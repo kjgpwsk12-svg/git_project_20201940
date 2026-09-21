@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 모바일 브라우저에서도 화면 너비 기준으로 미디어 쿼리가 동작하도록 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>미디어 쿼리 정의</title>
+  <style>
+    /* 기본 스타일 (모든 화면 공통) */
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+      font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* (1) 창 너비 500px 이하: 초록 배경 + 흰색 글자 */
+    @media screen and (max-width: 500px) {
+      body {
+        background-color: #6b9a3b;
+        color: #ffffff;
+      }
+    }
+
+    /* (2) 창 너비 501px ~ 750px: 밝은 배경 + 검정 글자 */
+    @media screen and (min-width: 501px) and (max-width: 750px) {
+      body {
+        background-color: #eef6dc;
+        color: #222222;
+      }
+    }
+
+    /* (3) 창 너비 751px 이상: 보라 배경 + 흰색 글자 */
+    @media screen and (min-width: 751px) {
+      body {
+        background-color: #5b3a92;
+        color: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>미디어 쿼리</h1>
+  <p>반응형 웹에 대한 예</p>
+</body>
+</html>
