@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>아이디어 | 홍길동 포트폴리오</title>
+  <link rel="stylesheet" href="mportpolio.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">홍길동 포트폴리오</a>
+      <nav aria-label="주 메뉴">
+        <a href="index.html">메인</a>
+        <a href="mintro.html">자기소개</a>
+        <a href="minfo.html">기본정보</a>
+        <a href="mstudy.html">학업</a>
+        <a href="mcareer.html">경력</a>
+        <a href="midea.html" aria-current="page">아이디어</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="page-title">
+      <h1>기말 과제 웹 프로젝트 아이디어</h1>
+      <p>기말 과제로 만들어 볼 수 있는 아이디어를 분야별로 모았습니다. 버튼을 눌러 관심 있는 분야만 골라 볼 수 있습니다.</p>
+    </div>
+
+    <section>
+      <div class="filters" role="group" aria-label="분야 선택">
+        <button type="button" data-cat="all" aria-pressed="true">전체</button>
+        <button type="button" data-cat="life" aria-pressed="false">생활</button>
+        <button type="button" data-cat="study" aria-pressed="false">학습</button>
+        <button type="button" data-cat="intro" aria-pressed="false">소개</button>
+        <button type="button" data-cat="fun" aria-pressed="false">오락</button>
+      </div>
+
+      <div class="idea-grid">
+        <article class="idea" data-cat="life">
+          <div class="meta"><span>생활</span><span class="level lv1">쉬움</span></div>
+          <h3>할 일 관리 앱</h3>
+          <p>오늘 해야 할 일을 적고 끝낸 일은 체크하는 페이지입니다.</p>
+          <ul class="points"><li>할 일 추가와 삭제</li><li>완료 체크와 남은 개수 표시</li><li>중요 표시 기능</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="life">
+          <div class="meta"><span>생활</span><span class="level lv2">보통</span></div>
+          <h3>용돈 가계부</h3>
+          <p>수입과 지출을 기록하고 월별 합계를 계산하는 페이지입니다.</p>
+          <ul class="points"><li>내역 입력 폼</li><li>표로 목록 보기</li><li>수입, 지출, 잔액 자동 계산</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="life">
+          <div class="meta"><span>생활</span><span class="level lv1">쉬움</span></div>
+          <h3>주간 시간표</h3>
+          <p>요일과 교시별 수업을 한눈에 보는 시간표 페이지입니다.</p>
+          <ul class="points"><li>요일별 표 구성</li><li>과목별 색상 구분</li><li>모바일에서 가로 스크롤</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+        </article>
+        <article class="idea" data-cat="life">
+          <div class="meta"><span>생활</span><span class="level lv2">보통</span></div>
+          <h3>운동 루틴 기록</h3>
+          <p>요일별 운동 계획과 실천 여부를 기록하는 페이지입니다.</p>
+          <ul class="points"><li>주간 루틴 표</li><li>완료 체크</li><li>이번 주 달성률 표시</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="life">
+          <div class="meta"><span>생활</span><span class="level lv3">도전</span></div>
+          <h3>날씨 정보 대시보드</h3>
+          <p>도시를 고르면 현재 날씨를 보여 주는 페이지입니다.</p>
+          <ul class="points"><li>도시 선택</li><li>기온, 습도, 날씨 아이콘</li><li>공개 날씨 API 연동</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>API</li></ul>
+        </article>
+
+        <article class="idea" data-cat="study">
+          <div class="meta"><span>학습</span><span class="level lv2">보통</span></div>
+          <h3>뽀모도로 공부 타이머</h3>
+          <p>25분 집중, 5분 휴식을 반복하는 타이머입니다.</p>
+          <ul class="points"><li>시작, 정지, 초기화 버튼</li><li>남은 시간 표시</li><li>종료 시 알림 문구</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="study">
+          <div class="meta"><span>학습</span><span class="level lv2">보통</span></div>
+          <h3>단어 암기 퀴즈</h3>
+          <p>문제를 풀고 점수를 확인하는 객관식 퀴즈 페이지입니다.</p>
+          <ul class="points"><li>문제 넘기기</li><li>정답, 오답 표시</li><li>최종 점수 결과 화면</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="study">
+          <div class="meta"><span>학습</span><span class="level lv1">쉬움</span></div>
+          <h3>단위와 환율 계산기</h3>
+          <p>길이, 무게, 환율을 바로 변환해 주는 계산기입니다.</p>
+          <ul class="points"><li>숫자 입력 시 즉시 변환</li><li>단위 선택 목록</li><li>계산 결과 강조 표시</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="study">
+          <div class="meta"><span>학습</span><span class="level lv1">쉬움</span></div>
+          <h3>D-Day 카운터</h3>
+          <p>시험이나 행사까지 남은 날짜를 보여 주는 페이지입니다.</p>
+          <ul class="points"><li>날짜 선택</li><li>남은 일수 계산</li><li>여러 일정을 목록으로 표시</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+
+        <article class="idea" data-cat="intro">
+          <div class="meta"><span>소개</span><span class="level lv1">쉬움</span></div>
+          <h3>맛집과 카페 소개</h3>
+          <p>동네 맛집이나 카페를 사진과 함께 소개하는 사이트입니다.</p>
+          <ul class="points"><li>대표 사진과 소개글</li><li>메뉴와 가격 표</li><li>영업시간, 위치 안내</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+        </article>
+        <article class="idea" data-cat="intro">
+          <div class="meta"><span>소개</span><span class="level lv1">쉬움</span></div>
+          <h3>여행 코스 소개</h3>
+          <p>여행지와 일정을 정리해 소개하는 페이지입니다.</p>
+          <ul class="points"><li>일정별 타임라인</li><li>명소 사진</li><li>준비물 체크리스트</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+        </article>
+        <article class="idea" data-cat="intro">
+          <div class="meta"><span>소개</span><span class="level lv2">보통</span></div>
+          <h3>동아리와 학과 홍보 사이트</h3>
+          <p>활동을 소개하고 신입 모집을 안내하는 사이트입니다.</p>
+          <ul class="points"><li>활동 소개와 사진</li><li>모집 안내 표</li><li>문의 입력 양식</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>반응형</li></ul>
+        </article>
+        <article class="idea" data-cat="intro">
+          <div class="meta"><span>소개</span><span class="level lv1">쉬움</span></div>
+          <h3>레시피 모음집</h3>
+          <p>자주 만드는 요리의 재료와 순서를 정리한 페이지입니다.</p>
+          <ul class="points"><li>재료 표</li><li>조리 순서 목록</li><li>완성 사진</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+        </article>
+
+        <article class="idea" data-cat="fun">
+          <div class="meta"><span>오락</span><span class="level lv2">보통</span></div>
+          <h3>미니 게임 모음</h3>
+          <p>숫자 맞히기와 가위바위보 같은 간단한 게임 페이지입니다.</p>
+          <ul class="points"><li>게임 선택 화면</li><li>결과와 점수 표시</li><li>다시 하기 버튼</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+        <article class="idea" data-cat="fun">
+          <div class="meta"><span>오락</span><span class="level lv2">보통</span></div>
+          <h3>반응형 사진 갤러리</h3>
+          <p>화면 크기에 따라 사진 배치가 바뀌는 갤러리입니다.</p>
+          <ul class="points"><li>썸네일 목록</li><li>클릭하면 크게 보기</li><li>미디어 쿼리로 열 개수 조절</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>미디어 쿼리</li></ul>
+        </article>
+        <article class="idea" data-cat="fun">
+          <div class="meta"><span>오락</span><span class="level lv2">보통</span></div>
+          <h3>음악 플레이리스트</h3>
+          <p>좋아하는 노래를 모아 놓고 들을 수 있는 페이지입니다.</p>
+          <ul class="points"><li>곡 목록 표</li><li>앨범 이미지</li><li>오디오 재생 컨트롤</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>audio 태그</li></ul>
+        </article>
+        <article class="idea" data-cat="fun">
+          <div class="meta"><span>오락</span><span class="level lv1">쉬움</span></div>
+          <h3>영화와 책 리뷰 모음</h3>
+          <p>감상한 작품의 평점과 후기를 모아 놓은 페이지입니다.</p>
+          <ul class="points"><li>포스터와 표지 이미지</li><li>별점과 한 줄 평</li><li>분야별 목록 표</li></ul>
+          <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="table-wrap">
+        <table>
+          <caption>발표하기 좋은 추천 아이디어</caption>
+          <thead>
+            <tr><th>아이디어</th><th>난이도</th><th>예상 작업 시간</th><th>추천 이유</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>반응형 사진 갤러리</td><td>보통</td><td>6 ~ 8시간</td><td>수업에서 배운 미디어 쿼리를 그대로 보여 줄 수 있습니다.</td></tr>
+            <tr><td>할 일 관리 앱</td><td>쉬움</td><td>4 ~ 6시간</td><td>동작이 눈에 잘 보여 발표 시연에 좋습니다.</td></tr>
+            <tr><td>맛집과 카페 소개</td><td>쉬움</td><td>4 ~ 5시간</td><td>사진과 표를 골고루 활용할 수 있습니다.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>프로젝트 진행 순서</h2>
+      <ol class="steps">
+        <li><strong>주제 정하기</strong><span>아이디어 중 하나를 고르고 목표를 한 문장으로 적습니다.</span></li>
+        <li><strong>화면 설계</strong><span>종이나 Figma로 페이지 구성을 그려 봅니다.</span></li>
+        <li><strong>마크업과 스타일</strong><span>HTML로 구조를 잡고 CSS로 꾸밉니다.</span></li>
+        <li><strong>기능 구현</strong><span>필요하면 JavaScript로 동작을 추가합니다.</span></li>
+        <li><strong>점검과 발표</strong><span>여러 화면 크기에서 확인하고 발표를 준비합니다.</span></li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    var buttons = document.querySelectorAll(".filters button");
+    var ideas = document.querySelectorAll(".idea");
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var cat = btn.dataset.cat;
+        buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
+        ideas.forEach(function (card) {
+          card.hidden = !(cat === "all" || card.dataset.cat === cat);
+        });
+      });
+    });
+  </script>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 홍길동. 웹 프로그래밍 수업 과제</span>
+      <span>hong@example.com</span>
+    </div>
+  </footer>
+</body>
+</html>

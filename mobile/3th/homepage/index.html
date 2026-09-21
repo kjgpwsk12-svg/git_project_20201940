@@ -3,28 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>나의 포트폴리오</title>
+  <title>메인 | 홍길동 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
 <body>
-  <header>
-    <h1>나의 포트폴리오</h1>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">홍길동 포트폴리오</a>
+      <nav aria-label="주 메뉴">
+        <a href="index.html" aria-current="page">메인</a>
+        <a href="mintro.html">자기소개</a>
+        <a href="minfo.html">기본정보</a>
+        <a href="mstudy.html">학업</a>
+        <a href="mcareer.html">경력</a>
+        <a href="midea.html">아이디어</a>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <a href="index.html">메인</a>
-    <a href="mintro.html">자기소개</a>
-    <a href="minfo.html">기본정보</a>
-    <a href="mstudy.html">학업</a>
-    <a href="mcareer.html">경력</a>
-  </nav>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>안녕하세요,<br>웹을 배우는<br>홍길동입니다.</h1>
+        <p class="lead">HTML과 CSS로 화면을 짜고, 어떤 기기에서도 읽기 좋은 반응형 웹을 공부하고 있습니다. 이 사이트는 지금까지 배우고 만든 것을 정리한 저의 포트폴리오입니다.</p>
+        <div class="btn-row">
+          <a class="btn" href="mintro.html">자기소개 보기</a>
+          <a class="btn ghost" href="midea.html">프로젝트 아이디어</a>
+        </div>
+      </div>
+      <div class="arch"><img src="images/profile.svg" alt="홍길동 프로필 사진"></div>
+    </section>
 
-  <main>
-    <h2>환영합니다</h2>
-    <p>이 사이트는 수업 과제로 제작한 포트폴리오 웹 페이지입니다.</p>
-    <p>위 메뉴를 눌러 각 페이지를 확인해 보세요.</p>
+    <section>
+      <h2>둘러보기</h2>
+      <div class="rows">
+        <a href="mintro.html"><strong>자기소개</strong><span>제가 어떤 사람인지, 무엇에 관심이 있는지 소개합니다.</span></a>
+        <a href="minfo.html"><strong>기본정보</strong><span>연락처와 자격, 사용할 수 있는 도구를 표로 정리했습니다.</span></a>
+        <a href="mstudy.html"><strong>학업</strong><span>학력과 이번 학기 수강 과목, 웹 프로그래밍 학습 기록입니다.</span></a>
+        <a href="mcareer.html"><strong>경력</strong><span>동아리와 인턴, 프로젝트 경험을 시간 순서로 보여 줍니다.</span></a>
+        <a href="midea.html"><strong>아이디어</strong><span>기말 과제로 만들어 볼 웹 프로젝트 아이디어 모음입니다.</span></a>
+      </div>
+    </section>
+
+    <section>
+      <h2>요즘 공부하는 것</h2>
+      <div class="cols-3">
+        <div class="panel">
+          <h3>반응형 웹</h3>
+          <p>미디어 쿼리로 화면 너비에 따라 배경색과 배치가 바뀌도록 만드는 방법을 실습하고 있습니다.</p>
+        </div>
+        <div class="panel">
+          <h3>웹 표준 마크업</h3>
+          <p>header, nav, main, footer 같은 의미 있는 태그로 문서 구조를 잡는 연습을 하고 있습니다.</p>
+        </div>
+        <div class="panel">
+          <h3>팀 프로젝트</h3>
+          <p>역할을 나누고 Git으로 코드를 공유하며 하나의 웹 페이지를 함께 완성하는 경험을 쌓고 있습니다.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>&copy; 2026 홍길동. All rights reserved.</footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 홍길동. 웹 프로그래밍 수업 과제</span>
+      <span>hong@example.com</span>
+    </div>
+  </footer>
 </body>
 </html>

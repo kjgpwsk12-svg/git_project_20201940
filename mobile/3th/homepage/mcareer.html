@@ -3,48 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>경력</title>
+  <title>경력 | 홍길동 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
 <body>
-  <header>
-    <h1>나의 포트폴리오</h1>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">홍길동 포트폴리오</a>
+      <nav aria-label="주 메뉴">
+        <a href="index.html">메인</a>
+        <a href="mintro.html">자기소개</a>
+        <a href="minfo.html">기본정보</a>
+        <a href="mstudy.html">학업</a>
+        <a href="mcareer.html" aria-current="page">경력</a>
+        <a href="midea.html">아이디어</a>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <a href="index.html">메인</a>
-    <a href="mintro.html">자기소개</a>
-    <a href="minfo.html">기본정보</a>
-    <a href="mstudy.html">학업</a>
-    <a href="mcareer.html">경력</a>
-  </nav>
+  <main class="wrap">
+    <div class="page-title">
+      <h1>경력</h1>
+      <p>동아리와 인턴, 공모전 등 지금까지의 활동을 시간 순서로 정리했습니다.</p>
+    </div>
 
-  <main>
-    <h2>경력</h2>
-    <table>
-      <tr>
-        <th>기간</th>
-        <th>활동 / 근무처</th>
-        <th>역할 및 내용</th>
-      </tr>
-      <tr>
-        <td>2023.01 ~ 2023.06</td>
-        <td>OO 동아리</td>
-        <td>팀원, 프로젝트 참여</td>
-      </tr>
-      <tr>
-        <td>2024.07 ~ 2024.08</td>
-        <td>OO 회사 인턴</td>
-        <td>웹 페이지 유지보수 보조</td>
-      </tr>
-      <tr>
-        <td>2025.03 ~ 2025.12</td>
-        <td>OO 공모전</td>
-        <td>팀 프로젝트 개발 참여</td>
-      </tr>
-    </table>
+    <section>
+      <h2>활동 경력</h2>
+      <ol class="timeline">
+        <li>
+          <time>2023.01 ~ 2023.06</time>
+          <h3>OO 프로그래밍 동아리 팀원</h3>
+          <p>매주 스터디에 참여하고 학기말 발표 프로젝트에서 화면 구성을 맡았습니다.</p>
+        </li>
+        <li>
+          <time>2024.07 ~ 2024.08</time>
+          <h3>OO 회사 인턴</h3>
+          <p>기존 웹 페이지의 오류를 찾아 수정하고 공지 게시물을 갱신하는 유지보수를 보조했습니다.</p>
+        </li>
+        <li>
+          <time>2025.03 ~ 2025.12</time>
+          <h3>OO 공모전 팀 프로젝트</h3>
+          <p>기획부터 발표까지 참여하며 웹 화면 개발과 발표 자료 제작을 담당했습니다.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <div class="table-wrap">
+        <table>
+          <caption>프로젝트 경험</caption>
+          <thead>
+            <tr><th>프로젝트</th><th>기간</th><th>역할</th><th>사용 기술</th><th>결과</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>동아리 소개 페이지</td><td>2023.03 ~ 2023.05</td><td>화면 구성</td><td>HTML, CSS</td><td>학기말 발표 우수팀 선정</td></tr>
+            <tr><td>사내 공지 페이지 유지보수</td><td>2024.07 ~ 2024.08</td><td>오류 수정</td><td>HTML, CSS, JavaScript</td><td>깨진 링크 20여 개 수정</td></tr>
+            <tr><td>공모전 출품 웹앱</td><td>2025.03 ~ 2025.11</td><td>프론트엔드</td><td>HTML, CSS, JavaScript</td><td>본선 진출</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="table-wrap">
+        <table>
+          <caption>수상 및 교육 이수</caption>
+          <thead>
+            <tr><th>연도</th><th>내용</th><th>주관</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2025</td><td>공모전 본선 진출</td><td>OO 기관</td></tr>
+            <tr><td>2024</td><td>교내 프로젝트 발표 우수상</td><td>OO대학교</td></tr>
+            <tr><td>2023</td><td>웹 개발 기초 특강 수료</td><td>OO 프로그래밍 동아리</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
-  <footer>&copy; 2026 홍길동. All rights reserved.</footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 홍길동. 웹 프로그래밍 수업 과제</span>
+      <span>hong@example.com</span>
+    </div>
+  </footer>
 </body>
 </html>

@@ -3,30 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>자기소개</title>
+  <title>자기소개 | 홍길동 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
 <body>
-  <header>
-    <h1>나의 포트폴리오</h1>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">홍길동 포트폴리오</a>
+      <nav aria-label="주 메뉴">
+        <a href="index.html">메인</a>
+        <a href="mintro.html" aria-current="page">자기소개</a>
+        <a href="minfo.html">기본정보</a>
+        <a href="mstudy.html">학업</a>
+        <a href="mcareer.html">경력</a>
+        <a href="midea.html">아이디어</a>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <a href="index.html">메인</a>
-    <a href="mintro.html">자기소개</a>
-    <a href="minfo.html">기본정보</a>
-    <a href="mstudy.html">학업</a>
-    <a href="mcareer.html">경력</a>
-  </nav>
+  <main class="wrap">
+    <div class="page-title">
+      <h1>자기소개</h1>
+      <p>저를 소개하는 글과 사진, 성향과 관심 분야를 담았습니다.</p>
+    </div>
 
-  <main>
-    <h2>자기소개</h2>
-    <!-- 본인 사진으로 교체: images/profile.jpg 를 넣고 아래 src를 수정 -->
-    <img class="photo" src="images/profile.svg" alt="프로필 사진">
-    <p>안녕하세요, 홍길동입니다.</p>
-    <p>여기에 자기소개 내용을 작성합니다. 성격, 장점, 관심 분야, 목표 등을 간단히 적어 보세요.</p>
+    <section class="two-col">
+      <div class="arch"><img src="images/profile.svg" alt="홍길동 프로필 사진"></div>
+      <div>
+        <h2>저는 이런 사람입니다</h2>
+        <p>안녕하세요, 웹 프로그래밍을 공부하고 있는 홍길동입니다. 화면에 보이는 결과가 제 손으로 조금씩 만들어지는 과정이 재미있어서 웹 개발에 관심을 갖게 되었습니다.</p>
+        <p>처음에는 태그 하나 닫는 것도 어려웠지만, 예제를 직접 따라 치고 결과를 확인하는 과정을 반복하면서 구조를 이해하게 되었습니다. 특히 브라우저 창 크기에 따라 화면이 달라지는 반응형 웹이 인상 깊었습니다.</p>
+        <p>앞으로는 디자인과 기능을 함께 생각하는 개발자가 되는 것이 목표입니다. 사용하는 사람이 편해야 좋은 화면이라고 생각합니다.</p>
+        <blockquote>느려도 꾸준히, 그리고 정확하게.</blockquote>
+      </div>
+    </section>
+
+    <section>
+      <h2>성격과 장점</h2>
+      <div class="cols-3">
+        <div class="panel">
+          <h3>꾸준함</h3>
+          <p>하루에 조금씩이라도 코드를 쓰는 습관을 이어 가고 있습니다.</p>
+        </div>
+        <div class="panel">
+          <h3>꼼꼼함</h3>
+          <p>오타와 닫히지 않은 태그를 놓치지 않고 찾아내는 편입니다.</p>
+        </div>
+        <div class="panel">
+          <h3>소통</h3>
+          <p>팀 프로젝트에서 서로 다른 의견을 정리해 합의점을 찾는 역할을 맡곤 합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>관심 분야</h2>
+      <ul class="tags">
+        <li>반응형 웹</li><li>UI 디자인</li><li>웹 접근성</li><li>프론트엔드</li>
+        <li>데이터 시각화</li><li>사진 촬영</li><li>카페 탐방</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>기술 수준</h2>
+      <ul class="skills">
+        <li><span>HTML</span><span class="bar-track"><span class="bar-fill" style="width:85%"></span></span><span>85%</span></li>
+        <li><span>CSS</span><span class="bar-track"><span class="bar-fill" style="width:75%"></span></span><span>75%</span></li>
+        <li><span>JavaScript</span><span class="bar-track"><span class="bar-fill" style="width:50%"></span></span><span>50%</span></li>
+        <li><span>Git / GitHub</span><span class="bar-track"><span class="bar-fill" style="width:40%"></span></span><span>40%</span></li>
+        <li><span>Figma</span><span class="bar-track"><span class="bar-fill" style="width:45%"></span></span><span>45%</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>활동 사진</h2>
+      <div class="gallery">
+        <figure><img src="images/gallery1.svg" alt="동아리 프로젝트 회의 장면"><figcaption>동아리 프로젝트 회의</figcaption></figure>
+        <figure><img src="images/gallery2.svg" alt="코딩 스터디 장면"><figcaption>코딩 스터디</figcaption></figure>
+        <figure><img src="images/gallery3.svg" alt="수업 발표 준비 장면"><figcaption>수업 발표 준비</figcaption></figure>
+      </div>
+    </section>
   </main>
 
-  <footer>&copy; 2026 홍길동. All rights reserved.</footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 홍길동. 웹 프로그래밍 수업 과제</span>
+      <span>hong@example.com</span>
+    </div>
+  </footer>
 </body>
 </html>
