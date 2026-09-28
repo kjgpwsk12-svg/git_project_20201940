@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>자기소개 | 홍길동 포트폴리오</title>
+  <title>자기소개 | 강진구 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
+
 <body>
   <header class="site-header">
     <div class="bar">
@@ -17,9 +19,21 @@
         <a href="mstudy.html">학업</a>
         <a href="mcareer.html">경력</a>
         <a href="midea.html">아이디어</a>
+        <a href="msns.html">SNS</a>
       </nav>
     </div>
   </header>
+
+  <audio id="bgm" loop>
+    <source src="music/Welcome.mp3" type="audio/mpeg">
+    브라우저가 오디오를 지원하지 않습니다.
+  </audio>
+
+  <div class="music-control">
+    <button id="musicBtn" type="button">
+      🎵 음악 재생
+    </button>
+  </div>
 
   <main class="wrap">
     <div class="page-title">
@@ -32,7 +46,8 @@
       <div>
         <h2>저는 이런 사람입니다</h2>
         <p>안녕하세요, 웹 프로그래밍을 공부하고 있는 홍길동입니다. 화면에 보이는 결과가 제 손으로 조금씩 만들어지는 과정이 재미있어서 웹 개발에 관심을 갖게 되었습니다.</p>
-        <p>처음에는 태그 하나 닫는 것도 어려웠지만, 예제를 직접 따라 치고 결과를 확인하는 과정을 반복하면서 구조를 이해하게 되었습니다. 특히 브라우저 창 크기에 따라 화면이 달라지는 반응형 웹이 인상 깊었습니다.</p>
+        <p>처음에는 태그 하나 닫는 것도 어려웠지만, 예제를 직접 따라 치고 결과를 확인하는 과정을 반복하면서 구조를 이해하게 되었습니다. 특히 브라우저 창 크기에 따라 화면이 달라지는 반응형 웹이 인상
+          깊었습니다.</p>
         <p>앞으로는 디자인과 기능을 함께 생각하는 개발자가 되는 것이 목표입니다. 사용하는 사람이 편해야 좋은 화면이라고 생각합니다.</p>
         <blockquote>느려도 꾸준히, 그리고 정확하게.</blockquote>
       </div>
@@ -59,28 +74,44 @@
     <section>
       <h2>관심 분야</h2>
       <ul class="tags">
-        <li>반응형 웹</li><li>UI 디자인</li><li>웹 접근성</li><li>프론트엔드</li>
-        <li>데이터 시각화</li><li>사진 촬영</li><li>카페 탐방</li>
+        <li>반응형 웹</li>
+        <li>UI 디자인</li>
+        <li>웹 접근성</li>
+        <li>프론트엔드</li>
+        <li>데이터 시각화</li>
+        <li>사진 촬영</li>
+        <li>카페 탐방</li>
       </ul>
     </section>
 
     <section>
       <h2>기술 수준</h2>
       <ul class="skills">
-        <li><span>HTML</span><span class="bar-track"><span class="bar-fill" style="width:85%"></span></span><span>85%</span></li>
-        <li><span>CSS</span><span class="bar-track"><span class="bar-fill" style="width:75%"></span></span><span>75%</span></li>
-        <li><span>JavaScript</span><span class="bar-track"><span class="bar-fill" style="width:50%"></span></span><span>50%</span></li>
-        <li><span>Git / GitHub</span><span class="bar-track"><span class="bar-fill" style="width:40%"></span></span><span>40%</span></li>
-        <li><span>Figma</span><span class="bar-track"><span class="bar-fill" style="width:45%"></span></span><span>45%</span></li>
+        <li><span>HTML</span><span class="bar-track"><span class="bar-fill"
+              style="width:85%"></span></span><span>85%</span></li>
+        <li><span>CSS</span><span class="bar-track"><span class="bar-fill"
+              style="width:75%"></span></span><span>75%</span></li>
+        <li><span>JavaScript</span><span class="bar-track"><span class="bar-fill"
+              style="width:50%"></span></span><span>50%</span></li>
+        <li><span>Git / GitHub</span><span class="bar-track"><span class="bar-fill"
+              style="width:40%"></span></span><span>40%</span></li>
+        <li><span>Figma</span><span class="bar-track"><span class="bar-fill"
+              style="width:45%"></span></span><span>45%</span></li>
       </ul>
     </section>
 
     <section>
       <h2>활동 사진</h2>
       <div class="gallery">
-        <figure><img src="images/gallery1.svg" alt="동아리 프로젝트 회의 장면"><figcaption>동아리 프로젝트 회의</figcaption></figure>
-        <figure><img src="images/gallery2.svg" alt="코딩 스터디 장면"><figcaption>코딩 스터디</figcaption></figure>
-        <figure><img src="images/gallery3.svg" alt="수업 발표 준비 장면"><figcaption>수업 발표 준비</figcaption></figure>
+        <figure><img src="images/gallery1.svg" alt="동아리 프로젝트 회의 장면">
+          <figcaption>동아리 프로젝트 회의</figcaption>
+        </figure>
+        <figure><img src="images/gallery2.svg" alt="코딩 스터디 장면">
+          <figcaption>코딩 스터디</figcaption>
+        </figure>
+        <figure><img src="images/gallery3.svg" alt="수업 발표 준비 장면">
+          <figcaption>수업 발표 준비</figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -91,5 +122,23 @@
       <span>hong@example.com</span>
     </div>
   </footer>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    musicBtn.addEventListener("click", function () {
+
+      if (bgm.paused) {
+        bgm.play();
+        musicBtn.textContent = "⏸ 음악 정지";
+      } else {
+        bgm.pause();
+        musicBtn.textContent = "🎵 음악 재생";
+      }
+
+    });
+  </script>
 </body>
+
 </html>

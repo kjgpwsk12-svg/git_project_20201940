@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>기본정보 | 홍길동 포트폴리오</title>
+  <title>기본정보 | 강진구 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
+
 <body>
   <header class="site-header">
     <div class="bar">
@@ -17,9 +19,21 @@
         <a href="mstudy.html">학업</a>
         <a href="mcareer.html">경력</a>
         <a href="midea.html">아이디어</a>
+        <a href="msns.html">SNS</a>
       </nav>
     </div>
   </header>
+
+  <audio id="bgm" loop>
+    <source src="music/Welcome.mp3" type="audio/mpeg">
+    브라우저가 오디오를 지원하지 않습니다.
+  </audio>
+
+  <div class="music-control">
+    <button id="musicBtn" type="button">
+      🎵 음악 재생
+    </button>
+  </div>
 
   <main class="wrap">
     <div class="page-title">
@@ -32,12 +46,30 @@
         <table>
           <caption>인적 사항</caption>
           <tbody>
-            <tr><th scope="row">이름</th><td>홍길동</td></tr>
-            <tr><th scope="row">생년월일</th><td>2000년 1월 1일</td></tr>
-            <tr><th scope="row">거주지</th><td>경기도 수원시</td></tr>
-            <tr><th scope="row">이메일</th><td>hong@example.com</td></tr>
-            <tr><th scope="row">연락처</th><td>010-0000-0000</td></tr>
-            <tr><th scope="row">GitHub</th><td>github.com/honggildong</td></tr>
+            <tr>
+              <th scope="row">이름</th>
+              <td>홍길동</td>
+            </tr>
+            <tr>
+              <th scope="row">생년월일</th>
+              <td>2000년 1월 1일</td>
+            </tr>
+            <tr>
+              <th scope="row">거주지</th>
+              <td>경기도 수원시</td>
+            </tr>
+            <tr>
+              <th scope="row">이메일</th>
+              <td>hong@example.com</td>
+            </tr>
+            <tr>
+              <th scope="row">연락처</th>
+              <td>010-0000-0000</td>
+            </tr>
+            <tr>
+              <th scope="row">GitHub</th>
+              <td>github.com/honggildong</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -48,13 +80,38 @@
         <table>
           <caption>자격 및 어학</caption>
           <thead>
-            <tr><th>구분</th><th>항목</th><th>취득일</th><th>비고</th></tr>
+            <tr>
+              <th>구분</th>
+              <th>항목</th>
+              <th>취득일</th>
+              <th>비고</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>자격증</td><td>컴퓨터활용능력 2급</td><td>2022.05</td><td>필기, 실기 합격</td></tr>
-            <tr><td>어학</td><td>TOEIC 800점</td><td>2024.02</td><td>유효기간 2년</td></tr>
-            <tr><td>면허</td><td>운전면허 2종 보통</td><td>2021.08</td><td>-</td></tr>
-            <tr><td>교육</td><td>HTML5, CSS3 온라인 강의</td><td>2025.12</td><td>수료</td></tr>
+            <tr>
+              <td>자격증</td>
+              <td>컴퓨터활용능력 2급</td>
+              <td>2022.05</td>
+              <td>필기, 실기 합격</td>
+            </tr>
+            <tr>
+              <td>어학</td>
+              <td>TOEIC 800점</td>
+              <td>2024.02</td>
+              <td>유효기간 2년</td>
+            </tr>
+            <tr>
+              <td>면허</td>
+              <td>운전면허 2종 보통</td>
+              <td>2021.08</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>교육</td>
+              <td>HTML5, CSS3 온라인 강의</td>
+              <td>2025.12</td>
+              <td>수료</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -65,14 +122,38 @@
         <table>
           <caption>사용할 수 있는 도구</caption>
           <thead>
-            <tr><th>도구</th><th>용도</th><th>숙련도</th></tr>
+            <tr>
+              <th>도구</th>
+              <th>용도</th>
+              <th>숙련도</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>Visual Studio Code</td><td>코드 작성</td><td>상</td></tr>
-            <tr><td>Chrome 개발자 도구</td><td>화면 확인, 반응형 테스트</td><td>중</td></tr>
-            <tr><td>Git, GitHub</td><td>버전 관리와 코드 공유</td><td>하</td></tr>
-            <tr><td>Figma</td><td>화면 설계</td><td>하</td></tr>
-            <tr><td>MS Office</td><td>문서, 발표 자료 작성</td><td>상</td></tr>
+            <tr>
+              <td>Visual Studio Code</td>
+              <td>코드 작성</td>
+              <td>상</td>
+            </tr>
+            <tr>
+              <td>Chrome 개발자 도구</td>
+              <td>화면 확인, 반응형 테스트</td>
+              <td>중</td>
+            </tr>
+            <tr>
+              <td>Git, GitHub</td>
+              <td>버전 관리와 코드 공유</td>
+              <td>하</td>
+            </tr>
+            <tr>
+              <td>Figma</td>
+              <td>화면 설계</td>
+              <td>하</td>
+            </tr>
+            <tr>
+              <td>MS Office</td>
+              <td>문서, 발표 자료 작성</td>
+              <td>상</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -85,5 +166,23 @@
       <span>hong@example.com</span>
     </div>
   </footer>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    musicBtn.addEventListener("click", function () {
+
+      if (bgm.paused) {
+        bgm.play();
+        musicBtn.textContent = "⏸ 음악 정지";
+      } else {
+        bgm.pause();
+        musicBtn.textContent = "🎵 음악 재생";
+      }
+
+    });
+  </script>
 </body>
+
 </html>

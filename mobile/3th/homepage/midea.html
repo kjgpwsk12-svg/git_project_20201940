@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>아이디어 | 홍길동 포트폴리오</title>
+  <title>아이디어 | 강진구 포트폴리오</title>
   <link rel="stylesheet" href="mportpolio.css">
 </head>
+
 <body>
   <header class="site-header">
     <div class="bar">
@@ -17,9 +19,21 @@
         <a href="mstudy.html">학업</a>
         <a href="mcareer.html">경력</a>
         <a href="midea.html" aria-current="page">아이디어</a>
+        <a href="msns.html">SNS</a>
       </nav>
     </div>
   </header>
+
+  <audio id="bgm" loop>
+    <source src="music/Welcome.mp3" type="audio/mpeg">
+    브라우저가 오디오를 지원하지 않습니다.
+  </audio>
+
+  <div class="music-control">
+    <button id="musicBtn" type="button">
+      🎵 음악 재생
+    </button>
+  </div>
 
   <main class="wrap">
     <div class="page-title">
@@ -41,7 +55,13 @@
             <div class="meta"><span class="cat cat-book">도서</span><span class="level lv2">보통</span></div>
             <h3>나의 독서 서재</h3>
             <p>책을 검색해 내 서재에 담고, 읽은 기록과 독서 통계를 한눈에 보는 개인용 독서 서비스입니다.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>도서 API</li><li>Chart.js</li></ul>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>도서 API</li>
+              <li>Chart.js</li>
+            </ul>
           </div>
           <div class="idea-detail">
             <h4>핵심 기능</h4>
@@ -63,7 +83,13 @@
             <div class="meta"><span class="cat cat-movie">영화</span><span class="level lv1">안정</span></div>
             <h3>영화 다이어리</h3>
             <p>본 영화를 날짜와 함께 기록하고, 달력과 통계로 나의 관람 습관을 돌아보는 서비스입니다.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li><li>Chart.js</li></ul>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>localStorage</li>
+              <li>Chart.js</li>
+            </ul>
           </div>
           <div class="idea-detail">
             <h4>핵심 기능</h4>
@@ -85,7 +111,13 @@
             <div class="meta"><span class="cat cat-movie">영화</span><span class="level lv3">도전</span></div>
             <h3>영화 탐색과 찜 목록</h3>
             <p>영화 데이터를 불러와 인기작을 탐색하고, 마음에 드는 영화를 찜해 두는 서비스입니다.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>fetch</li><li>영화 API</li></ul>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>fetch</li>
+              <li>영화 API</li>
+            </ul>
           </div>
           <div class="idea-detail">
             <h4>핵심 기능</h4>
@@ -98,7 +130,8 @@
             <h4>페이지 구성</h4>
             <p>메인(인기 영화), 탐색, 영화 상세, 찜 목록</p>
             <h4>발표 포인트</h4>
-            <p>외부 API 연동과 비동기 처리(fetch)를 보여 줄 수 있어 기술 난이도가 드러납니다. 다만 API 키 발급과 출처 표기 조건은 시작 전에 확인해야 하고, 시연용 샘플 데이터도 준비해 두는 것이 안전합니다.</p>
+            <p>외부 API 연동과 비동기 처리(fetch)를 보여 줄 수 있어 기술 난이도가 드러납니다. 다만 API 키 발급과 출처 표기 조건은 시작 전에 확인해야 하고, 시연용 샘플 데이터도 준비해
+              두는 것이 안전합니다.</p>
           </div>
         </article>
 
@@ -107,7 +140,13 @@
             <div class="meta"><span class="cat cat-both">도서와 영화</span><span class="level lv2">보통</span></div>
             <h3>원작과 영화 비교 아카이브</h3>
             <p>소설을 원작으로 한 영화를 짝지어 놓고, 두 작품의 차이를 나란히 비교해 보는 아카이브입니다.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li><li>localStorage</li></ul>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>JSON</li>
+              <li>localStorage</li>
+            </ul>
           </div>
           <div class="idea-detail">
             <h4>핵심 기능</h4>
@@ -129,7 +168,13 @@
             <div class="meta"><span class="cat cat-both">도서와 영화</span><span class="level lv1">안정</span></div>
             <h3>올해의 감상 리포트</h3>
             <p>읽은 책과 본 영화를 한곳에 기록하고, 연말 결산처럼 요약해 보여 주는 서비스입니다.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li><li>Chart.js</li></ul>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>localStorage</li>
+              <li>Chart.js</li>
+            </ul>
           </div>
           <div class="idea-detail">
             <h4>핵심 기능</h4>
@@ -153,14 +198,50 @@
         <table>
           <caption>한눈에 비교</caption>
           <thead>
-            <tr><th>아이디어</th><th>분야</th><th>외부 API</th><th>난이도</th><th>차별점</th></tr>
+            <tr>
+              <th>아이디어</th>
+              <th>분야</th>
+              <th>외부 API</th>
+              <th>난이도</th>
+              <th>차별점</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>나의 독서 서재</td><td>도서</td><td>필요</td><td>보통</td><td>독서 통계 차트</td></tr>
-            <tr><td>영화 다이어리</td><td>영화</td><td>선택</td><td>안정</td><td>달력과 포스터 표시</td></tr>
-            <tr><td>영화 탐색과 찜 목록</td><td>영화</td><td>필요</td><td>도전</td><td>실시간 데이터 연동</td></tr>
-            <tr><td>원작과 영화 비교 아카이브</td><td>도서와 영화</td><td>불필요</td><td>보통</td><td>주제의 독창성</td></tr>
-            <tr><td>올해의 감상 리포트</td><td>도서와 영화</td><td>불필요</td><td>안정</td><td>자동 요약 리포트</td></tr>
+            <tr>
+              <td>나의 독서 서재</td>
+              <td>도서</td>
+              <td>필요</td>
+              <td>보통</td>
+              <td>독서 통계 차트</td>
+            </tr>
+            <tr>
+              <td>영화 다이어리</td>
+              <td>영화</td>
+              <td>선택</td>
+              <td>안정</td>
+              <td>달력과 포스터 표시</td>
+            </tr>
+            <tr>
+              <td>영화 탐색과 찜 목록</td>
+              <td>영화</td>
+              <td>필요</td>
+              <td>도전</td>
+              <td>실시간 데이터 연동</td>
+            </tr>
+            <tr>
+              <td>원작과 영화 비교 아카이브</td>
+              <td>도서와 영화</td>
+              <td>불필요</td>
+              <td>보통</td>
+              <td>주제의 독창성</td>
+            </tr>
+            <tr>
+              <td>올해의 감상 리포트</td>
+              <td>도서와 영화</td>
+              <td>불필요</td>
+              <td>안정</td>
+              <td>자동 요약 리포트</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -205,5 +286,23 @@
       <span>hong@example.com</span>
     </div>
   </footer>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    musicBtn.addEventListener("click", function () {
+
+      if (bgm.paused) {
+        bgm.play();
+        musicBtn.textContent = "⏸ 음악 정지";
+      } else {
+        bgm.pause();
+        musicBtn.textContent = "🎵 음악 재생";
+      }
+
+    });
+  </script>
 </body>
+
 </html>
