@@ -138,7 +138,21 @@ class ExampleInstrumentedTest {
         }
 
 
+        var i : Int
 
+        for(i in 9 downTo 1){
+            println("구구단 ${10-i}단")
+            for(j in 9 downTo 1){
+                println("${10-i} * ${10-j} = ${(10-i)*(10-j)}")
+            }
         }
 
+        for(i in 10..13){
+            for (j in 5..10){  // 2단부터 9단까지만 먼저 가로로 출력
+                print("$i x $j = ${i * j} \t")
+            }
+            println() // 줄바꿈
+        }
+
+    }
     }
