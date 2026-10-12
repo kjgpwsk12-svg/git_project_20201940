@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>마이페이지 · 이코노바</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <script src="/js/theme-init.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/mypage.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <div class="narrow">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Account</p>
+              <h1 class="page-title">마이페이지</h1>
+            </div>
+          </div>
+          <p class="alert error" id="page-message" role="alert" hidden></p>
+
+          <div class="stack" id="content" hidden>
+            <section class="panel" aria-labelledby="account-title">
+              <div class="panel-head"><h2 class="panel-title" id="account-title">계정 정보</h2></div>
+              <div class="panel-body">
+                <dl class="meta-list">
+                  <dt>이메일</dt><dd id="email">-</dd>
+                  <dt>가입일</dt><dd id="joined">-</dd>
+                  <dt>관심 종목</dt><dd id="watch-count">-</dd>
+                </dl>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="profile-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="profile-title">프로필</h2>
+                <span class="panel-meta">다른 사용자에게 공개돼요</span>
+              </div>
+              <form class="panel-body form" id="profile-form" novalidate>
+                <p class="alert" id="profile-message" role="alert" hidden></p>
+                <div class="field">
+                  <label for="nickname">닉네임</label>
+                  <input class="input" id="nickname" minlength="2" maxlength="15" required aria-describedby="nickname-hint">
+                  <p class="hint" id="nickname-hint">2~15자, 한글·영문·숫자·밑줄</p>
+                </div>
+                <div class="field">
+                  <label for="bio">소개</label>
+                  <textarea class="textarea" id="bio" maxlength="200" aria-describedby="bio-count"></textarea>
+                  <p class="hint" id="bio-count">0 / 200</p>
+                </div>
+                <div><button class="btn primary" type="submit">저장</button></div>
+              </form>
+            </section>
+
+            <section class="panel" aria-labelledby="password-title">
+              <div class="panel-head"><h2 class="panel-title" id="password-title">비밀번호</h2></div>
+              <div class="panel-body form">
+                <p class="sm muted">가입한 이메일로 비밀번호 재설정 링크를 보내 드려요.</p>
+                <p class="alert" id="password-message" role="alert" hidden></p>
+                <div><button class="btn outline" id="send-reset" type="button">재설정 메일 받기</button></div>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="delete-title">
+              <div class="panel-head"><h2 class="panel-title" id="delete-title">계정 삭제</h2></div>
+              <form class="panel-body form" id="delete-form" novalidate>
+                <p class="sm muted">투자 기록, 관심 종목, 북마크, 사용자 정의 지표가 모두 삭제되고 되돌릴 수 없어요.
+                  작성한 게시글과 댓글은 남지만 작성자는 "탈퇴한 사용자"로 표시돼요.</p>
+                <p class="alert" id="delete-message" role="alert" hidden></p>
+                <div class="field">
+                  <label for="delete-confirm">확인을 위해 닉네임을 입력하세요</label>
+                  <input class="input" id="delete-confirm" autocomplete="off">
+                </div>
+                <div><button class="btn danger" type="submit">계정 삭제</button></div>
+              </form>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

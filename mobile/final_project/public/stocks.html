@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>주식 · 이코노바</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <script src="/js/theme-init.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/stocks.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <div class="page-head">
+          <div>
+            <p class="eyebrow">Stocks</p>
+            <h1 class="page-title">주식</h1>
+            <p class="page-desc">국내·미국 주요 종목의 시세를 비교하고 관심 종목을 관리하세요.</p>
+          </div>
+        </div>
+
+        <section class="panel" aria-labelledby="list-title">
+          <h2 class="sr-only" id="list-title">종목 목록</h2>
+          <div class="toolbar">
+            <div class="seg" role="tablist" aria-label="목록" id="tabs">
+              <button role="tab" aria-selected="true" data-tab="KR">국내</button>
+              <button role="tab" aria-selected="false" data-tab="US">미국</button>
+              <button role="tab" aria-selected="false" data-tab="WATCH">관심 종목</button>
+            </div>
+            <input class="filter-input" id="filter" type="search" placeholder="목록에서 찾기" aria-label="목록에서 찾기">
+            <span class="panel-meta" id="list-meta"></span>
+          </div>
+          <p class="alert error" id="list-error" role="alert" hidden style="margin:12px 16px 0"></p>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" style="width:40px"><span class="sr-only">관심</span></th>
+                  <th scope="col"><button class="th-sort" data-sort="name">종목</button></th>
+                  <th scope="col" class="right"><button class="th-sort" data-sort="price">현재가</button></th>
+                  <th scope="col" class="right"><button class="th-sort" data-sort="change">등락률</button></th>
+                  <th scope="col" class="right hide-sm"><button class="th-sort" data-sort="volume">거래량</button></th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

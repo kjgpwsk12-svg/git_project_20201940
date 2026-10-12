@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>이코노바 · 경제 홈</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <script src="/js/theme-init.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/home.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <div class="page-head">
+          <div>
+            <p class="eyebrow">Market Overview</p>
+            <h1 class="page-title">경제 홈</h1>
+            <p class="page-desc">국내·미국 시장 흐름과 관심 종목을 한눈에 확인하세요.</p>
+          </div>
+          <p class="sm muted" id="indices-time"></p>
+        </div>
+
+        <section aria-label="주요 지수">
+          <ul class="kpi-grid" id="indices"></ul>
+        </section>
+
+        <div class="home-grid">
+          <section class="panel" aria-labelledby="watch-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="watch-title">관심 종목</h2>
+              <div class="seg" role="tablist" aria-label="시장" id="watch-filter">
+                <button role="tab" aria-selected="true" data-filter="ALL">전체</button>
+                <button role="tab" aria-selected="false" data-filter="KR">국내</button>
+                <button role="tab" aria-selected="false" data-filter="US">미국</button>
+              </div>
+              <span class="panel-meta" id="watch-mode"></span>
+              <button class="icon-btn" id="watch-refresh" type="button" aria-label="시세 새로고침"></button>
+            </div>
+            <p class="alert error" id="watch-error" role="alert" hidden style="margin:12px 16px 0"></p>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">종목</th>
+                    <th scope="col" class="right">현재가</th>
+                    <th scope="col" class="right">등락</th>
+                    <th scope="col" class="right hide-sm">거래량</th>
+                    <th scope="col"><span class="sr-only">삭제</span></th>
+                  </tr>
+                </thead>
+                <tbody id="watch-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="movers-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="movers-title">주요 종목 등락</h2>
+              <div class="seg" role="tablist" aria-label="시장" id="movers-market">
+                <button role="tab" aria-selected="true" data-market="KR">국내</button>
+                <button role="tab" aria-selected="false" data-market="US">미국</button>
+              </div>
+              <span class="panel-meta" id="movers-time"></span>
+            </div>
+            <div class="movers-split" id="movers"></div>
+          </section>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

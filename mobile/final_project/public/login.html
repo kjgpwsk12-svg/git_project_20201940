@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>로그인 · 이코노바</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <script src="/js/theme-init.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/login.js"></script>
+</head>
+<body>
+  <div class="auth-body">
+    <aside class="auth-aside" aria-hidden="true">
+      <a class="brand" href="/" style="padding:0;border:0;height:auto">
+        <span class="brand-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+        <span><span class="brand-name">ECONOVA</span><span class="brand-sub">이코노바</span></span>
+      </a>
+      <div>
+        <h2>시장을 읽고, 나만의 기준을 세우고, 기록하세요.</h2>
+        <p>국내·미국 주식과 경제 지표, 뉴스, 투자 기록, 커뮤니티를 한곳에서.</p>
+        <ul class="auth-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>국내·미국 시세와 뉴스를 함께 보는 차트</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기술적 지표와 나만의 차트 수식</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>매매 기록과 손익 캘린더 (본인만 보기)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>투자 SNS와 주제별 게시판</li>
+        </ul>
+      </div>
+      <p class="xs muted">정보 제공 목적의 서비스이며 투자 권유가 아닙니다.</p>
+    </aside>
+    <main id="main" class="auth-main">
+      <section class="auth-card" aria-labelledby="title">
+        <h1 id="title">로그인</h1>
+        <p class="lead">이코노바 계정으로 로그인하세요.</p>
+        <form class="form" id="form" novalidate>
+          <p class="alert" id="message" role="alert" hidden></p>
+          <div class="field">
+            <label for="email">이메일</label>
+            <input class="input" id="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="password">비밀번호</label>
+            <input class="input" id="password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn primary block" type="submit">로그인</button>
+        </form>
+        <p class="auth-links">
+          <a class="link" href="/signup">회원가입</a>
+          <a class="link" href="/forgot">비밀번호를 잊었어요</a>
+          <a class="link" href="/">홈으로</a>
+        </p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
