@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>포트폴리오 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/portfolio.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/portfolio.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/grandcanyon-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">포트폴리오</h1>
+            <p>매매 기록으로 보유 종목과 손익을 계산하고, 달력으로 투자 흐름을 돌아보세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <dl class="kpi-grid hero-kpis kpi-4" aria-label="포트폴리오 요약">
+          <div class="panel kpi"><dt class="kpi-label">총 평가금액</dt><dd class="kpi-value" id="sum-value">-</dd><dd class="kpi-change sm muted" id="sum-value-note"></dd></div>
+          <div class="panel kpi"><dt class="kpi-label">평가손익</dt><dd class="kpi-value" id="sum-profit">-</dd><dd class="kpi-change" id="sum-rate"></dd></div>
+          <div class="panel kpi"><dt class="kpi-label">투자 원금</dt><dd class="kpi-value" id="sum-cost">-</dd><dd class="kpi-change sm muted">보유 중인 종목 기준</dd></div>
+          <div class="panel kpi"><dt class="kpi-label">실현손익 + 배당</dt><dd class="kpi-value" id="sum-realized">-</dd><dd class="kpi-change sm muted" id="sum-realized-note"></dd></div>
+        </dl>
+
+        <p class="alert error" id="page-message" role="alert" hidden></p>
+
+        <section class="panel port-panel" id="content" hidden aria-labelledby="tabs-label">
+          <h2 class="sr-only" id="tabs-label">투자 기록</h2>
+          <div class="port-tools">
+            <div class="tabs" role="tablist" aria-label="보기" id="port-tabs">
+              <button type="button" role="tab" id="tab-holdings" aria-controls="view-holdings" aria-selected="true" data-view="holdings">보유 종목</button>
+              <button type="button" role="tab" id="tab-history" aria-controls="view-history" aria-selected="false" data-view="history">거래 기록</button>
+              <button type="button" role="tab" id="tab-calendar" aria-controls="view-calendar" aria-selected="false" data-view="calendar">투자 캘린더</button>
+            </div>
+            <span class="panel-meta price-time" id="price-time"></span>
+            <button class="btn primary sm" id="add-btn" type="button">+ 거래 추가</button>
+          </div>
+          <div class="port-warnings" id="warnings" hidden></div>
+
+          <!-- 보유 종목 -->
+          <div class="port-view" id="view-holdings" role="tabpanel" aria-labelledby="tab-holdings">
+            <div class="holdings-grid">
+              <div class="table-wrap">
+                <table class="table holdings-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">종목</th>
+                      <th scope="col" class="right">수량</th>
+                      <th scope="col" class="right hide-sm">평균단가</th>
+                      <th scope="col" class="right">현재가</th>
+                      <th scope="col" class="right hide-sm">평가금액</th>
+                      <th scope="col" class="right">평가손익</th>
+                    </tr>
+                  </thead>
+                  <tbody id="holdings"></tbody>
+                </table>
+              </div>
+              <section class="alloc" aria-labelledby="alloc-title">
+                <h3 class="alloc-title" id="alloc-title">자산 구성</h3>
+                <div class="alloc-chart" id="alloc-chart"></div>
+                <ul class="alloc-legend" id="alloc-legend"></ul>
+              </section>
+            </div>
+          </div>
+
+          <!-- 거래 기록 -->
+          <div class="port-view" id="view-history" role="tabpanel" aria-labelledby="tab-history" hidden>
+            <div class="history-tools">
+              <label class="sr-only" for="history-symbol">종목</label>
+              <select class="input sm history-select" id="history-symbol"></select>
+              <div class="seg" role="group" aria-label="거래 유형" id="history-type">
+                <button type="button" aria-pressed="true" data-type="all">전체</button>
+                <button type="button" aria-pressed="false" data-type="buy">매수</button>
+                <button type="button" aria-pressed="false" data-type="sell">매도</button>
+                <button type="button" aria-pressed="false" data-type="dividend">배당</button>
+                <button type="button" aria-pressed="false" data-type="split">분할</button>
+              </div>
+              <span class="panel-meta" id="history-count"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="table history-table">
+                <thead>
+                  <tr>
+                    <th scope="col">거래일</th>
+                    <th scope="col">종목</th>
+                    <th scope="col">유형</th>
+                    <th scope="col" class="right">수량</th>
+                    <th scope="col" class="right hide-sm">가격</th>
+                    <th scope="col" class="right">금액</th>
+                    <th scope="col" class="right hide-sm">수수료·세금</th>
+                    <th scope="col"><span class="sr-only">관리</span></th>
+                  </tr>
+                </thead>
+                <tbody id="history"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 투자 캘린더 -->
+          <div class="port-view" id="view-calendar" role="tabpanel" aria-labelledby="tab-calendar" hidden>
+            <div class="cal-head">
+              <button class="icon-btn" id="cal-prev" type="button" aria-label="이전 달"></button>
+              <h3 class="cal-title" id="cal-title" aria-live="polite"></h3>
+              <button class="icon-btn" id="cal-next" type="button" aria-label="다음 달"></button>
+              <button class="btn ghost sm" id="cal-today" type="button">이번 달</button>
+              <dl class="cal-summary" id="cal-summary"></dl>
+            </div>
+            <div class="cal-grid" id="cal-grid" role="grid" aria-labelledby="cal-title"></div>
+            <section class="cal-day" aria-live="polite">
+              <h3 class="cal-day-title" id="cal-day-title"></h3>
+              <ul class="cal-day-list" id="cal-day-list"></ul>
+            </section>
+          </div>
+        </section>
+
+        <dialog class="modal tx-modal" id="tx-dialog" aria-labelledby="tx-title">
+          <form class="form" id="tx-form" novalidate>
+            <h2 class="modal-title" id="tx-title">거래 추가</h2>
+            <fieldset class="field">
+              <legend class="field-legend">유형</legend>
+              <div class="seg tx-type" id="tx-type">
+                <label><input type="radio" name="type" value="buy" checked><span>매수</span></label>
+                <label><input type="radio" name="type" value="sell"><span>매도</span></label>
+                <label><input type="radio" name="type" value="dividend"><span>배당</span></label>
+                <label><input type="radio" name="type" value="split"><span>분할·병합</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="tx-stock">종목</label>
+              <div id="tx-stock-field"></div>
+              <p class="hint" id="tx-stock-hint" hidden></p>
+            </div>
+            <div class="tx-row">
+              <div class="field">
+                <label for="tx-date">거래일</label>
+                <input class="input" id="tx-date" type="date" required aria-describedby="tx-date-hint">
+                <p class="hint" id="tx-date-hint" hidden></p>
+              </div>
+              <div class="field" data-for="buy sell">
+                <label for="tx-quantity">수량</label>
+                <input class="input" id="tx-quantity" inputmode="decimal" autocomplete="off" aria-describedby="tx-quantity-hint">
+                <p class="hint" id="tx-quantity-hint" hidden></p>
+              </div>
+            </div>
+            <div class="tx-row" data-for="buy sell">
+              <div class="field">
+                <label for="tx-price">단가 <span class="muted tx-unit"></span></label>
+                <input class="input" id="tx-price" inputmode="decimal" autocomplete="off" aria-describedby="tx-price-hint">
+                <p class="hint" id="tx-price-hint" hidden></p>
+              </div>
+              <div class="field">
+                <label for="tx-fee">수수료 <span class="muted tx-unit"></span></label>
+                <input class="input" id="tx-fee" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="tx-fee-hint">
+                <p class="hint" id="tx-fee-hint" hidden></p>
+              </div>
+            </div>
+            <div class="tx-row" data-for="sell">
+              <div class="field">
+                <label for="tx-tax">세금 <span class="muted tx-unit"></span></label>
+                <input class="input" id="tx-tax" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="tx-tax-hint">
+                <p class="hint" id="tx-tax-hint" hidden></p>
+              </div>
+              <div></div>
+            </div>
+            <div class="field" data-for="dividend">
+              <label for="tx-amount">입금액(세후) <span class="muted tx-unit"></span></label>
+              <input class="input" id="tx-amount" inputmode="decimal" autocomplete="off" aria-describedby="tx-amount-hint">
+              <p class="hint" id="tx-amount-hint" hidden></p>
+            </div>
+            <div class="field" data-for="split">
+              <label for="tx-ratio">비율 (1주가 몇 주가 되었나요?)</label>
+              <input class="input" id="tx-ratio" inputmode="decimal" autocomplete="off" placeholder="예: 4:1 분할이면 4, 5:1 병합이면 0.2" aria-describedby="tx-ratio-hint">
+              <p class="hint" id="tx-ratio-hint" hidden></p>
+            </div>
+            <div class="field" data-for="usd">
+              <label for="tx-fx">환율 (원/달러, 선택)</label>
+              <input class="input" id="tx-fx" inputmode="decimal" autocomplete="off" placeholder="거래 당시 환율" aria-describedby="tx-fx-hint">
+              <p class="hint" id="tx-fx-hint" hidden></p>
+            </div>
+            <div class="field">
+              <label for="tx-memo">메모 <span class="muted">(선택)</span></label>
+              <input class="input" id="tx-memo" maxlength="500" autocomplete="off" placeholder="매매 이유, 계좌 등" aria-describedby="tx-memo-hint">
+              <p class="hint" id="tx-memo-hint" hidden></p>
+            </div>
+            <p class="tx-preview sm" id="tx-preview"></p>
+            <p class="alert" id="tx-message" role="alert" hidden></p>
+            <div class="modal-actions">
+              <button class="btn ghost" type="button" id="tx-cancel">취소</button>
+              <button class="btn primary" type="submit" id="tx-submit">저장</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

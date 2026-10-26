@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>게시글 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/post.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <a class="back-link" id="back-link" href="/board">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          게시판
+        </a>
+        <p class="alert error" id="page-message" role="alert" hidden></p>
+
+        <div class="post-grid" id="content" hidden>
+          <div class="post-column">
+            <article class="panel post-article" aria-labelledby="post-title">
+              <header class="post-head">
+                <p class="post-kicker" id="post-kicker"></p>
+                <h1 class="post-h1" id="post-title"></h1>
+                <div class="post-byline" id="post-byline"></div>
+              </header>
+              <p class="alert error" id="hidden-note" hidden>관리자가 숨김 처리한 글이에요. 작성자와 관리자에게만 보여요.</p>
+              <div class="post-body" id="post-body"></div>
+              <div class="post-actions">
+                <button class="act-btn like-btn" id="like-btn" type="button" aria-pressed="false"></button>
+                <button class="act-btn" id="bookmark-btn" type="button" aria-pressed="false"></button>
+                <button class="act-btn" id="share-btn" type="button"></button>
+                <span class="post-actions-right" id="owner-actions"></span>
+              </div>
+            </article>
+
+            <section class="panel" aria-labelledby="comments-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="comments-title">댓글</h2>
+                <span class="panel-meta" id="comment-count"></span>
+              </div>
+              <div class="panel-body comment-area">
+                <form class="comment-form" id="comment-form" novalidate hidden>
+                  <label class="sr-only" for="comment-body">댓글 쓰기</label>
+                  <textarea class="textarea" id="comment-body" rows="3" maxlength="2000" placeholder="댓글을 남겨 보세요" aria-describedby="comment-hint"></textarea>
+                  <div class="comment-form-foot">
+                    <p class="hint" id="comment-hint" hidden></p>
+                    <span class="sm muted" id="comment-len">0 / 2000</span>
+                    <button class="btn primary sm" type="submit">등록</button>
+                  </div>
+                  <p class="alert" id="comment-message" role="alert" hidden></p>
+                </form>
+                <p class="login-prompt" id="comment-login" hidden></p>
+                <ul class="comment-list" id="comments"></ul>
+              </div>
+            </section>
+          </div>
+
+          <aside class="post-side">
+            <section class="panel" aria-labelledby="more-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="more-title">이 게시판의 다른 글</h2>
+                <a class="more-link" id="more-link" href="/board">더보기</a>
+              </div>
+              <ul class="side-posts" id="more-posts"></ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

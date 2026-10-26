@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMaxYMax slice">
+  <!-- 호수: 해 질 녘 하늘, 산 그림자가 물에 비친 모습 -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f8fb5"/>
+      <stop offset="0.5" stop-color="#d9c3cf"/>
+      <stop offset="1" stop-color="#f6dcc4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.55" r="0.4">
+      <stop offset="0" stop-color="#ffe9c7" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffe9c7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9b8c6"/>
+      <stop offset="1" stop-color="#5e7896"/>
+    </linearGradient>
+    <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8d8aa8"/>
+      <stop offset="1" stop-color="#a99eb4"/>
+    </linearGradient>
+    <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4d5f80"/>
+      <stop offset="1" stop-color="#6a7593"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="soft" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <rect width="1600" height="600" fill="url(#glow)"/>
+  <circle cx="1150" cy="330" r="34" fill="#fff4e0" opacity="0.9"/>
+
+  <path fill="url(#hill1)" d="M0 330 L140 280 L260 305 L400 240 L520 290 L660 230 L780 285 L900 245 L1020 300 L1160 255 L1300 300 L1440 260 L1600 300 L1600 380 L0 380Z"/>
+  <path fill="url(#hill2)" d="M0 380 L120 330 L230 355 L350 300 L470 345 L600 310 L720 350 L860 305 L980 350 L1100 320 L1240 360 L1380 325 L1500 355 L1600 335 L1600 380 L0 380Z"/>
+
+  <rect y="380" width="1600" height="220" fill="url(#water)"/>
+  <g opacity="0.45" filter="url(#soft)" transform="translate(0 760) scale(1 -1)">
+    <path fill="#5c6a8a" d="M0 380 L120 330 L230 355 L350 300 L470 345 L600 310 L720 350 L860 305 L980 350 L1100 320 L1240 360 L1380 325 L1500 355 L1600 335 L1600 380 L0 380Z"/>
+  </g>
+  <ellipse cx="1150" cy="430" rx="140" ry="10" fill="#fff1d9" opacity="0.55" filter="url(#soft)"/>
+  <g stroke="#f4e6dc" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round">
+    <path d="M980 450 H1320"/>
+    <path d="M1040 475 H1260"/>
+    <path d="M900 505 H1180"/>
+    <path d="M1200 530 H1450"/>
+  </g>
+  <rect x="0" y="360" width="1600" height="40" fill="#f3e3dc" opacity="0.5" filter="url(#blur)"/>
+</svg>

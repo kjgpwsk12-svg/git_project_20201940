@@ -186,7 +186,9 @@ create table public.posts (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   -- 게시판 글은 제목이 필요하다
-  constraint posts_title_required check (board = 'sns' or title is not null)
+  constraint posts_title_required check (board = 'sns' or title is not null),
+  -- 피드 글(sns)은 짧은 글: 500자까지
+  constraint posts_sns_length check (board <> 'sns' or char_length(body) <= 500)
 );
 
 create index posts_board_created on public.posts (board, created_at desc);
@@ -386,8 +388,15 @@ create unique index reports_once_per_comment on public.reports (reporter_id, com
 alter table public.reports enable row level security;
 create policy "본인 신고 또는 관리자 조회" on public.reports
   for select using (reporter_id = auth.uid() or public.is_admin());
+-- 본인이 쓴 글·댓글은 신고할 수 없다
+create or replace function public.is_own_content(p_post bigint, p_comment bigint)
+returns boolean language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.posts where id = p_post and author_id = auth.uid())
+      or exists (select 1 from public.comments where id = p_comment and author_id = auth.uid())
+$$;
+
 create policy "로그인 사용자 신고" on public.reports
-  for insert with check (reporter_id = auth.uid() and status = 'open');
+  for insert with check (reporter_id = auth.uid() and status = 'open' and not public.is_own_content(post_id, comment_id));
 create policy "관리자 처리" on public.reports
   for update using (public.is_admin()) with check (public.is_admin());
 
@@ -483,7 +492,9 @@ create table public.company_locations (
   lat double precision not null check (lat between -90 and 90),
   lng double precision not null check (lng between -180 and 180),
   source_url text not null check (source_url ~ '^https?://'),
-  verified_at date not null
+  verified_at date not null,
+  -- exact: 건물·캠퍼스 단위로 확인한 좌표, approx: 도로·동네 단위 근사 좌표
+  precision text not null default 'exact' check (precision in ('exact', 'approx'))
 );
 
 create index company_locations_company on public.company_locations (company_id);

@@ -31,6 +31,9 @@ async function init(user) {
 
   $("content").hidden = false;
   $("email").textContent = user.email;
+  $("my-email").textContent = user.email;
+  $("my-name").textContent = `${profile.nickname}님`;
+  $("my-avatar").textContent = profile.nickname.slice(0, 1);
   $("joined").textContent = new Date(profile.created_at).toLocaleDateString("ko-KR");
   initWatchlist()
     .then(() => ($("watch-count").textContent = `${watchlistIds().length}개`))
@@ -58,6 +61,8 @@ async function init(user) {
       .eq("id", user.id);
     if (error) throw new Error(koreanError(error));
     profile.nickname = nickname.value.trim();
+    $("my-name").textContent = `${profile.nickname}님`;
+    $("my-avatar").textContent = profile.nickname.slice(0, 1);
     showMessage($("profile-message"), "저장했어요.", "success");
   });
 
@@ -74,7 +79,17 @@ async function init(user) {
   // 계정 삭제
   onSubmit($("delete-form"), $("delete-message"), async () => {
     if ($("delete-confirm").value.trim() !== profile.nickname) throw new Error("닉네임이 일치하지 않아요.");
-    if (!confirm("정말 계정을 삭제할까요? 되돌릴 수 없어요.")) return;
+    const ok = confirm(
+      [
+        "계정을 삭제할까요?",
+        "",
+        "삭제되는 것: 투자 기록, 관심 종목, 북마크, 사용자 정의 지표",
+        "남는 것: 게시글과 댓글(작성자는 '탈퇴한 사용자'로 표시)",
+        "",
+        "삭제하면 되돌릴 수 없어요.",
+      ].join("\n"),
+    );
+    if (!ok) return;
     const { error } = await client.rpc("delete_my_account");
     if (error) throw new Error(koreanError(error));
     await signOut();

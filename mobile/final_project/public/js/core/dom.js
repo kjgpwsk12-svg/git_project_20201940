@@ -23,6 +23,12 @@ export function el(tag, props = {}, ...children) {
 
 export const $ = (id) => document.getElementById(id);
 
+/** replaceChildren과 같지만 el()처럼 배열을 펼치고 false·null은 건너뛴다 */
+export function fill(node, ...children) {
+  node.replaceChildren(...children.flat().filter((c) => c !== null && c !== undefined && c !== false));
+  return node;
+}
+
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 // lucide 아이콘 경로 (ISC 라이선스)
@@ -83,6 +89,20 @@ const ICONS = {
   sigma: [
     "M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2",
   ],
+  chart: ["M3 3v16a2 2 0 0 0 2 2h16", "M18 17V9", "M13 17V5", "M8 17v-3"],
+  briefcase: [
+    "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",
+    "M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z",
+  ],
+  chevronRight: ["m9 18 6-6-6-6"],
+  chevronLeft: ["m15 18-6-6 6-6"],
+  heart: ["M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"],
+  bookmark: ["m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"],
+  flag: ["M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z", "M4 22v-7"],
+  link: ["M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71", "M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"],
+  pencil: ["M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"],
+  trash: ["M3 6h18", "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"],
+  plus: ["M5 12h14", "M12 5v14"],
   sortDown: ["m6 9 6 6 6-6"],
   sortUp: ["m18 15-6-6-6 6"],
 };

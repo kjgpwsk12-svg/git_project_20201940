@@ -1,0 +1,105 @@
+/* =====================================================================
+   경제 지도
+   ===================================================================== */
+
+.map-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+.map-panel .panel-head .seg { margin-left: auto; }
+.map-wrap { position: relative; margin: 0 20px; }
+.map {
+  height: 540px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel-2);
+  font-family: inherit;
+}
+.map-status {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 500;
+  transform: translate(-50%, -50%);
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  color: var(--text-2);
+  font-size: 13px;
+}
+.map-status:empty { display: none; }
+
+/* 어두운 화면에서는 지도 밝기를 낮춰 눈부심을 줄인다 */
+:root[data-theme="dark"] .map .leaflet-tile-pane { filter: brightness(0.62) contrast(1.1) saturate(0.7); }
+.map .leaflet-control-attribution { font-size: 10.5px; }
+.map .leaflet-tooltip { font-family: inherit; font-weight: 700; }
+
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 12px 20px 18px; color: var(--text-2); font-size: 12px; }
+.map-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.dot { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.dot.dashed { border: 2px dashed var(--muted); background: transparent; }
+.chip .dot { width: 8px; height: 8px; margin-right: 6px; }
+.chip { display: inline-flex; align-items: center; }
+
+/* 지도 말풍선 */
+.leaflet-popup-content-wrapper { border-radius: 12px; background: var(--panel); color: var(--text); box-shadow: var(--shadow-pop); }
+.leaflet-popup-tip { background: var(--panel); }
+.leaflet-popup-content { margin: 14px 16px; font-family: inherit; }
+.pop { display: grid; gap: 4px; }
+.pop-sector { font-size: 11.5px; font-weight: 800; }
+.pop-name { color: var(--text); font-size: 16px; font-weight: 800; }
+.pop-price { color: var(--text-2); font-size: 13px; }
+.pop-addr, .pop-desc { color: var(--text-2); font-size: 12px; line-height: 1.5; }
+.pop-desc { color: var(--muted); }
+.pop-links { display: flex; gap: 12px; margin-top: 4px; font-size: 12.5px; font-weight: 700; }
+.pop-links a { color: var(--accent-strong); }
+.pop-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.approx-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  margin-left: 6px;
+  padding: 0 6px;
+  border: 1px dashed var(--warn);
+  border-radius: 5px;
+  color: var(--warn);
+  font-size: 10.5px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+/* ----- 기업 목록 ----- */
+.company-panel { position: sticky; top: calc(var(--topbar-h) + 18px); }
+.company-tools { display: grid; gap: 10px; padding: 0 20px 12px; border-bottom: 1px solid var(--line); }
+.company-tools .filter-input { width: 100%; height: 38px; }
+.company-tools .chip { height: 28px; padding: 0 10px; font-size: 12px; }
+.company-list { max-height: 420px; padding: 6px 12px; overflow-y: auto; overscroll-behavior: contain; }
+.company-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 8px; border-radius: 10px; text-align: left; }
+.company-item:hover { background: var(--panel-2); }
+.company-item[aria-current="true"] { background: var(--accent-soft); }
+.company-item > svg { margin-left: auto; color: var(--muted); }
+.company-text { display: grid; min-width: 0; }
+.company-text strong { overflow: hidden; color: var(--text); font-size: 13.5px; text-overflow: ellipsis; white-space: nowrap; }
+.company-text small { color: var(--muted); font-size: 12px; }
+.company-list .empty { padding: 24px 8px; }
+.company-note { padding: 12px 20px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.6; }
+.company-note .approx-tag { margin-left: 0; }
+
+@media (max-width: 1099px) {
+  .map-grid { grid-template-columns: minmax(0, 1fr); }
+  .company-panel { position: static; }
+  .map { height: 440px; }
+}
+@media (max-width: 760px) {
+  .map-wrap { margin: 0 12px; }
+  .map { height: 360px; }
+}
+
+.pop-price-note { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+.pop-links a { display: inline-flex; align-items: center; gap: 3px; }
+.company-note { display: grid; gap: 6px; list-style: none; }

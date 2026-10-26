@@ -30,3 +30,26 @@ export function validatePasswordConfirm(password, confirm) {
 export function validateBio(value) {
   return value.length > 200 ? "소개는 200자 이하로 써 주세요." : null;
 }
+
+// ----- 게시판 -----
+
+export function validatePostTitle(value) {
+  const v = value.trim();
+  if (!v) return "제목을 입력해 주세요.";
+  if (v.length > 100) return "제목은 100자 이하로 써 주세요.";
+  return null;
+}
+
+export function validatePostBody(value) {
+  const v = value.trim();
+  if (!v) return "내용을 입력해 주세요.";
+  if (v.length > 10000) return "내용은 10,000자 이하로 써 주세요.";
+  return null;
+}
+
+export function validateComment(value) {
+  const v = value.trim();
+  if (!v) return "댓글을 입력해 주세요.";
+  if (v.length > 2000) return "댓글은 2,000자 이하로 써 주세요.";
+  return null;
+}

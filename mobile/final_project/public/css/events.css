@@ -1,0 +1,75 @@
+/* =====================================================================
+   경제 일정
+   ===================================================================== */
+
+.events-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+.events-side { display: grid; gap: 18px; position: sticky; top: calc(var(--topbar-h) + 18px); }
+
+.events-head { gap: 6px; }
+.events-month { min-width: 110px; font-size: 17px; text-align: center; }
+.events-head #this-month { margin-left: 4px; }
+
+.events-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 0 20px 14px; border-bottom: 1px solid var(--line); }
+
+.agenda { padding: 6px 20px 20px; }
+.agenda > .empty { padding: 40px 16px; }
+.day-group { padding-top: 16px; }
+.day-group + .day-group { border-top: 1px dashed var(--line); margin-top: 6px; }
+.day-label { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--text); font-size: 14px; font-weight: 800; }
+.day-tag { padding: 2px 8px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800; }
+.day-tag.soon { background: var(--accent-soft); color: var(--accent-strong); }
+.day-tag.muted-tag { background: var(--panel-2); color: var(--muted); }
+.day-group.past .ev-row { opacity: 0.62; }
+.day-group.today .ev-row { border-color: var(--accent); }
+
+.ev-list { display: grid; gap: 8px; }
+.ev-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+.ev-time { color: var(--text); font-size: 15px; font-weight: 800; }
+.ev-title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; color: var(--text); font-size: 14.5px; font-weight: 700; }
+.ev-values { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; color: var(--muted); font-size: 12.5px; }
+.ev-values strong { color: var(--text); }
+.ev-source { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+a.ev-source:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+
+.ev-cat { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 6px; background: var(--panel-2); color: var(--text-2); font-size: 11.5px; font-weight: 700; }
+.ev-cat.c-rate { background: var(--accent-soft); color: var(--accent-strong); }
+.ev-cat.c-inflation { background: var(--warn-soft); color: var(--warn); }
+.ev-cat.c-employment { background: var(--down-soft); color: var(--down); }
+
+.next-list { padding: 0 12px 12px; }
+.next-list li a { display: flex; align-items: center; gap: 12px; padding: 10px 8px; border-radius: 10px; }
+.next-list li a:hover { background: var(--panel-2); }
+.next-dday { flex: none; min-width: 52px; padding: 4px 0; border-radius: 8px; background: var(--accent-soft); color: var(--accent-strong); font-size: 12px; font-weight: 800; text-align: center; }
+.next-main { display: grid; gap: 2px; min-width: 0; }
+.next-main strong { overflow: hidden; color: var(--text); font-size: 13.5px; text-overflow: ellipsis; white-space: nowrap; }
+.next-main small { color: var(--muted); font-size: 12px; }
+.next-list .empty { padding: 20px 8px; }
+
+@media (max-width: 1099px) {
+  .events-grid { grid-template-columns: minmax(0, 1fr); }
+  .events-side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .events-side { grid-template-columns: minmax(0, 1fr); }
+  .ev-row { grid-template-columns: 48px minmax(0, 1fr); }
+  .ev-source { grid-column: 2; }
+}
+.agenda .empty-action { margin-top: 14px; }
+
+/* 다가오는 일정에서 넘어온 날짜를 잠깐 강조 */
+.day-group.flash .ev-row { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); transition: box-shadow 0.3s; }

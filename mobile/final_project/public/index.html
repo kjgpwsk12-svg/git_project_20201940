@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>이코노바 · 경제 홈</title>
+  <meta name="color-scheme" content="light dark">
+  <title>ECONOVA · 홈</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -18,58 +20,112 @@
     <div class="app-main">
       <header id="topbar"></header>
       <main id="main" class="content">
-        <div class="page-head">
-          <div>
-            <p class="eyebrow">Market Overview</p>
-            <h1 class="page-title">경제 홈</h1>
-            <p class="page-desc">국내·미국 시장 흐름과 관심 종목을 한눈에 확인하세요.</p>
+        <section class="hero hero-photo hero-home" aria-labelledby="greeting">
+          <div class="hero-text">
+            <h1 id="greeting">안녕하세요</h1>
+            <p>오늘도 현명한 투자를 응원합니다.</p>
           </div>
-          <p class="sm muted" id="indices-time"></p>
-        </div>
-
-        <section aria-label="주요 지수">
-          <ul class="kpi-grid" id="indices"></ul>
+          <img class="hero-art photo" src="/images/scenes/mountain-photo.webp" alt="" aria-hidden="true">
+          <p class="hero-quote"><span class="hero-quote-text">“데이터가 만드는<br>더 나은 투자 세상”</span><span class="hero-logo" id="hero-logo">ECONOVA</span></p>
         </section>
 
+        <ul class="kpi-grid hero-kpis" id="indices" aria-label="주요 지수와 환율"></ul>
+
         <div class="home-grid">
-          <section class="panel" aria-labelledby="watch-title">
+          <section class="panel ink area-chart" aria-labelledby="chart-title">
             <div class="panel-head">
-              <h2 class="panel-title" id="watch-title">관심 종목</h2>
-              <div class="seg" role="tablist" aria-label="시장" id="watch-filter">
-                <button role="tab" aria-selected="true" data-filter="ALL">전체</button>
-                <button role="tab" aria-selected="false" data-filter="KR">국내</button>
-                <button role="tab" aria-selected="false" data-filter="US">미국</button>
+              <h2 class="panel-title" id="chart-title">KOSPI 차트</h2>
+              <div class="chart-value">
+                <strong class="mono" id="chart-price">—</strong>
+                <span id="chart-change"></span>
               </div>
-              <span class="panel-meta" id="watch-mode"></span>
-              <button class="icon-btn" id="watch-refresh" type="button" aria-label="시세 새로고침"></button>
             </div>
-            <p class="alert error" id="watch-error" role="alert" hidden style="margin:12px 16px 0"></p>
+            <div class="chart-tabs">
+              <div class="seg" role="group" aria-label="차트 기간" id="chart-range">
+                <button type="button" aria-pressed="false" data-range="1M">1개월</button>
+                <button type="button" aria-pressed="true" data-range="3M">3개월</button>
+                <button type="button" aria-pressed="false" data-range="6M">6개월</button>
+                <button type="button" aria-pressed="false" data-range="ALL">전체</button>
+              </div>
+            </div>
+            <div class="home-chart" id="chart" role="img" aria-label="코스피 일봉 차트"></div>
+          </section>
+
+          <section class="panel area-indi" aria-labelledby="indi-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="indi-title">주요 경제 지표</h2>
+              <span class="panel-meta" id="indi-meta"></span>
+              <a class="more-link" href="/indicators" style="margin-left:8px">더보기</a>
+            </div>
+            <ul class="indicator-list" id="indicators"></ul>
+          </section>
+
+          <section class="panel area-news" aria-labelledby="news-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="news-title">최신 뉴스</h2>
+              <a class="more-link" href="/news">더보기</a>
+            </div>
+            <ul class="news-list" id="market-news"></ul>
+          </section>
+
+          <section class="panel area-pop" aria-labelledby="pop-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="pop-title">인기 종목</h2>
+              <a class="more-link" href="/stocks">더보기</a>
+            </div>
+            <div class="tabs" role="tablist" aria-label="시장" id="pop-tabs" style="margin: 0 20px">
+              <button type="button" role="tab" aria-selected="true" data-tab="KOSPI">코스피</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="KOSDAQ">코스닥</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="US">해외</button>
+            </div>
             <div class="table-wrap">
-              <table class="table">
+              <table class="table compact">
                 <thead>
                   <tr>
-                    <th scope="col">종목</th>
+                    <th scope="col">종목명</th>
                     <th scope="col" class="right">현재가</th>
-                    <th scope="col" class="right">등락</th>
-                    <th scope="col" class="right hide-sm">거래량</th>
-                    <th scope="col"><span class="sr-only">삭제</span></th>
+                    <th scope="col" class="right">등락률</th>
+                    <th scope="col" class="right vol">거래량</th>
                   </tr>
                 </thead>
-                <tbody id="watch-body"></tbody>
+                <tbody id="pop-body"></tbody>
               </table>
             </div>
           </section>
 
-          <section class="panel" aria-labelledby="movers-title">
+          <section class="panel area-port" aria-labelledby="port-title">
             <div class="panel-head">
-              <h2 class="panel-title" id="movers-title">주요 종목 등락</h2>
-              <div class="seg" role="tablist" aria-label="시장" id="movers-market">
-                <button role="tab" aria-selected="true" data-market="KR">국내</button>
-                <button role="tab" aria-selected="false" data-market="US">미국</button>
-              </div>
-              <span class="panel-meta" id="movers-time"></span>
+              <h2 class="panel-title" id="port-title">포트폴리오</h2>
+              <a class="more-link" href="/portfolio">더보기</a>
             </div>
-            <div class="movers-split" id="movers"></div>
+            <div class="portfolio">
+              <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="자산 구성 (기록 없음)">
+                <circle cx="60" cy="60" r="46" class="donut-track"/>
+                <circle cx="60" cy="60" r="46" class="donut-a" stroke-dasharray="145 289" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="46" class="donut-b" stroke-dasharray="80 289" stroke-dashoffset="-148" transform="rotate(-90 60 60)"/>
+              </svg>
+              <div>
+                <p class="muted sm">총 자산</p>
+                <p class="portfolio-value" id="port-value">—</p>
+                <p class="sm muted" id="port-note">투자 기록을 입력하면 자산과 손익이 표시돼요.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel area-sched" aria-labelledby="sched-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="sched-title">오늘의 주요 일정</h2>
+              <a class="more-link" href="/events">더보기</a>
+            </div>
+            <ul class="schedule" id="schedule"></ul>
+          </section>
+
+          <section class="panel area-comm" aria-labelledby="comm-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="comm-title">커뮤니티 인기글</h2>
+              <a class="more-link" href="/board?sort=likes">더보기</a>
+            </div>
+            <ul class="community" id="community"></ul>
           </section>
         </div>
       </main>

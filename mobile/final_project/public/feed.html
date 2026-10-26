@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>커뮤니티 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/feed.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/feed.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/joshua-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">커뮤니티</h1>
+            <p>시장에 대한 생각을 짧게 나누고, 관심 있는 투자자를 팔로우하세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <div class="feed-grid">
+          <div class="feed-column">
+            <section class="panel composer" aria-label="새 글 쓰기" id="composer" hidden>
+              <form class="composer-form" id="composer-form" novalidate>
+                <span class="composer-avatar" id="composer-avatar"></span>
+                <div class="composer-main">
+                  <label class="sr-only" for="composer-body">새 글</label>
+                  <textarea class="composer-input" id="composer-body" rows="3" maxlength="500" placeholder="지금 시장에 대해 어떻게 생각하세요?" aria-describedby="composer-hint"></textarea>
+                  <p class="hint" id="composer-hint" hidden></p>
+                  <div class="composer-foot">
+                    <div class="composer-stock">
+                      <label class="sr-only" for="composer-stock">관련 종목</label>
+                      <div id="composer-stock-field"></div>
+                    </div>
+                    <span class="sm muted" id="composer-len">0 / 500</span>
+                    <button class="btn primary sm" type="submit">게시</button>
+                  </div>
+                  <p class="alert" id="composer-message" role="alert" hidden></p>
+                </div>
+              </form>
+            </section>
+            <p class="login-prompt panel" id="composer-login" hidden></p>
+
+            <div class="feed-tabs-row">
+              <div class="tabs" role="tablist" aria-label="피드 종류" id="feed-tabs">
+                <button type="button" role="tab" aria-selected="true" data-tab="all">전체</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="following">팔로잉</button>
+              </div>
+            </div>
+
+            <p class="alert error" id="feed-error" role="alert" hidden></p>
+            <div class="feed-list" id="feed" aria-live="polite"></div>
+            <div class="feed-more"><button class="btn outline" id="more-btn" type="button" hidden>더 보기</button></div>
+          </div>
+
+          <aside class="feed-side">
+            <section class="panel me-card" aria-labelledby="me-title" id="me-card">
+              <h2 class="sr-only" id="me-title">내 프로필</h2>
+              <div class="me-body" id="me-body"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="suggest-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="suggest-title">추천 투자자</h2>
+                <span class="panel-meta">최근 활동 순</span>
+              </div>
+              <ul class="suggest-list" id="suggest"></ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

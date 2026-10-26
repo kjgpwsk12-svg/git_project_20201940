@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>주식 · 이코노바</title>
+  <meta name="color-scheme" content="light dark">
+  <title>주식 · ECONOVA</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -18,41 +20,77 @@
     <div class="app-main">
       <header id="topbar"></header>
       <main id="main" class="content">
-        <div class="page-head">
-          <div>
-            <p class="eyebrow">Stocks</p>
-            <h1 class="page-title">주식</h1>
-            <p class="page-desc">국내·미국 주요 종목의 시세를 비교하고 관심 종목을 관리하세요.</p>
+        <section class="hero hero-slim" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/lake-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">주식</h1>
+            <p>국내·해외 종목의 시세를 비교하고 관심 종목을 관리하세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <ul class="kpi-grid hero-kpis kpi-4" id="indices" aria-label="시장 지수"></ul>
+
+        <div class="stocks-grid">
+          <section class="panel area-list" aria-labelledby="list-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="list-title">종목 시세</h2>
+              <span class="panel-meta" id="list-count"></span>
+              <span class="panel-meta list-time" id="list-time"></span>
+            </div>
+            <div class="list-tools">
+              <div class="tabs" role="tablist" aria-label="시장" id="tabs">
+                <button type="button" role="tab" aria-selected="true" data-tab="KOSPI">코스피</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="KOSDAQ">코스닥</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="US">해외</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="WATCH">관심 종목</button>
+              </div>
+              <label class="filter">
+                <span class="sr-only">목록에서 찾기</span>
+                <input class="filter-input" id="filter" type="search" placeholder="종목명·코드로 찾기">
+              </label>
+            </div>
+            <p class="alert error" id="list-error" role="alert" hidden style="margin:12px 20px 0"></p>
+            <div class="table-wrap">
+              <table class="table stock-table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width:52px"><span class="sr-only">관심</span></th>
+                    <th scope="col"><button class="th-sort" type="button" data-sort="name">종목명</button></th>
+                    <th scope="col" class="right"><button class="th-sort" type="button" data-sort="price">현재가</button></th>
+                    <th scope="col" class="right hide-sm"><button class="th-sort" type="button" data-sort="diff">전일 대비</button></th>
+                    <th scope="col" class="right"><button class="th-sort" type="button" data-sort="change">등락률</button></th>
+                    <th scope="col" class="right hide-sm"><button class="th-sort" type="button" data-sort="volume">거래량</button></th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="stocks-side">
+            <section class="panel ink" aria-labelledby="movers-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="movers-title">오늘의 급등락</h2>
+                <div class="seg" role="group" aria-label="방향" id="movers-dir" style="margin-left:auto">
+                  <button type="button" aria-pressed="true" data-dir="up">상승</button>
+                  <button type="button" aria-pressed="false" data-dir="down">하락</button>
+                </div>
+              </div>
+              <p class="side-note sm" id="movers-scope"></p>
+              <ol class="rank-list" id="movers"></ol>
+            </section>
+
+            <section class="panel" aria-labelledby="watch-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="watch-title">관심 종목</h2>
+                <span class="panel-meta" id="watch-mode"></span>
+                <button class="more-link" id="watch-all" type="button" style="margin-left:8px">전체 보기</button>
+              </div>
+              <ul class="watch-mini" id="watch-mini"></ul>
+            </section>
           </div>
         </div>
-
-        <section class="panel" aria-labelledby="list-title">
-          <h2 class="sr-only" id="list-title">종목 목록</h2>
-          <div class="toolbar">
-            <div class="seg" role="tablist" aria-label="목록" id="tabs">
-              <button role="tab" aria-selected="true" data-tab="KR">국내</button>
-              <button role="tab" aria-selected="false" data-tab="US">미국</button>
-              <button role="tab" aria-selected="false" data-tab="WATCH">관심 종목</button>
-            </div>
-            <input class="filter-input" id="filter" type="search" placeholder="목록에서 찾기" aria-label="목록에서 찾기">
-            <span class="panel-meta" id="list-meta"></span>
-          </div>
-          <p class="alert error" id="list-error" role="alert" hidden style="margin:12px 16px 0"></p>
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col" style="width:40px"><span class="sr-only">관심</span></th>
-                  <th scope="col"><button class="th-sort" data-sort="name">종목</button></th>
-                  <th scope="col" class="right"><button class="th-sort" data-sort="price">현재가</button></th>
-                  <th scope="col" class="right"><button class="th-sort" data-sort="change">등락률</button></th>
-                  <th scope="col" class="right hide-sm"><button class="th-sort" data-sort="volume">거래량</button></th>
-                </tr>
-              </thead>
-              <tbody id="rows"></tbody>
-            </table>
-          </div>
-        </section>
       </main>
       <footer id="footer"></footer>
     </div>

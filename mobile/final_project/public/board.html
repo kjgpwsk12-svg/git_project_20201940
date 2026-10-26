@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>게시판 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/board.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/swiss-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">게시판</h1>
+            <p>종목과 경제 이야기를 나누고 투자 아이디어를 기록하세요.</p>
+          </div>
+          <a class="btn primary hero-action" id="write-link" href="/write">글쓰기</a>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <div class="board-grid">
+          <section class="panel" aria-labelledby="list-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="list-title">게시글</h2>
+              <span class="panel-meta" id="list-count"></span>
+            </div>
+            <div class="list-tools">
+              <div class="tabs" role="tablist" aria-label="게시판 종류" id="tabs"></div>
+            </div>
+            <div class="board-tools">
+              <div class="seg" role="group" aria-label="정렬" id="sort">
+                <button type="button" aria-pressed="true" data-sort="latest">최신순</button>
+                <button type="button" aria-pressed="false" data-sort="likes">좋아요순</button>
+                <button type="button" aria-pressed="false" data-sort="comments">댓글순</button>
+              </div>
+              <form class="filter" id="search-form" role="search">
+                <label class="sr-only" for="q">게시글 검색</label>
+                <input class="filter-input" id="q" type="search" maxlength="50" placeholder="제목·내용 검색 후 Enter">
+              </form>
+            </div>
+            <p class="alert error" id="list-error" role="alert" hidden style="margin:12px 20px 0"></p>
+            <ul class="post-list" id="posts"></ul>
+            <nav class="pager" id="pager" aria-label="페이지"></nav>
+          </section>
+
+          <div class="board-side">
+            <section class="panel" aria-labelledby="hot-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="hot-title">인기글</h2>
+                <span class="panel-meta">최근 7일 · 좋아요 기준</span>
+              </div>
+              <ol class="hot-list" id="hot"></ol>
+            </section>
+
+            <section class="panel" aria-labelledby="rule-title">
+              <div class="panel-head"><h2 class="panel-title" id="rule-title">이용 안내</h2></div>
+              <ul class="panel-body rule-list">
+                <li>특정 종목의 매수·매도를 권유하거나 리딩방을 홍보하는 글은 숨김 처리될 수 있어요.</li>
+                <li>욕설, 비하, 개인정보 노출은 금지예요.</li>
+                <li>도배를 막기 위해 글은 1분에 5개, 댓글은 10개까지 쓸 수 있어요.</li>
+                <li>문제가 있는 글은 글 화면의 <strong>신고</strong>로 알려 주세요.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

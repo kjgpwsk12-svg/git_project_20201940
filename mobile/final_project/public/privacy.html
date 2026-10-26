@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>개인정보 처리방침 · 이코노바</title>
+  <meta name="color-scheme" content="light dark">
+  <title>개인정보 처리방침 · ECONOVA</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -18,10 +20,12 @@
     <div class="app-main">
       <header id="topbar"></header>
       <main id="main" class="content">
-        <article class="narrow doc">
-          <p class="eyebrow">Privacy</p>
-          <h1 class="page-title">개인정보 처리방침</h1>
-          <p class="sm muted">시행일: 2026년 10월 12일</p>
+        <section class="hero hero-slim doc-hero" aria-labelledby="doc-title">
+          <img class="hero-art photo" src="/images/scenes/canyon-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text"><h1 id="doc-title">개인정보 처리방침</h1><p>ECONOVA가 개인정보를 어떻게 다루는지 알려 드려요.</p></div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+        <article class="panel narrow doc doc-card">
           <h2>1. 수집하는 정보</h2>
           <ul>
             <li>필수: 이메일, 비밀번호(암호화 저장), 닉네임</li>
@@ -38,6 +42,7 @@
           <p>계정을 삭제하면 이메일, 프로필, 투자 기록, 관심 종목, 북마크를 지체 없이 삭제합니다. 게시글과 댓글은 작성자 정보를 지운 상태로 남습니다.</p>
           <h2>5. 처리 위탁</h2>
           <p>회원 인증과 데이터 저장에 Supabase를 사용합니다.</p>
+          <p class="doc-effective">시행일: 2026년 10월 12일</p>
         </article>
       </main>
       <footer id="footer"></footer>

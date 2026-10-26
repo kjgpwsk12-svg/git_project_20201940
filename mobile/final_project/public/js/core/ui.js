@@ -45,3 +45,25 @@ export function skeletonRows(count, columns) {
     el("tr", {}, ...Array.from({ length: columns }, () => el("td", {}, el("span", { class: "skeleton", style: "width:70%" })))),
   );
 }
+
+let toastTimer = null;
+
+/** 화면 아래에 잠깐 뜨는 알림. 스크린리더에도 읽힌다. */
+export function showToast(text) {
+  let box = document.getElementById("toast");
+  if (!box) {
+    box = el("div", { id: "toast", class: "toast", role: "status", "aria-live": "polite" });
+    document.body.append(box);
+  }
+  box.textContent = text;
+  box.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => box.classList.remove("show"), 2200);
+}
+
+/** 관심 종목 추가/삭제 후 알림 */
+export async function toggleWithToast(toggle, id, name, isWatchedNow) {
+  const wasWatched = isWatchedNow(id);
+  await toggle(id);
+  showToast(wasWatched ? `${name}을(를) 관심 종목에서 뺐어요` : `${name}을(를) 관심 종목에 추가했어요`);
+}

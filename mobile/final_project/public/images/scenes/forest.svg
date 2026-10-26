@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMaxYMax slice">
+  <!-- 안개 낀 침엽수 숲: 청록빛 아침 -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9cc6c4"/>
+      <stop offset="1" stop-color="#e3f0ec"/>
+    </linearGradient>
+    <radialGradient id="light" cx="0.8" cy="0.15" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="16"/></filter>
+    <!-- 나무 한 그루 -->
+    <symbol id="pine" viewBox="0 0 40 120">
+      <path d="M20 0 L28 22 L24 22 L33 44 L27 44 L37 70 L29 70 L40 98 L23 98 L23 120 L17 120 L17 98 L0 98 L11 70 L3 70 L13 44 L7 44 L16 22 L12 22Z"/>
+    </symbol>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <rect width="1600" height="600" fill="url(#light)"/>
+
+  <path fill="#a9c9c4" d="M0 300 C200 260 380 290 560 250 C760 210 940 270 1140 230 C1320 195 1460 240 1600 220 L1600 600 L0 600Z"/>
+
+  <g fill="#86aea9">
+    <use href="#pine" x="40" y="250" width="40" height="110"/>
+    <use href="#pine" x="120" y="240" width="46" height="125"/>
+    <use href="#pine" x="260" y="255" width="38" height="105"/>
+    <use href="#pine" x="420" y="235" width="44" height="120"/>
+    <use href="#pine" x="560" y="225" width="40" height="115"/>
+    <use href="#pine" x="700" y="230" width="46" height="125"/>
+    <use href="#pine" x="860" y="220" width="40" height="112"/>
+    <use href="#pine" x="1000" y="215" width="44" height="122"/>
+    <use href="#pine" x="1140" y="205" width="40" height="118"/>
+    <use href="#pine" x="1280" y="210" width="46" height="128"/>
+    <use href="#pine" x="1430" y="200" width="40" height="115"/>
+    <use href="#pine" x="1540" y="205" width="44" height="122"/>
+  </g>
+
+  <rect x="0" y="300" width="1600" height="90" fill="#eef6f3" opacity="0.65" filter="url(#blur)"/>
+
+  <path fill="#5f8f8c" d="M0 400 C220 370 420 395 640 365 C860 335 1060 380 1280 350 C1420 332 1520 345 1600 340 L1600 600 L0 600Z"/>
+  <g fill="#4a7b79">
+    <use href="#pine" x="0" y="320" width="56" height="160"/>
+    <use href="#pine" x="150" y="335" width="50" height="150"/>
+    <use href="#pine" x="330" y="315" width="60" height="170"/>
+    <use href="#pine" x="520" y="325" width="52" height="155"/>
+    <use href="#pine" x="700" y="300" width="62" height="175"/>
+    <use href="#pine" x="900" y="315" width="54" height="160"/>
+    <use href="#pine" x="1080" y="295" width="62" height="178"/>
+    <use href="#pine" x="1260" y="305" width="56" height="165"/>
+    <use href="#pine" x="1440" y="290" width="62" height="180"/>
+  </g>
+
+  <rect x="0" y="420" width="1600" height="70" fill="#e4f1ed" opacity="0.45" filter="url(#blur)"/>
+
+  <path fill="#2f5b5c" d="M0 520 C240 490 480 515 720 490 C960 465 1200 505 1440 480 C1520 472 1570 476 1600 475 L1600 600 L0 600Z"/>
+  <g fill="#244a4c">
+    <use href="#pine" x="60" y="420" width="70" height="190"/>
+    <use href="#pine" x="380" y="430" width="64" height="180"/>
+    <use href="#pine" x="760" y="410" width="74" height="200"/>
+    <use href="#pine" x="1120" y="415" width="70" height="195"/>
+    <use href="#pine" x="1460" y="400" width="76" height="210"/>
+  </g>
+</svg>

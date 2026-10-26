@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>회원가입 · 이코노바</title>
+  <meta name="color-scheme" content="light dark">
+  <title>회원가입 · ECONOVA</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -14,25 +16,26 @@
 </head>
 <body>
   <div class="auth-body">
-    <aside class="auth-aside" aria-hidden="true">
-      <a class="brand" href="/" style="padding:0;border:0;height:auto">
-        <span class="brand-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="brand-name">ECONOVA</span><span class="brand-sub">이코노바</span></span>
-      </a>
+    <aside class="auth-aside">
       <div>
-        <h2>시장을 읽고, 나만의 기준을 세우고, 기록하세요.</h2>
-        <p>국내·미국 주식과 경제 지표, 뉴스, 투자 기록, 커뮤니티를 한곳에서.</p>
+        <a class="auth-brand" href="/"><img src="/images/logo.webp" alt="ECONOVA" height="40"></a>
+        <h2>더 나은 투자 결정을 위한<br>경제와 금융의 모든 것, ECONOVA</h2>
         <ul class="auth-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>국내·미국 시세와 뉴스를 함께 보는 차트</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기술적 지표와 나만의 차트 수식</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>매매 기록과 손익 캘린더 (본인만 보기)</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>투자 SNS와 주제별 게시판</li>
+          <li><span class="tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>실시간 주가 &amp; 시장 동향</li>
+          <li><span class="tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span>경제 지표 &amp; 글로벌 뉴스</li>
+          <li><span class="tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg></span>개인 맞춤 포트폴리오</li>
+          <li><span class="tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>투자 커뮤니티</li>
         </ul>
       </div>
-      <p class="xs muted">정보 제공 목적의 서비스이며 투자 권유가 아닙니다.</p>
+      <div>
+        <div class="auth-swatches" aria-hidden="true">
+          <span style="background:#5eead4"></span><span style="background:#4a7fb5"></span><span style="background:#e8eef4"></span><span style="background:#8a97a6"></span>
+        </div>
+        <p class="auth-tagline">Modern · Clean · Trustworthy</p>
+      </div>
     </aside>
     <main id="main" class="auth-main">
-      <section class="auth-card" aria-labelledby="title">
+      <section class="panel auth-card" aria-labelledby="title">
         <h1 id="title">회원가입</h1>
         <p class="lead">가입하면 투자 기록, 게시판, SNS를 사용할 수 있어요.</p>
         <form class="form" id="form" novalidate>

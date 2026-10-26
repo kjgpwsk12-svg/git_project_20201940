@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>경제 지도 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/leaflet.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/map.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/map.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/forest-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">경제 지도</h1>
+            <p>국내외 주요 상장사가 어디에 있는지 지도에서 살펴보고 종목으로 바로 이동하세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <div class="map-grid">
+          <section class="panel map-panel" aria-labelledby="map-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="map-title">본사 위치</h2>
+              <div class="seg" role="group" aria-label="지도 범위" id="region">
+                <button type="button" aria-pressed="true" data-region="KR">한국</button>
+                <button type="button" aria-pressed="false" data-region="US">미국</button>
+                <button type="button" aria-pressed="false" data-region="ALL">전체</button>
+              </div>
+            </div>
+            <div class="map-wrap">
+              <div class="map" id="map" role="region" aria-label="기업 본사 지도"></div>
+              <p class="map-status" id="map-status" role="status"></p>
+            </div>
+            <ul class="map-legend" id="legend" aria-label="분야 색 범례"></ul>
+          </section>
+
+          <aside class="panel company-panel" aria-labelledby="list-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="list-title">기업 목록</h2>
+              <span class="panel-meta" id="list-count"></span>
+            </div>
+            <div class="company-tools">
+              <label class="sr-only" for="company-search">기업 찾기</label>
+              <input class="filter-input" id="company-search" type="search" placeholder="기업명·분야로 찾기" autocomplete="off">
+              <div class="chip-row" role="group" aria-label="분야" id="sector-filter"></div>
+            </div>
+            <ul class="company-list" id="company-list"></ul>
+            <ul class="company-note">
+              <li><strong>주소</strong>: 한국은 한국거래소 KIND 기업개황의 본점 주소, 미국은 SEC EDGAR 공시의 사업장 주소예요. (2026년 10월 14일 확인)</li>
+              <li><strong>좌표</strong>: 그 주소를 OpenStreetMap 데이터 기반 주소 검색(Nominatim, Photon)으로 한 번 찾아 저장했어요. <span class="approx-tag">위치 근사</span> 표시는 건물이 아닌 도로·동네 단위라 실제 위치와 다를 수 있어요.</li>
+              <li><strong>지도</strong>: © OpenStreetMap contributors · 데이터 라이선스 <a class="link" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">ODbL<span class="sr-only"> (새 창)</span></a></li>
+            </ul>
+          </aside>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

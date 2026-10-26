@@ -54,3 +54,15 @@ export function formatDateLabel(date) {
   const weekday = ["일", "월", "화", "수", "목", "금", "토"][new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
   return `${y}년 ${m}월 ${d}일 (${weekday})`;
 }
+
+const shortDate = new Intl.DateTimeFormat("ko-KR", { timeZone: "Asia/Seoul", year: "numeric", month: "numeric", day: "numeric" });
+
+/** 글·댓글 작성 시각: "방금 전", "5분 전", "3시간 전", "2일 전", 일주일이 넘으면 날짜 */
+export function formatRelativeTime(iso, now = new Date()) {
+  const seconds = Math.max(0, (now - new Date(iso)) / 1000);
+  if (seconds < 60) return "방금 전";
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}분 전`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}시간 전`;
+  if (seconds < 7 * 86400) return `${Math.floor(seconds / 86400)}일 전`;
+  return shortDate.format(new Date(iso));
+}

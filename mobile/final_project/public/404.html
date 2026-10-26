@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>페이지를 찾을 수 없음 · 이코노바</title>
+  <meta name="color-scheme" content="light dark">
+  <title>페이지를 찾을 수 없음 · ECONOVA</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -18,12 +20,15 @@
     <div class="app-main">
       <header id="topbar"></header>
       <main id="main" class="content">
-        <div class="empty" style="padding:96px 16px">
-          <p class="eyebrow">404</p>
-          <h1 class="page-title">찾을 수 없는 페이지예요</h1>
-          <p class="page-desc">주소가 올바른지 확인해 주세요.</p>
-          <p style="margin-top:20px"><a class="btn primary" href="/">경제 홈으로</a></p>
-        </div>
+        <section class="hero hero-slim notfound" aria-labelledby="nf-title">
+          <img class="hero-art photo night" src="/images/scenes/starlight-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <p class="eyebrow">404</p>
+            <h1 id="nf-title">찾을 수 없는 페이지예요</h1>
+            <p>주소가 올바른지 확인해 주세요.</p>
+            <p style="margin-top:18px"><a class="btn primary" href="/">홈으로</a></p>
+          </div>
+        </section>
       </main>
       <footer id="footer"></footer>
     </div>

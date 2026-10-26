@@ -1,4 +1,4 @@
-// 앱 골격: 사이드바(메뉴, 장 운영 상태), 상단바(검색, 테마, 계정), 데모 안내, 푸터.
+// 앱 골격: 사이드바(로고, 메뉴, 장 운영 상태, 계정), 상단바(검색, 날짜, 테마 스위치), 데모 안내, 푸터.
 // 각 페이지는 #sidebar, #topbar, #footer 자리만 두고 initShell()을 호출한다.
 import { marketStatus } from "/shared/market-hours.js";
 import { getStatus } from "./api.js";
@@ -11,25 +11,31 @@ export const MENU = [
   {
     label: "마켓",
     items: [
-      { href: "/", label: "경제 홈", icon: "home", ready: true },
+      { href: "/", label: "홈", icon: "home", ready: true },
       { href: "/stocks", label: "주식", icon: "candles", ready: true, match: ["/stocks", "/stock"] },
-      { href: "/news", label: "뉴스", icon: "news", ready: false },
-      { href: "/events", label: "경제 일정", icon: "clock", ready: false },
-      { href: "/map", label: "경제 지도", icon: "map", ready: false },
+      { href: "/news", label: "뉴스", icon: "news", ready: true },
+      { href: "/indicators", label: "경제지표", icon: "chart", ready: true },
+      { href: "/events", label: "경제 일정", icon: "clock", ready: true },
+      { href: "/map", label: "경제 지도", icon: "map", ready: true },
     ],
   },
   {
     label: "내 투자",
-    items: [{ href: "/calendar", label: "투자 캘린더", icon: "calendar", ready: false }],
+    items: [{ href: "/portfolio", label: "포트폴리오", icon: "briefcase", ready: true }],
   },
   {
     label: "커뮤니티",
     items: [
-      { href: "/feed", label: "피드", icon: "users", ready: false },
-      { href: "/board", label: "게시판", icon: "board", ready: false },
+      { href: "/feed", label: "커뮤니티", icon: "users", ready: true, match: ["/feed", "/user"] },
+      { href: "/board", label: "게시판", icon: "board", ready: true, match: ["/board", "/post", "/write"] },
     ],
   },
 ];
+
+/** ECONOVA 로고 이미지 (흰 글자, 어두운 바탕용) */
+export function logoImage(height = 30) {
+  return el("img", { src: "/images/logo.webp", alt: "ECONOVA", height, style: `height:${height}px;width:auto;display:block` });
+}
 
 function isCurrent(item) {
   const path = location.pathname.replace(/\.html$/, "");
@@ -41,12 +47,14 @@ export function initShell() {
   renderSidebar();
   renderTopbar();
   renderFooter();
+  // 데이터 출처는 푸터에만 표시한다 (데모 안내 배너는 쓰지 않음)
   getStatus().then((s) => {
-    if (s?.isDemo) $("topbar").after(el("div", { class: "demo-banner", role: "status" }, "데모 모드 · 화면 확인용 가상 데이터입니다. 실제 시세와 기사가 아닙니다."));
     const source = $("data-source");
     if (s && source) source.textContent = `시세: ${s.marketLabel}`;
   });
   renderAccount();
+  // 화면 배너 오른쪽 아래 로고
+  document.querySelectorAll("[data-hero-logo]").forEach((slot) => slot.replaceChildren(logoImage(26)));
 }
 
 // ----- 사이드바 -----
@@ -55,7 +63,6 @@ function renderSidebar() {
   const sidebar = $("sidebar");
   if (!sidebar) return;
   sidebar.className = "sidebar";
-  sidebar.setAttribute("aria-label", "주 메뉴");
 
   const groups = MENU.map((group) =>
     el(
@@ -70,16 +77,11 @@ function renderSidebar() {
             "li",
             {},
             item.ready
-              ? el(
-                  "a",
-                  { class: "nav-item", href: item.href, "aria-current": isCurrent(item) ? "page" : null },
-                  icon(item.icon),
-                  item.label,
-                )
+              ? el("a", { class: "nav-item", href: item.href, "aria-current": isCurrent(item) ? "page" : null }, icon(item.icon, 18), item.label)
               : el(
                   "span",
                   { class: "nav-item", "aria-disabled": "true" },
-                  icon(item.icon),
+                  icon(item.icon, 18),
                   item.label,
                   el("span", { class: "nav-soon" }, "준비 중"),
                 ),
@@ -89,17 +91,16 @@ function renderSidebar() {
     ),
   );
 
-  const status = el("div", { class: "market-status", "aria-live": "off" });
+  const status = el("div", { class: "market-status" });
   const drawStatus = () => {
     status.replaceChildren(
-      el("p", { class: "nav-label", style: "padding:0" }, "장 운영"),
       ...["KR", "US"].map((market) => {
         const s = marketStatus(market);
         return el(
           "div",
           { class: "status-row", title: `${s.detail} · 공휴일 미반영` },
-          el("span", {}, el("span", { class: `status-dot ${s.state}` }), market === "KR" ? "한국" : "미국"),
-          el("span", { class: s.state === "open" ? "" : "muted" }, s.label),
+          el("span", {}, el("span", { class: `status-dot ${s.state}` }), el("strong", {}, market === "KR" ? "한국" : "미국")),
+          el("span", {}, s.label),
         );
       }),
     );
@@ -108,14 +109,9 @@ function renderSidebar() {
   setInterval(drawStatus, 60_000);
 
   sidebar.replaceChildren(
-    el(
-      "a",
-      { class: "brand", href: "/", "aria-label": "이코노바 홈" },
-      el("span", { class: "brand-mark" }, icon("logo", 16)),
-      el("span", {}, el("span", { class: "brand-name" }, "ECONOVA"), el("span", { class: "brand-sub" }, "이코노바 · 주식·경제 분석")),
-    ),
+    el("a", { class: "brand", href: "/", "aria-label": "ECONOVA 홈" }, logoImage(30)),
     el("nav", { class: "nav", "aria-label": "주 메뉴" }, ...groups),
-    el("div", { class: "sidebar-foot" }, status),
+    el("div", { class: "sidebar-foot" }, status, el("div", { id: "side-account" })),
   );
 }
 
@@ -133,26 +129,24 @@ function toggleSidebar(open) {
 
 // ----- 상단바 -----
 
-function currentTheme() {
-  const set = document.documentElement.dataset.theme;
-  if (set) return set;
-  return matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-}
+const isDark = () => document.documentElement.dataset.theme === "dark";
 
 function renderTopbar() {
   const topbar = $("topbar");
   if (!topbar) return;
   topbar.className = "topbar";
 
-  const themeButton = el("button", { class: "icon-btn", type: "button" });
+  const knob = el("span", { class: "knob" });
+  const themeSwitch = el("button", { class: "theme-switch", type: "button", role: "switch" }, knob);
   const drawTheme = () => {
-    const theme = currentTheme();
-    themeButton.replaceChildren(icon(theme === "dark" ? "sun" : "moon", 17));
-    themeButton.setAttribute("aria-label", theme === "dark" ? "밝은 테마로 바꾸기" : "어두운 테마로 바꾸기");
+    knob.replaceChildren(icon(isDark() ? "moon" : "sun", 13));
+    themeSwitch.setAttribute("aria-checked", String(isDark()));
+    themeSwitch.setAttribute("aria-label", "다크 모드");
   };
-  themeButton.addEventListener("click", () => {
-    const next = currentTheme() === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
+  themeSwitch.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    if (next === "dark") document.documentElement.dataset.theme = "dark";
+    else delete document.documentElement.dataset.theme;
     try {
       localStorage.setItem("econova-theme", next);
     } catch {
@@ -162,6 +156,8 @@ function renderTopbar() {
     window.dispatchEvent(new CustomEvent("themechange"));
   });
   drawTheme();
+
+  const today = new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "numeric", day: "numeric", weekday: "short", timeZone: "Asia/Seoul" }).format(new Date());
 
   topbar.replaceChildren(
     el("a", { class: "sr-only", href: "#main" }, "본문으로 건너뛰기"),
@@ -178,7 +174,7 @@ function renderTopbar() {
       icon("menu", 18),
     ),
     createSearch(),
-    el("div", { class: "topbar-actions" }, themeButton, el("div", { id: "account", style: "display:flex;gap:8px" })),
+    el("div", { class: "topbar-actions" }, el("span", { class: "topbar-date num" }, today), themeSwitch, el("div", { id: "account", style: "display:flex;gap:4px" })),
   );
 
   document.addEventListener("keydown", (e) => {
@@ -186,31 +182,39 @@ function renderTopbar() {
   });
 }
 
-/** 상단바 계정 영역: 로그인 상태에 따라 바뀐다 */
+/** 계정: 사이드바 아래 프로필, 상단바 로그아웃 버튼 */
 async function renderAccount() {
-  const box = $("account");
-  if (!box) return;
+  const side = $("side-account");
+  const top = $("account");
   const client = await getSupabase();
   if (!client) return;
 
   const draw = async (user) => {
     if (!user) {
       const next = encodeURIComponent(location.pathname + location.search);
-      box.replaceChildren(
-        el("a", { class: "btn ghost sm hide-sm", href: `/login?next=${next}` }, "로그인"),
-        el("a", { class: "btn primary sm", href: "/signup" }, "회원가입"),
+      side?.replaceChildren(
+        el(
+          "div",
+          { class: "side-auth" },
+          el("a", { class: "login", href: `/login?next=${next}` }, "로그인"),
+          el("a", { class: "signup", href: "/signup" }, "회원가입"),
+        ),
       );
+      top?.replaceChildren();
       return;
     }
     const profile = await getMyProfile().catch(() => null);
     const name = profile?.nickname ?? "내 계정";
-    box.replaceChildren(
+    side?.replaceChildren(
       el(
         "a",
-        { class: "account-chip", href: "/mypage", title: "마이페이지" },
+        { class: "profile", href: "/mypage", title: "마이페이지" },
         el("span", { class: "avatar", "aria-hidden": "true" }, name.slice(0, 1)),
-        el("span", { class: "hide-sm" }, name),
+        el("span", {}, el("span", { class: "profile-name" }, name), el("span", { class: "profile-sub" }, profile?.role === "admin" ? "관리자" : "마이페이지")),
       ),
+    );
+    top?.replaceChildren(
+      el("a", { class: "icon-btn", href: "/mypage", "aria-label": "마이페이지", title: "마이페이지" }, icon("user", 17)),
       el(
         "button",
         {
@@ -226,6 +230,7 @@ async function renderAccount() {
         icon("logout", 17),
       ),
     );
+    window.dispatchEvent(new CustomEvent("profileloaded", { detail: profile }));
   };
 
   const { data } = await client.auth.getSession();

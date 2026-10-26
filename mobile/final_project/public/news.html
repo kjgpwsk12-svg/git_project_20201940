@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>뉴스 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/news.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/news.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/tree-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">뉴스</h1>
+            <p>국내외 시장 뉴스를 주제별로 모아 보고, 궁금한 키워드로 찾아보세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <p class="news-demo" id="demo-note" hidden></p>
+
+        <div class="news-grid">
+          <section class="panel" aria-labelledby="list-title">
+            <div class="panel-head">
+              <h2 class="panel-title" id="list-title">시장 뉴스</h2>
+              <span class="panel-meta" id="list-meta"></span>
+            </div>
+            <div class="list-tools">
+              <div class="tabs" role="tablist" aria-label="뉴스 주제" id="topics"></div>
+            </div>
+            <form class="news-search" id="search-form" role="search">
+              <label class="sr-only" for="q">뉴스 검색</label>
+              <input class="filter-input" id="q" type="search" maxlength="30" placeholder="키워드로 검색 (예: 반도체, 금리) 후 Enter" autocomplete="off">
+            </form>
+            <p class="alert error" id="list-error" role="alert" hidden style="margin:0 20px 12px"></p>
+            <ul class="news-list" id="news"></ul>
+          </section>
+
+          <aside class="news-side">
+            <section class="panel" aria-labelledby="saved-title" id="saved-panel" hidden>
+              <div class="panel-head">
+                <h2 class="panel-title" id="saved-title">저장한 뉴스</h2>
+                <span class="panel-meta" id="saved-meta"></span>
+              </div>
+              <ul class="saved-list" id="saved"></ul>
+            </section>
+
+            <section class="panel" aria-labelledby="about-title">
+              <div class="panel-head"><h2 class="panel-title" id="about-title">뉴스 안내</h2></div>
+              <ul class="panel-body rule-list">
+                <li id="source-note">기사 제목·요약과 원문 링크만 보여 줘요. 본문은 <strong>언론사 사이트</strong>에서 읽을 수 있어요.</li>
+                <li id="refresh-note">뉴스는 10분마다 새로 가져와요.</li>
+                <li>뉴스는 참고용이며 투자 판단의 근거가 아니에요.</li>
+                <li id="save-note" hidden>네이버 검색 이용 약관이 검색 결과의 저장을 제한해서, 기사 저장 기능은 꺼 두었어요.</li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

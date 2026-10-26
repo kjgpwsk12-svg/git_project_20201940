@@ -215,6 +215,37 @@ describe("지도·일정 (관리자 관리 데이터)", () => {
     ok(await as(ADMIN, "insert into companies (symbol_id, name, industry, country) values ('KR.005930', '삼성전자', '반도체', 'KR')"));
     assert.equal((await as(null, "select * from companies")).length, 1);
   });
+
+  it("경제 지도 시드: 두 번 실행해도 회사·본사 위치가 한 번씩만 들어간다", async () => {
+    const seed = await readFile(new URL("../supabase/seeds/2026_company_locations.sql", import.meta.url), "utf8");
+    await db.exec(seed);
+    await db.exec(seed);
+    // 위 테스트에서 관리자가 이미 넣은 삼성전자도 본사 위치가 생긴다
+    assert.equal((await as(null, "select * from companies")).length, 48);
+    const locations = await as(null, "select precision from company_locations where kind = 'hq'");
+    assert.equal(locations.length, 48);
+    assert.ok(locations.some((l) => l.precision === "approx"));
+    rejected(await as(A, "insert into company_locations (company_id, kind, label, address, lat, lng, source_url, verified_at) select id, 'plant', 'x', 'x', 0, 0, 'https://x', current_date from companies limit 1"));
+  });
+
+  it("2026 경제 일정 시드: 두 번 실행해도 한 번만 들어가고, 시각이 서울 기준으로 맞다", async () => {
+    const seed = await readFile(new URL("../supabase/seeds/2026_economic_events.sql", import.meta.url), "utf8");
+    await db.exec(seed);
+    await db.exec(seed);
+    const rows = await as(null, "select title, scheduled_at from economic_events order by scheduled_at");
+    assert.equal(rows.length, 22);
+    rejected(await as(A, "insert into economic_events (country, category, title, scheduled_at, source) values ('KR', 'rate', '가짜', now(), 'x')"));
+    // FOMC 10월: 미 서머타임 중 14:00 ET → 서울 10월 29일 03:00
+    const [{ seoul }] = (
+      await db.query("select to_char(scheduled_at at time zone 'Asia/Seoul', 'YYYY-MM-DD HH24:MI') as seoul from economic_events where title like 'FOMC%' and scheduled_at > '2026-10-01' and scheduled_at < '2026-11-01'")
+    ).rows;
+    assert.equal(seoul, "2026-10-29 03:00");
+    // CPI 11월 10일: 서머타임이 끝난 뒤라 08:30 ET → 서울 22:30
+    const [{ cpi }] = (
+      await db.query("select to_char(scheduled_at at time zone 'Asia/Seoul', 'YYYY-MM-DD HH24:MI') as cpi from economic_events where title like '%CPI%10월분'")
+    ).rows;
+    assert.equal(cpi, "2026-11-10 22:30");
+  });
 });
 
 describe("신고", () => {
@@ -228,6 +259,24 @@ describe("신고", () => {
     const [mine] = await as(A, "select status from reports where id = $1", [report.id]);
     assert.equal(mine.status, "open", "신고자가 직접 처리할 수 없음");
     ok(await as(ADMIN, "update reports set status = 'resolved' where id = $1", [report.id]));
+  });
+
+  it("본인 글·댓글은 신고할 수 없다", async () => {
+    await resetRateLimit();
+    const [{ id: own }] = ok(await as(B, "insert into posts (board, title, body) values ('free', '내 글', '내용') returning id"));
+    rejected(await as(B, "insert into reports (post_id, reason) values ($1, '스팸')", [own]));
+    const [{ id: comment }] = ok(await as(B, "insert into comments (post_id, body) values ($1, '내 댓글') returning id", [own]));
+    rejected(await as(B, "insert into reports (comment_id, reason) values ($1, '스팸')", [comment]));
+    ok(await as(A, "insert into reports (comment_id, reason) values ($1, '스팸')", [comment]));
+  });
+});
+
+describe("피드 글", () => {
+  it("피드 글은 500자까지, 게시판 글은 더 길게 쓸 수 있다", async () => {
+    await resetRateLimit();
+    ok(await as(B, "insert into posts (board, body) values ('sns', repeat('a', 500))"));
+    rejected(await as(B, "insert into posts (board, body) values ('sns', repeat('a', 501))"));
+    ok(await as(B, "insert into posts (board, title, body) values ('free', '긴 글', repeat('a', 2000))"));
   });
 });
 

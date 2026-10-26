@@ -30,7 +30,7 @@ export function parseSymbolId(id) {
   return null;
 }
 
-const kr = (code, name, basePrice) => ({ symbol: { market: "KR", code }, name, basePrice });
+const kr = (code, name, basePrice, board = "KOSPI") => ({ symbol: { market: "KR", code }, name, basePrice, board });
 const us = (exchange, code, name, basePrice, aliases = "") => ({
   symbol: { market: "US", exchange, code },
   name,
@@ -40,7 +40,7 @@ const us = (exchange, code, name, basePrice, aliases = "") => ({
 
 /**
  * 검색용 주요 종목 목록. 여기 없는 종목도 주소로 직접 열 수 있다.
- * basePrice는 데모 데이터의 시작 가격 근사값, aliases는 한글 검색어다.
+ * basePrice는 데모 데이터의 시작 가격 근사값, board는 국내 시장 구분(KOSPI/KOSDAQ), aliases는 한글 검색어다.
  */
 export const CATALOG = [
   kr("005930", "삼성전자", 70000),
@@ -66,8 +66,13 @@ export const CATALOG = [
   kr("329180", "HD현대중공업", 400000),
   kr("034020", "두산에너빌리티", 60000),
   kr("323410", "카카오뱅크", 25000),
-  kr("247540", "에코프로비엠", 120000),
-  kr("196170", "알테오젠", 400000),
+  kr("247540", "에코프로비엠", 120000, "KOSDAQ"),
+  kr("196170", "알테오젠", 400000, "KOSDAQ"),
+  kr("086520", "에코프로", 60000, "KOSDAQ"),
+  kr("028300", "HLB", 70000, "KOSDAQ"),
+  kr("263750", "펄어비스", 40000, "KOSDAQ"),
+  kr("293490", "카카오게임즈", 18000, "KOSDAQ"),
+  kr("035900", "JYP Ent.", 70000, "KOSDAQ"),
   us("NAS", "AAPL", "Apple", 230, "애플"),
   us("NAS", "MSFT", "Microsoft", 450, "마이크로소프트"),
   us("NAS", "NVDA", "NVIDIA", 180, "엔비디아"),

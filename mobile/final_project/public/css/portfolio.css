@@ -1,0 +1,156 @@
+/* =====================================================================
+   포트폴리오 (보유 종목 · 거래 기록 · 투자 캘린더)
+   ===================================================================== */
+
+.port-panel { margin-top: 18px; }
+.port-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 20px 0; border-bottom: 1px solid var(--line); }
+.port-tools .tabs { flex: 1; min-width: 0; border-bottom: 0; }
+.port-tools .tabs button { flex: 0 0 auto; padding: 0 18px; min-height: 44px; }
+.port-tools #add-btn { margin-bottom: 8px; }
+.port-view { padding: 16px 20px 22px; }
+
+.port-warnings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 14px 20px 0;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 13px;
+}
+.port-warnings .text-btn { color: var(--warn); text-decoration: underline; text-underline-offset: 3px; }
+
+.strong { font-weight: 700; }
+.rate-line { display: block; margin-top: 2px; font-size: 12px; font-weight: 600; }
+.accent-text { color: var(--accent-strong); }
+
+/* ----- 보유 종목 ----- */
+.holdings-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 24px; align-items: start; }
+.holdings-table td { padding-top: 13px; padding-bottom: 13px; }
+.alloc { padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); }
+.alloc-title { color: var(--text); font-size: 14px; font-weight: 700; }
+.alloc-chart { position: relative; display: grid; place-items: center; margin: 14px 0; }
+.alloc-chart .donut-track { stroke: var(--line); }
+.alloc-center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; pointer-events: none; }
+.alloc-center small { color: var(--muted); font-size: 11.5px; }
+.alloc-center strong { color: var(--text); font-size: 18px; font-weight: 800; }
+.alloc-legend { display: grid; gap: 8px; }
+.alloc-legend li { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.alloc-legend .swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; }
+.alloc-name { flex: 1; min-width: 0; overflow: hidden; color: var(--text-2); text-overflow: ellipsis; white-space: nowrap; }
+.alloc-legend .num { color: var(--text); font-weight: 700; }
+
+/* ----- 거래 기록 ----- */
+.history-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
+.history-select { width: auto; min-width: 150px; height: 36px; }
+.history-tools .panel-meta { margin-left: auto; }
+.history-table td { padding-top: 12px; padding-bottom: 12px; vertical-align: top; }
+.history-table .sym { min-width: 0; }
+.tx-memo { max-width: 260px; margin-top: 4px; overflow: hidden; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.tx-warn { background: var(--warn-soft); }
+.tx-warn-text { max-width: 220px; margin-top: 4px; color: var(--warn); font-size: 11.5px; line-height: 1.5; }
+
+.tx-badge { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 6px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.tx-badge.t-buy { background: var(--up-soft); color: var(--up); }
+.tx-badge.t-sell { background: var(--down-soft); color: var(--down); }
+.tx-badge.t-dividend { background: var(--accent-soft); color: var(--accent-strong); }
+.tx-badge.t-split { background: var(--panel-2); color: var(--text-2); }
+
+/* ----- 투자 캘린더 ----- */
+.cal-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 14px; }
+.cal-title { min-width: 120px; color: var(--text); font-size: 18px; font-weight: 800; text-align: center; }
+.cal-summary { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 0 auto; font-size: 13px; }
+.cal-summary div { display: flex; gap: 6px; }
+.cal-summary dt { color: var(--muted); }
+.cal-summary dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.cal-grid { display: grid; gap: 6px; }
+.cal-row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.cal-weekdays span { padding: 4px 0; color: var(--muted); font-size: 12px; font-weight: 600; text-align: center; }
+.cal-weekdays .sun, .cal-cell.sun .cal-num { color: var(--up); }
+.cal-weekdays .sat, .cal-cell.sat .cal-num { color: var(--down); }
+.cal-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  min-height: 92px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  text-align: left;
+}
+.cal-cell.blank { border-color: transparent; background: transparent; }
+button.cal-cell:hover { border-color: var(--line-strong); background: var(--panel-2); }
+.cal-cell.has { background: var(--panel-2); }
+.cal-cell[aria-selected="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.cal-num { color: var(--text-2); font-size: 12.5px; font-weight: 700; }
+.cal-cell.today .cal-num {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.cal-chip {
+  overflow: hidden;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cal-chip.t-buy { background: var(--up-soft); color: var(--up); }
+.cal-chip.t-sell { background: var(--down-soft); color: var(--down); }
+.cal-chip.t-dividend { background: var(--accent-soft); color: var(--accent-strong); }
+.cal-chip.t-split { background: var(--panel); color: var(--text-2); }
+.cal-more { color: var(--muted); font-size: 11px; }
+
+.cal-day { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.cal-day-title { color: var(--text-2); font-size: 14px; font-weight: 700; }
+.cal-day-list { display: grid; gap: 8px; margin-top: 10px; }
+.cal-day-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 13.5px; }
+.cal-day-name { color: var(--text); font-weight: 700; }
+.cal-day-name:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cal-day-list strong { margin-left: auto; color: var(--text); }
+.cal-day-memo { flex-basis: 100%; color: var(--muted); font-size: 12px; }
+.cal-day-list .empty-day { border-style: dashed; color: var(--muted); }
+
+/* ----- 거래 입력 창 ----- */
+.tx-modal { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow-y: auto; }
+.tx-type { display: flex; flex-wrap: wrap; }
+.tx-type label { position: relative; }
+.tx-type input { position: absolute; opacity: 0; pointer-events: none; }
+.tx-type span { display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: 8px; color: var(--text-2); font-size: 13px; font-weight: 600; cursor: pointer; }
+.tx-type input:checked + span { background: var(--panel); color: var(--text); box-shadow: var(--shadow); }
+.tx-type input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 1px; }
+.tx-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tx-row[hidden] { display: none; }
+.tx-preview { min-height: 1.4em; color: var(--accent-strong); font-weight: 700; }
+.tx-preview:empty { display: none; }
+
+@media (max-width: 1099px) {
+  .holdings-grid { grid-template-columns: minmax(0, 1fr); }
+  .alloc { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: center; }
+  .alloc-title { grid-column: 1 / -1; }
+  .alloc-chart { margin: 0; }
+}
+@media (max-width: 760px) {
+  .port-tools .tabs button { padding: 0 12px; }
+  .cal-cell { min-height: 64px; padding: 4px; }
+  .cal-chip { display: none; }
+  .cal-cell.has::after { content: ""; width: 6px; height: 6px; margin: 2px auto 0; border-radius: 50%; background: var(--accent); }
+  .cal-summary { margin-left: 0; flex-basis: 100%; }
+  .tx-row { grid-template-columns: 1fr; }
+  .alloc { grid-template-columns: 1fr; }
+}
+.tx-fx-missing { margin-top: 4px; color: var(--muted); font-size: 11.5px; }
+/* 좁아진 요약 카드의 설명 문구는 줄바꿈 허용 */
+#sum-value-note, #sum-realized-note { white-space: normal; line-height: 1.45; }

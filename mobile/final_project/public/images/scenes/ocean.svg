@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMaxYMax slice">
+  <!-- 바다 일출: 수평선, 해 반사, 잔물결 -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7aa6c6"/>
+      <stop offset="0.6" stop-color="#d7e3ea"/>
+      <stop offset="1" stop-color="#f7e6cf"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="0.74" cy="0.6" r="0.35">
+      <stop offset="0" stop-color="#ffe7bd" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffe7bd" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fb3c8"/>
+      <stop offset="1" stop-color="#2d5878"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff1d6" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff1d6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="soft" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <rect width="1600" height="600" fill="url(#sunGlow)"/>
+  <g fill="#ffffff" opacity="0.55" filter="url(#blur)">
+    <ellipse cx="420" cy="140" rx="220" ry="26"/>
+    <ellipse cx="900" cy="190" rx="260" ry="22"/>
+    <ellipse cx="1350" cy="120" rx="200" ry="20"/>
+  </g>
+  <circle cx="1185" cy="355" r="46" fill="#fff6e3"/>
+
+  <path fill="#6f8ea6" opacity="0.8" d="M0 360 L180 345 L320 352 L430 340 L520 356 L520 360Z"/>
+  <rect y="360" width="1600" height="240" fill="url(#sea)"/>
+  <path d="M1110 362 L1260 362 L1330 600 L1040 600Z" fill="url(#path)" filter="url(#soft)"/>
+
+  <g stroke="#ffffff" stroke-linecap="round" fill="none">
+    <path d="M60 400 q40 -6 80 0 t80 0" stroke-opacity="0.35" stroke-width="2"/>
+    <path d="M300 430 q50 -7 100 0 t100 0" stroke-opacity="0.3" stroke-width="2"/>
+    <path d="M620 410 q45 -6 90 0 t90 0" stroke-opacity="0.3" stroke-width="2"/>
+    <path d="M820 470 q60 -8 120 0 t120 0" stroke-opacity="0.25" stroke-width="2.5"/>
+    <path d="M1350 440 q50 -7 100 0 t100 0" stroke-opacity="0.3" stroke-width="2"/>
+    <path d="M180 520 q70 -9 140 0 t140 0" stroke-opacity="0.22" stroke-width="3"/>
+    <path d="M1000 540 q80 -10 160 0 t160 0" stroke-opacity="0.22" stroke-width="3"/>
+    <path d="M1150 395 h70 M1140 420 h90 M1130 450 h110 M1120 485 h130" stroke="#fff3da" stroke-opacity="0.6" stroke-width="2.5"/>
+  </g>
+</svg>

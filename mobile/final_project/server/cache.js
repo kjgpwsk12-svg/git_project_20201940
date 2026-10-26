@@ -33,6 +33,24 @@ export async function cached(key, ttlMs, load) {
   return task;
 }
 
+/**
+ * 보관하지 않고, 같은 요청이 동시에 들어오면 한 번만 불러온다.
+ * 저장·캐싱이 허용되지 않는 자료(FRED 이용 약관 등)에 쓴다.
+ * @returns {Promise<{ value: any, fetchedAt: string, stale: false }>}
+ */
+export function deduped(key, load) {
+  if (inflight.has(key)) return inflight.get(key);
+  const task = (async () => {
+    try {
+      return { value: await load(), fetchedAt: new Date().toISOString(), stale: false };
+    } finally {
+      inflight.delete(key);
+    }
+  })();
+  inflight.set(key, task);
+  return task;
+}
+
 export function clearCache() {
   store.clear();
   inflight.clear();

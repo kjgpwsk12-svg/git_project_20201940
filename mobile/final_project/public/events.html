@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>경제 일정 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/events.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/events.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/amazon-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">경제 일정</h1>
+            <p>금리 결정, 물가, 고용 발표처럼 시장을 움직이는 일정을 서울 시각으로 확인하세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <div class="events-grid">
+          <section class="panel" aria-labelledby="list-title">
+            <div class="panel-head events-head">
+              <button class="icon-btn" id="prev-month" type="button" aria-label="이전 달"></button>
+              <h2 class="panel-title events-month" id="list-title" aria-live="polite"></h2>
+              <button class="icon-btn" id="next-month" type="button" aria-label="다음 달"></button>
+              <button class="btn ghost sm" id="this-month" type="button">이번 달</button>
+              <span class="panel-meta" id="list-count"></span>
+            </div>
+            <div class="events-filters">
+              <div class="seg" role="group" aria-label="국가" id="country-filter">
+                <button type="button" aria-pressed="true" data-country="all">전체</button>
+                <button type="button" aria-pressed="false" data-country="KR">한국</button>
+                <button type="button" aria-pressed="false" data-country="US">미국</button>
+              </div>
+              <div class="chip-row" role="group" aria-label="분류" id="category-filter"></div>
+            </div>
+            <p class="alert error" id="list-error" role="alert" hidden style="margin:0 20px 12px"></p>
+            <div class="agenda" id="agenda"></div>
+          </section>
+
+          <aside class="events-side">
+            <section class="panel" aria-labelledby="next-title">
+              <div class="panel-head">
+                <h2 class="panel-title" id="next-title">다가오는 일정</h2>
+                <span class="panel-meta">필터와 관계없이 전체</span>
+              </div>
+              <ol class="next-list" id="next-list"></ol>
+            </section>
+
+            <section class="panel" aria-labelledby="guide-title">
+              <div class="panel-head"><h2 class="panel-title" id="guide-title">시간 안내</h2></div>
+              <ul class="panel-body rule-list">
+                <li>모든 시각은 <strong>서울 시각</strong>이에요. 미국 발표는 보통 서울 밤이나 다음 날 새벽이에요.</li>
+                <li>미국은 서머타임(3월 둘째 주~11월 첫째 주)에 1시간 일찍 발표돼요.</li>
+                <li>금통위는 회의 시작 시각이고, 결정은 오전 중 발표돼요.</li>
+                <li>일정은 공식 발표 기준이며 바뀔 수 있어요. 각 일정의 <strong>출처</strong>에서 확인할 수 있어요.</li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

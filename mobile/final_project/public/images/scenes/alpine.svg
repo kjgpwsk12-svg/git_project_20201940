@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMaxYMax slice">
+  <!-- 설산: 아침 하늘, 겹겹의 능선, 안개 -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fa7c9"/>
+      <stop offset="0.55" stop-color="#c3d6e6"/>
+      <stop offset="1" stop-color="#e9f0f5"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.28" r="0.35">
+      <stop offset="0" stop-color="#fff6e5" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff6e5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9db5cb"/>
+      <stop offset="1" stop-color="#c4d4e1"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6c8aa6"/>
+      <stop offset="1" stop-color="#9fb4c7"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f5f7c"/>
+      <stop offset="1" stop-color="#5d7b95"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#253f56"/>
+      <stop offset="1" stop-color="#1b3247"/>
+    </linearGradient>
+    <linearGradient id="snow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d9e5ef"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <rect width="1600" height="600" fill="url(#sun)"/>
+
+  <path fill="url(#far)" d="M0 330 L120 280 L210 300 L330 220 L420 260 L520 190 L610 240 L720 160 L800 210 L900 140 L990 200 L1090 150 L1180 205 L1290 130 L1380 190 L1480 150 L1600 200 L1600 600 L0 600Z"/>
+  <path fill="url(#snow)" opacity="0.9" d="M720 160 L748 186 L736 184 L726 196 L712 182 L700 188Z M900 140 L934 172 L918 168 L906 182 L892 168 L878 175Z M1290 130 L1326 166 L1310 160 L1298 176 L1284 160 L1268 168Z"/>
+
+  <rect x="0" y="250" width="1600" height="90" fill="#eef4f8" opacity="0.55" filter="url(#blur)"/>
+
+  <path fill="url(#mid)" d="M0 390 L150 320 L260 350 L380 270 L470 310 L560 250 L660 320 L770 240 L860 300 L980 225 L1080 290 L1200 220 L1300 280 L1420 230 L1520 285 L1600 260 L1600 600 L0 600Z"/>
+  <path fill="url(#snow)" opacity="0.85" d="M560 250 L590 278 L576 276 L566 290 L552 274 L540 280Z M980 225 L1012 256 L998 252 L986 268 L972 252 L958 258Z M1200 220 L1232 250 L1218 247 L1206 262 L1192 247 L1178 253Z"/>
+
+  <rect x="0" y="330" width="1600" height="80" fill="#e3edf4" opacity="0.5" filter="url(#blur)"/>
+
+  <path fill="url(#near)" d="M0 460 L130 400 L250 430 L360 370 L480 420 L600 360 L720 415 L840 350 L960 410 L1080 355 L1200 405 L1320 360 L1450 410 L1600 370 L1600 600 L0 600Z"/>
+  <path fill="url(#front)" d="M0 540 L160 495 L300 520 L440 480 L600 515 L760 470 L920 510 L1080 475 L1240 505 L1400 470 L1600 500 L1600 600 L0 600Z"/>
+</svg>

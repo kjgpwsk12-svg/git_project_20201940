@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
-  <title>이용약관 · 이코노바</title>
+  <meta name="color-scheme" content="light dark">
+  <title>이용약관 · ECONOVA</title>
   <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
   <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/pages.css">
   <script defer src="/vendor/supabase.js"></script>
@@ -18,10 +20,12 @@
     <div class="app-main">
       <header id="topbar"></header>
       <main id="main" class="content">
-        <article class="narrow doc">
-          <p class="eyebrow">Terms</p>
-          <h1 class="page-title">이용약관</h1>
-          <p class="sm muted">시행일: 2026년 10월 12일</p>
+        <section class="hero hero-slim doc-hero" aria-labelledby="doc-title">
+          <img class="hero-art photo" src="/images/scenes/desert-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text"><h1 id="doc-title">이용약관</h1><p>ECONOVA 서비스를 이용할 때 지켜야 할 약속이에요.</p></div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+        <article class="panel narrow doc doc-card">
           <h2>1. 서비스의 성격</h2>
           <p>이코노바는 국내외 주식·경제 정보를 모아 보여주고, 이용자가 투자 기록을 관리하며 의견을 나눌 수 있는 정보 서비스입니다. 이 서비스는 학교 과제로 개발되었으며 투자자문, 투자일임, 세무 자문을 제공하지 않습니다.</p>
           <h2>2. 정보의 정확성</h2>
@@ -35,6 +39,17 @@
           </ul>
           <h2>4. 계정</h2>
           <p>이용자는 언제든 마이페이지에서 계정을 삭제할 수 있습니다. 삭제하면 개인 투자 기록은 지워지고, 게시글과 댓글은 작성자 정보 없이 남습니다.</p>
+          <h2>5. 외부 자료와 이용 조건</h2>
+          <p>이 사이트는 개인·교육용 비상업 프로젝트이며, 아래 기관의 자료를 각 기관의 이용 조건에 따라 보여 줍니다. 각 기관은 이 사이트와 관계가 없고 내용을 보증하지 않습니다.</p>
+          <ul>
+            <li>경제 지표(미국): FRED® API, Federal Reserve Bank of St. Louis — <a class="link" href="https://fred.stlouisfed.org/legal/" target="_blank" rel="noopener noreferrer">FRED 이용 약관<span class="sr-only"> (새 창)</span></a>. 자료는 서버에 보관하지 않으며, 개별 계열의 저작권은 각 원 출처에 있습니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</li>
+            <li>경제 지표(한국 기준금리): 한국은행 경제통계시스템(ECOS) Open API — <a class="link" href="https://ecos.bok.or.kr/" target="_blank" rel="noopener noreferrer">한국은행 ECOS<span class="sr-only"> (새 창)</span></a></li>
+            <li>시장 뉴스: 네이버 뉴스 검색 API(설정한 경우) — 검색 결과는 서버에 보관하지 않고 원문 링크로 연결합니다.</li>
+            <li>경제 지도: 지도 © OpenStreetMap contributors(<a class="link" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">ODbL<span class="sr-only"> (새 창)</span></a>), 기업 주소는 한국거래소 KIND·미국 SEC EDGAR 공시.</li>
+            <li>경제 일정: 한국은행·미 연방준비제도·미 노동통계국이 공개한 일정.</li>
+          </ul>
+          <p>이용자는 위 자료를 이 사이트 밖으로 대량 복사하거나 재배포하지 않아야 하며, 각 기관의 이용 조건을 따릅니다.</p>
+          <p class="doc-effective">시행일: 2026년 10월 12일</p>
         </article>
       </main>
       <footer id="footer"></footer>

@@ -3,6 +3,7 @@
 import { timingSafeEqual } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import express from "express";
+import { cleanNewsQuery, findTopic } from "../shared/news-topics.js";
 import { parseSymbolId, symbolId } from "../shared/symbols.js";
 import { createMarketService } from "./market.js";
 
@@ -58,14 +59,18 @@ export function createApp(service = createMarketService(), env = process.env) {
   // 정적 파일: 화면(public), 공용 모듈(shared), 차트 라이브러리
   app.use(express.static(root("../public"), { extensions: ["html"] }));
   app.use("/shared", express.static(root("../shared")));
+  // 외부 라이브러리와 글꼴은 node_modules에서 직접 제공한다 (CDN 없음)
   const vendor = {
-    "lightweight-charts.mjs": "../node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.mjs",
-    "supabase.js": "../node_modules/@supabase/supabase-js/dist/umd/supabase.js",
+    "lightweight-charts.mjs": ["text/javascript", "../node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.mjs"],
+    "supabase.js": ["text/javascript", "../node_modules/@supabase/supabase-js/dist/umd/supabase.js"],
+    "PretendardVariable.woff2": ["font/woff2", "../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2"],
+    "leaflet.mjs": ["text/javascript", "../node_modules/leaflet/dist/leaflet-src.esm.js"],
+    "leaflet.css": ["text/css", "../node_modules/leaflet/dist/leaflet.css"],
   };
   app.get("/vendor/:file", (req, res, next) => {
-    const path = vendor[req.params.file];
-    if (!path) return next();
-    res.type("text/javascript").sendFile(root(path));
+    const entry = vendor[req.params.file];
+    if (!entry) return next();
+    res.type(entry[0]).sendFile(root(entry[1]), { maxAge: "7d" });
   });
 
   app.get("/api/status", (req, res) => {
@@ -82,6 +87,59 @@ export function createApp(service = createMarketService(), env = process.env) {
     } catch (error) {
       console.error("[api/indices]", error.message);
       res.status(502).json({ error: "주요 지수를 불러오지 못했어요." });
+    }
+  });
+
+  /** 지수 일봉 (경제 홈 차트) */
+  app.get("/api/indices/:id/candles", async (req, res) => {
+    const request = service.getIndexCandles(req.params.id);
+    if (!request) return res.status(501).json({ error: "지수 차트는 아직 연동되지 않았어요." });
+    try {
+      const result = await request;
+      if (!result.value) return res.status(404).json({ error: "없는 지수예요." });
+      res.json(result);
+    } catch (error) {
+      console.error("[api/indices/candles]", error.message);
+      res.status(502).json({ error: "지수 차트를 불러오지 못했어요." });
+    }
+  });
+
+  /** 주요 경제 지표. 연동 전이면 available: false */
+  app.get("/api/indicators", async (req, res) => {
+    const request = service.getIndicators();
+    if (!request) return res.json({ available: false });
+    try {
+      res.json({ available: true, ...(await request) });
+    } catch (error) {
+      console.error("[api/indicators]", error.message);
+      res.status(502).json({ error: "경제 지표를 불러오지 못했어요." });
+    }
+  });
+
+  /** 지표 하나의 10년 기록 GET /api/indicators/US10Y/history */
+  app.get("/api/indicators/:id/history", async (req, res) => {
+    const id = String(req.params.id);
+    if (!/^[A-Z0-9]{2,12}$/.test(id)) return res.status(400).json({ error: "지표 이름이 올바르지 않아요." });
+    try {
+      res.json(await service.getIndicatorHistory(id));
+    } catch (error) {
+      if (error.status === 404) return res.status(404).json({ error: error.message });
+      console.error("[api/indicators/history]", error.message);
+      res.status(502).json({ error: "지표 기록을 불러오지 못했어요." });
+    }
+  });
+
+  /** 시장 뉴스 GET /api/market-news?topic=kr&q=검색어. 뉴스 공급자가 없으면 available: false */
+  app.get("/api/market-news", async (req, res) => {
+    const topic = findTopic(String(req.query.topic ?? "all")).id;
+    const query = cleanNewsQuery(req.query.q);
+    const request = service.getMarketNews({ topic, query });
+    if (!request) return res.json({ available: false });
+    try {
+      res.json({ available: true, ...(await request) });
+    } catch (error) {
+      console.error("[api/market-news]", error.message);
+      res.status(502).json({ error: "뉴스를 불러오지 못했어요." });
     }
   });
 

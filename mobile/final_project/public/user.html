@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>프로필 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/feed.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/user.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <a class="back-link" href="/feed">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          커뮤니티
+        </a>
+        <p class="alert error" id="page-message" role="alert" hidden></p>
+
+        <div id="content" hidden>
+          <section class="panel user-hero" aria-labelledby="user-name">
+            <div class="user-id">
+              <span id="user-avatar"></span>
+              <div class="user-text">
+                <h1 class="user-name" id="user-name"></h1>
+                <p class="user-bio" id="user-bio"></p>
+                <p class="user-joined sm muted" id="user-joined"></p>
+              </div>
+              <div class="user-action" id="user-action"></div>
+            </div>
+            <dl class="user-stats">
+              <div><dt>글</dt><dd id="count-posts">-</dd></div>
+              <div><dt>팔로워</dt><dd id="count-followers">-</dd></div>
+              <div><dt>팔로잉</dt><dd id="count-following">-</dd></div>
+            </dl>
+          </section>
+
+          <div class="user-tabs-row">
+            <div class="tabs" role="tablist" aria-label="작성한 글" id="user-tabs">
+              <button type="button" role="tab" aria-selected="true" data-tab="sns">피드</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="board">게시판 글</button>
+            </div>
+          </div>
+          <div id="user-posts" class="user-posts"></div>
+          <div class="feed-more"><button class="btn outline" id="more-btn" type="button" hidden>더 보기</button></div>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>

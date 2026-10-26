@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>경제지표 · ECONOVA</title>
+  <meta name="description" content="이코노바(ECONOVA) · 국내외 주식·경제 정보 통합 분석 플랫폼">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <script src="/js/theme-init.js"></script>
+  <link rel="preload" href="/vendor/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/indicators.css">
+  <script defer src="/vendor/supabase.js"></script>
+  <script type="module" src="/js/pages/indicators.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside id="sidebar"></aside>
+    <div class="app-main">
+      <header id="topbar"></header>
+      <main id="main" class="content">
+        <section class="hero hero-slim hero-board" aria-labelledby="page-title">
+          <img class="hero-art photo" src="/images/scenes/lake-photo.webp" alt="" aria-hidden="true">
+          <div class="hero-text">
+            <h1 id="page-title">경제지표</h1>
+            <p>금리·물가·고용·환율 지표를 공식 자료로 확인하고, 10년 흐름을 차트로 살펴보세요.</p>
+          </div>
+          <span class="hero-brand" data-hero-logo aria-hidden="true"></span>
+        </section>
+
+        <p class="alert error" id="page-error" role="alert" hidden style="margin-top:18px"></p>
+        <div class="ind-groups" id="groups" aria-live="polite"></div>
+
+        <section class="panel ind-chart-panel" aria-labelledby="chart-title">
+          <div class="panel-head ind-chart-head">
+            <div>
+              <h2 class="panel-title" id="chart-title">지표 추이</h2>
+              <p class="sm muted" id="chart-sub"></p>
+            </div>
+            <div class="seg" role="group" aria-label="기간" id="range">
+              <button type="button" aria-pressed="false" data-years="1">1년</button>
+              <button type="button" aria-pressed="false" data-years="3">3년</button>
+              <button type="button" aria-pressed="true" data-years="5">5년</button>
+              <button type="button" aria-pressed="false" data-years="10">10년</button>
+            </div>
+          </div>
+          <div class="ind-chart-body">
+            <div class="ind-chart" id="chart" role="img" aria-label="선택한 지표의 추이 차트"></div>
+            <aside class="ind-about" id="about"></aside>
+          </div>
+        </section>
+
+        <p class="ind-source">
+          자료: 미국 지표는 <strong>FRED® API(Federal Reserve Bank of St. Louis)</strong>로 받은 각 기관의 자료이고, 한국 기준금리는 <strong>한국은행 ECOS</strong> Open API 자료예요.
+          이 사이트는 개인·교육용 프로젝트이며 세인트루이스 연준·한국은행과 관계가 없고, 두 기관은 이 화면의 내용을 보증하지 않아요.
+          자료는 서버에 보관하지 않고 열 때마다 새로 가져오며, 발표 주기가 지표마다 달라 기준일이 서로 다를 수 있어요.
+          색은 값이 오르고 내린 방향만 뜻해요. 투자 판단의 근거가 아닌 참고용이에요.
+          자료별 이용 조건은 <a class="link" href="/terms">이용약관 5조</a>와 <a class="link" href="https://fred.stlouisfed.org/legal/" target="_blank" rel="noopener noreferrer">FRED 이용 약관<span class="sr-only"> (새 창)</span></a>에서 볼 수 있어요.
+        </p>
+        <p class="ind-source" id="fred-notice" hidden lang="en">This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</p>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </div>
+</body>
+</html>
