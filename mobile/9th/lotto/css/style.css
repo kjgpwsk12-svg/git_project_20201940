@@ -1,0 +1,678 @@
+/* ===== 기본 설정 ===== */
+:root {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #2b3a67;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 페이지 배경: 밝은 파스텔 그라데이션 */
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+  background:
+    radial-gradient(circle at 10% 10%, #fff4bd 0, transparent 35%),
+    radial-gradient(circle at 92% 88%, #ffd3e8 0, transparent 40%),
+    linear-gradient(160deg, #c6e6ff, #e8defe);
+}
+
+/* ===== 가운데 흰 카드 ===== */
+.card {
+  width: min(100%, 520px);
+  height: fit-content;
+  padding: 32px 26px;
+  border-radius: 28px;
+  background: rgb(255 255 255 / 88%);
+  box-shadow: 0 18px 50px rgb(90 120 200 / 25%);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #8a7bff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 7vw, 2.2rem);
+  letter-spacing: -0.04em;
+}
+
+.desc {
+  margin: 8px 0 18px;
+  color: #6b7aa8;
+}
+
+/* 생성 횟수 */
+.count {
+  margin: 0 0 14px;
+  color: #6b7aa8;
+  font-weight: 700;
+}
+
+.count b {
+  color: #ff5d7a;
+  font-size: 1.3rem;
+}
+
+/* ===== 공이 들어오는 영역 ===== */
+.balls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 84px; /* 공이 없을 때도 높이를 유지해 화면이 덜컹거리지 않게 */
+  padding: 14px 8px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f4f8ff, #eaf1ff);
+}
+
+/* 공이 하나도 없을 때(초기/초기화 직후) 안내 문구를 보여준다 */
+.balls:empty::before {
+  content: "번호 뽑기를 눌러보세요 🎱";
+  color: #9aa7cc;
+  font-weight: 700;
+}
+
+/* ===== 공 모양 ===== */
+.ball {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  /* 입체감: 왼쪽 위 하이라이트 + 아래쪽 어두운 그림자 */
+  background-image: radial-gradient(circle at 30% 28%, rgb(255 255 255 / 75%) 0, rgb(255 255 255 / 0%) 45%);
+  box-shadow: inset -5px -7px 10px rgb(0 0 0 / 18%), 0 6px 12px rgb(60 80 140 / 25%);
+  animation: ball-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+
+/* 번호 구간별 공 색상 (실제 로또 공 색을 참고) */
+.ball.c1 { background-color: #ffc928; } /* 1~10 노랑 */
+.ball.c2 { background-color: #4dabf7; } /* 11~20 파랑 */
+.ball.c3 { background-color: #ff6b6b; } /* 21~30 빨강 */
+.ball.c4 { background-color: #8e9bb5; } /* 31~40 회색 */
+.ball.c5 { background-color: #51cf66; } /* 41~45 초록 */
+
+/* 사용자가 고른 번호와 일치한 공: 반짝이는 테두리 */
+.ball.match {
+  outline: 4px solid #fff;
+  animation: ball-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both, glow 1.2s ease-in-out 0.7s infinite alternate;
+}
+
+/* 공이 위에서 떨어지며 회전하고 통통 튀며 자리 잡는 애니메이션 */
+@keyframes ball-in {
+  0%   { opacity: 0; transform: translateY(-120px) rotate(-360deg) scale(0.4); }
+  60%  { opacity: 1; transform: translateY(8px) rotate(0deg) scale(1.1); }
+  80%  { transform: translateY(-6px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+@keyframes glow {
+  from { box-shadow: inset -5px -7px 10px rgb(0 0 0 / 18%), 0 0 6px 2px rgb(255 214 74 / 60%); }
+  to   { box-shadow: inset -5px -7px 10px rgb(0 0 0 / 18%), 0 0 18px 8px rgb(255 214 74 / 95%); }
+}
+
+/* ===== 확인 줄 / 비교 결과 문구 ===== */
+.check {
+  margin: 10px 0 0;
+  color: #3aa86b;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.compare {
+  min-height: 1.6em;
+  margin: 10px 0 0;
+  font-weight: 800;
+  color: #ff5d7a;
+}
+
+/* ===== 버튼 ===== */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px 0;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #ff8fa3, #ff6b81);
+  color: #fff;
+  box-shadow: 0 6px 0 #e04861;
+}
+
+.btn.ghost {
+  background: #e6efff;
+  color: #4a5c94;
+  box-shadow: 0 6px 0 #c4d3f2;
+}
+
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 rgb(0 0 0 / 15%); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; } /* 뽑는 중에는 누를 수 없음 */
+
+/* ===== 내 번호 고르기 ===== */
+.picker-box {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 2px dashed #dbe4fa;
+}
+
+.picker-box h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.picker-box small {
+  margin-left: 6px;
+  color: #ff5d7a;
+}
+
+.hint {
+  margin: 6px 0 12px;
+  color: #8a98c2;
+  font-size: 0.82rem;
+}
+
+/* 1~45 번호판: 9열 격자 */
+.picker {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 6px;
+}
+
+.picker button {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 2px solid #dbe4fa;
+  border-radius: 10px;
+  background: #fff;
+  color: #5c6c9c;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 100ms ease, background 100ms ease;
+}
+
+.picker button:hover { transform: scale(1.1); }
+
+/* 내가 고른 번호 */
+.picker button.selected {
+  border-color: #8a7bff;
+  background: #8a7bff;
+  color: #fff;
+}
+
+/* 내가 고른 번호가 실제로 뽑힌 경우 */
+.picker button.hit {
+  border-color: #ffc928;
+  background: #ffc928;
+  color: #5a4300;
+}
+
+@media (max-width: 420px) {
+  .ball { width: 46px; height: 46px; font-size: 1.1rem; }
+  .picker { gap: 4px; }
+}
+
+/* 움직임 줄이기 설정을 켠 사용자는 애니메이션 생략 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* =====================================================
+ * 도로롱 테마: 귀여운 파스텔 꿈나라 배경 + 마스코트
+ * (위의 기본 스타일을 덮어쓰거나 덧붙인다)
+ * ===================================================== */
+
+/* 배경: 분홍 → 연보라 → 하늘색의 몽글몽글한 그라데이션 */
+body {
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 120px; /* 아래 언덕과 카드가 겹치지 않도록 */
+  background: linear-gradient(180deg, #ffd9ec 0%, #e6dcff 48%, #cdeeff 100%);
+}
+
+.card {
+  position: relative;
+  z-index: 2; /* 배경 장식 위에 표시 */
+  backdrop-filter: blur(6px);
+  border: 3px solid #fff;
+}
+
+/* ----- 배경 장식 레이어 ----- */
+.decor {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 초승달: 동그라미에서 겹친 그림자로 한쪽을 파내 만든다 */
+.moon {
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: inset -22px 8px 0 0 #fff6b8, 0 0 40px 10px rgb(255 246 184 / 70%);
+  animation: moon-bob 6s ease-in-out infinite alternate;
+}
+
+@keyframes moon-bob {
+  to { transform: translateY(12px) rotate(8deg); }
+}
+
+/* 둥실둥실 흘러가는 구름 */
+.cloud {
+  position: absolute;
+  width: 130px;
+  height: 40px;
+  border-radius: 40px;
+  background: rgb(255 255 255 / 85%);
+  animation: drift 55s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud::before { top: -20px; left: 18px; width: 54px; height: 54px; }
+.cloud::after  { top: -12px; left: 62px; width: 42px; height: 42px; }
+
+.cloud.c-a { top: 14%; left: -200px; }
+.cloud.c-b { top: 38%; left: -200px; animation-duration: 75s; animation-delay: -30s; transform: scale(0.7); opacity: 0.8; }
+.cloud.c-c { top: 62%; left: -200px; animation-duration: 65s; animation-delay: -12s; transform: scale(1.15); }
+
+@keyframes drift {
+  to { translate: calc(100vw + 400px) 0; }
+}
+
+/* 아래쪽 파스텔 언덕 두 겹 */
+.hill {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  border-radius: 50% 50% 0 0;
+}
+
+.hill.h-back  { bottom: -60px; height: 190px; background: #c9f2dc; }
+.hill.h-front { bottom: -90px; height: 190px; left: -30%; background: #ffd1e4; }
+
+/* JS가 만들어 넣는 반짝이는 별/하트/꽃 */
+.sparkle {
+  position: absolute;
+  color: var(--c, #fff);
+  font-size: var(--s, 18px);
+  text-shadow: 0 0 10px currentColor;
+  animation: twinkle var(--d, 3s) ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.25; transform: scale(0.7) rotate(-10deg); }
+  to   { opacity: 1;    transform: scale(1.15) rotate(10deg) translateY(-6px); }
+}
+
+/* ----- 마스코트 도로롱 ----- */
+.mascot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -78px 0 6px; /* 카드 윗선에 걸쳐 살짝 튀어나오게 */
+}
+
+.dororong {
+  width: 170px;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 8px 10px rgb(150 120 220 / 25%));
+}
+
+/* 말풍선 */
+.speech {
+  position: absolute;
+  top: 10px;
+  left: calc(50% + 70px);
+  max-width: 150px;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgb(120 100 200 / 20%);
+  color: #6a55c9;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: left;
+}
+
+/* 말풍선 꼬리 */
+.speech::before {
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  content: "";
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+/* 상태별 표정: 처음엔 모두 숨기고, data-mood 에 맞는 것만 보이게 한다 */
+.eyes, .mouth, .bubble, .zzz { display: none; }
+
+.dororong[data-mood="sleep"] .eyes-sleep,
+.dororong[data-mood="sleep"] .mouth-sleep,
+.dororong[data-mood="sleep"] .bubble,
+.dororong[data-mood="sleep"] .zzz,
+.dororong[data-mood="awake"] .eyes-awake,
+.dororong[data-mood="awake"] .mouth-awake,
+.dororong[data-mood="happy"] .eyes-happy,
+.dororong[data-mood="happy"] .mouth-happy { display: inline; }
+
+/* 몸통을 바닥 가운데 기준으로 움직이기 위한 설정 */
+.dororong .body { transform-box: view-box; transform-origin: 100px 175px; }
+
+/* 자는 중: 숨쉬듯 천천히 부풀었다 줄어든다 */
+.dororong[data-mood="sleep"] .body { animation: breathe 3.2s ease-in-out infinite; }
+
+/* 깨어 있을 때(뽑는 중): 콩콩 뛰며 기다린다 */
+.dororong[data-mood="awake"] .body { animation: hop 0.6s ease-in-out infinite; }
+
+/* 기쁠 때: 신나게 점프하며 좌우로 흔들린다 */
+.dororong[data-mood="happy"] .body { animation: cheer 0.7s ease-in-out infinite; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1, 1); }
+  50%      { transform: scale(1.03, 1.05); }
+}
+
+@keyframes hop {
+  0%, 100% { transform: translateY(0) scale(1.03, 0.97); }
+  50%      { transform: translateY(-12px) scale(0.98, 1.03); }
+}
+
+@keyframes cheer {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-22px) rotate(4deg); }
+}
+
+/* 콧방울이 커졌다 작아졌다 */
+.dororong .bubble {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: bubble 3.2s ease-in-out infinite;
+}
+
+@keyframes bubble {
+  0%, 100% { transform: scale(0.35); }
+  60%      { transform: scale(1.15); }
+}
+
+/* zZ 글자가 위로 떠오르며 사라진다 */
+.dororong .z {
+  animation: float-z 3s ease-in-out infinite;
+}
+.dororong .z2 { animation-delay: 0.5s; }
+.dororong .z3 { animation-delay: 1s; }
+
+@keyframes float-z {
+  0%   { opacity: 0; transform: translateY(8px); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 좁은 화면에서는 말풍선을 캐릭터 위쪽 가운데로 */
+@media (max-width: 460px) {
+  .mascot { margin-top: -66px; }
+  .dororong { width: 140px; }
+  .speech { left: auto; right: 0; top: -2px; max-width: 120px; font-size: 0.74rem; }
+}
+
+/* =====================================================
+ * 도로롱 이미지 버전: 사진(PNG)을 그대로 쓰고,
+ * 기분(data-mood)에 따라 움직임과 효과(zZ, 하트)만 바꾼다
+ * ===================================================== */
+.dororong {
+  position: relative;
+  width: 170px;
+}
+
+.dororong-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 95%; /* 발 쪽을 기준으로 늘어나고 줄어들게 */
+  filter: drop-shadow(0 8px 8px rgb(150 120 220 / 30%));
+  pointer-events: none;
+}
+
+/* 자는 중: 숨쉬듯 천천히 */
+.dororong[data-mood="sleep"] .dororong-img { animation: img-breathe 3.4s ease-in-out infinite; }
+/* 깨어남: 콩콩 뜀 */
+.dororong[data-mood="awake"] .dororong-img { animation: img-hop 0.6s ease-in-out infinite; }
+/* 기쁨: 크게 점프하며 좌우로 흔들림 */
+.dororong[data-mood="happy"] .dororong-img { animation: img-cheer 0.7s ease-in-out infinite; }
+
+@keyframes img-breathe {
+  0%, 100% { transform: scale(1, 1) rotate(-1.5deg); }
+  50%      { transform: scale(1.03, 1.05) rotate(1.5deg); }
+}
+@keyframes img-hop {
+  0%, 100% { transform: translateY(0) scale(1.04, 0.95); }
+  50%      { transform: translateY(-14px) scale(0.97, 1.04); }
+}
+@keyframes img-cheer {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-26px) rotate(6deg); }
+}
+
+/* 효과 글자(zZ, 하트)는 평소엔 숨김 */
+.fx {
+  position: absolute;
+  display: none;
+  font-weight: 900;
+  pointer-events: none;
+}
+
+/* zZ: 자는 중에만 머리 오른쪽 위로 떠오른다 */
+.dororong[data-mood="sleep"] .zz { display: block; color: #8a7bff; animation: float-z 3s ease-in-out infinite; }
+.zz1 { top: 4px;  right: -6px;  font-size: 24px; }
+.zz2 { top: -12px; right: -22px; font-size: 17px; animation-delay: 0.5s !important; }
+.zz3 { top: -26px; right: -34px; font-size: 12px; animation-delay: 1s !important; }
+
+/* 하트: 기쁠 때만 위로 솟아오른다 */
+.dororong[data-mood="happy"] .heart { display: block; color: #ff6b9a; animation: float-heart 1.2s ease-out infinite; }
+.h1 { top: 0;    left: 10%; font-size: 20px; }
+.h2 { top: -8px; left: 46%; font-size: 26px; animation-delay: 0.3s !important; }
+.h3 { top: 0;    left: 80%; font-size: 18px; animation-delay: 0.6s !important; }
+
+@keyframes float-heart {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.6); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-46px) scale(1.2); }
+}
+
+@media (max-width: 460px) {
+  .dororong { width: 140px; }
+}
+
+/* 도로롱이 카드 위로 튀어나오는 만큼(점프 포함) 위쪽 공간을 확보 */
+body {
+  padding-top: 150px;
+}
+
+@media (max-width: 460px) {
+  body { padding-top: 130px; }
+}
+
+/* =====================================================
+ * 역대 당첨번호 출현 횟수 통계
+ * ===================================================== */
+.stats-box {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 2px dashed #dbe4fa;
+}
+
+.stats-box h2 { margin: 0; font-size: 1.1rem; }
+.stats-box small { margin-left: 6px; color: #8a98c2; font-weight: 700; }
+.hint.source { margin: 10px 0 0; font-size: 0.72rem; }
+
+/* 가장 많이/적게 나온 번호 요약 */
+.stats-top {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #fff4f8;
+  color: #c2517a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+/* 정렬 탭 */
+.tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.tab {
+  flex: 1;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 999px;
+  background: #e6efff;
+  color: #6b7aa8;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.tab.on { background: #8a7bff; color: #fff; }
+
+/* 번호별 막대 목록 (길어서 스크롤) */
+.stats {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f4f8ff, #eaf1ff);
+  text-align: left;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 30px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 4px;
+  border-radius: 10px;
+}
+
+/* 방금 뽑힌 번호 줄 */
+.stat-row.now { background: #fff3b8; box-shadow: 0 0 0 2px #ffd54a; }
+
+.mini {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+  box-shadow: inset -2px -3px 4px rgb(0 0 0 / 18%);
+}
+.mini.c1 { background-color: #ffc928; }
+.mini.c2 { background-color: #4dabf7; }
+.mini.c3 { background-color: #ff6b6b; }
+.mini.c4 { background-color: #8e9bb5; }
+.mini.c5 { background-color: #51cf66; }
+
+.bar-wrap { height: 12px; border-radius: 8px; background: rgb(138 155 204 / 18%); overflow: hidden; }
+.bar {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ffb3d4, #ff6b9a);
+  transition: width 0.6s cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+.stat-count { color: #5c6c9c; font-size: 0.82rem; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* =====================================================
+ * 구간별 출현 횟수 가로 막대 그래프
+ * ===================================================== */
+.chart-title {
+  margin: 16px 0 8px;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.range-chart {
+  display: grid;
+  gap: 10px;
+  padding: 14px 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f4f8ff, #eaf1ff);
+}
+
+.range-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 74px;
+  align-items: center;
+  gap: 8px;
+}
+
+.range-label { color: #5c6c9c; font-size: 0.82rem; font-weight: 800; text-align: left; }
+
+.range-track { height: 22px; border-radius: 12px; background: rgb(138 155 204 / 18%); overflow: hidden; }
+
+/* 막대는 0%에서 시작해 값만큼 늘어나며, 구간 색은 공 색과 같다 */
+.range-bar {
+  width: 0;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: inset 0 -4px 6px rgb(0 0 0 / 12%), inset 0 3px 4px rgb(255 255 255 / 40%);
+  transition: width 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.range-bar.c1 { background-color: #ffc928; }
+.range-bar.c2 { background-color: #4dabf7; }
+.range-bar.c3 { background-color: #ff6b6b; }
+.range-bar.c4 { background-color: #8e9bb5; }
+.range-bar.c5 { background-color: #51cf66; }
+
+.range-value { color: #5c6c9c; font-size: 0.82rem; font-weight: 800; text-align: right; line-height: 1.2; }
+.range-value small { display: block; margin: 0; color: #9aa7cc; font-size: 0.7rem; }
+
+.chart-note { margin: 6px 0 0; text-align: left; }

@@ -1,0 +1,8 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{public/**,shared/**,node_modules/lightweight-charts/dist/**,node_modules/leaflet/dist/**,node_modules/pretendard/dist/web/variable/**,node_modules/@supabase/supabase-js/dist/umd/**}"
+    }
+  }
+}

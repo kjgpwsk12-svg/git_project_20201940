@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>로또 번호 생성기</title>
+    <!-- 스타일은 css 폴더, 동작은 js 폴더의 파일을 불러온다 -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <!-- ===== 배경 장식: 달, 구름, 언덕 (별/하트는 JS가 만들어 넣는다) ===== -->
+    <div class="decor" aria-hidden="true">
+      <div class="moon"></div>
+      <div class="cloud c-a"></div>
+      <div class="cloud c-b"></div>
+      <div class="cloud c-c"></div>
+      <div id="sparkles"></div>
+      <div class="hill h-back"></div>
+      <div class="hill h-front"></div>
+    </div>
+
+    <main class="card">
+      <!-- ===== 마스코트 도로롱: data-mood 값(sleep/awake/happy)에 따라 움직임과 효과가 바뀐다 ===== -->
+      <div class="mascot">
+        <p id="speech" class="speech">쿨쿨... 번호를 뽑아줘~</p>
+        <div id="dororong" class="dororong" data-mood="sleep" role="img" aria-label="캐릭터 도로롱">
+          <img class="dororong-img" src="images/dororong.png" alt="" draggable="false">
+          <!-- 자는 중에 떠오르는 zZ -->
+          <span class="fx zz zz1">Z</span><span class="fx zz zz2">z</span><span class="fx zz zz3">z</span>
+          <!-- 기쁠 때 솟아오르는 하트 -->
+          <span class="fx heart h1">♥</span><span class="fx heart h2">♥</span><span class="fx heart h3">♥</span>
+        </div>
+      </div>
+
+      <p class="eyebrow">LOTTO GENERATOR</p>
+      <h1>로또 번호 생성기</h1>
+      <p class="desc">1~45 중 중복 없는 6개의 번호를 뽑아 드려요.</p>
+
+      <!-- 생성 횟수 표시 -->
+      <p class="count">지금까지 <b id="count">0</b>번 뽑았어요</p>
+
+      <!-- 뽑힌 공이 하나씩 들어오는 영역 (비어 있으면 안내 문구가 CSS로 표시됨) -->
+      <section id="balls" class="balls" aria-live="polite" aria-label="뽑힌 번호"></section>
+
+
+      <!-- 사용자 번호와 비교한 결과 -->
+      <p id="compare" class="compare" aria-live="polite"></p>
+
+      <div class="buttons">
+        <button id="draw-btn" class="btn primary" type="button">번호 뽑기</button>
+        <button id="reset-btn" class="btn ghost" type="button">초기화</button>
+      </div>
+
+      <!-- 사용자가 직접 고르는 번호판 -->
+      <section class="picker-box">
+        <h2>내 번호 고르기 <small id="picked-info">0 / 6</small></h2>
+        <p class="hint">최대 6개까지 고르면, 뽑힌 번호와 몇 개 맞는지 비교해 드려요.</p>
+        <div id="picker" class="picker"></div>
+      </section>
+
+      <!-- 역대 당첨번호 출현 횟수 통계 (데이터는 js/lotto-data.js) -->
+      <section class="stats-box">
+        <h2>역대 당첨번호 출현 횟수 <small id="stats-info"></small></h2>
+        <p class="hint">1등 당첨번호 6개 기준이며 보너스 번호는 제외했어요. 방금 뽑힌 번호는 하이라이트돼요.</p>
+        <p id="stats-top" class="stats-top"></p>
+
+        <!-- 번호 구간별 출현 횟수 가로 막대 그래프 -->
+        <h3 class="chart-title">구간별 출현 횟수</h3>
+        <div id="range-chart" class="range-chart" role="img" aria-label="번호 구간별 출현 횟수 가로 막대 그래프"></div>
+        <p class="hint chart-note">41~45는 번호가 5개뿐이라 막대가 짧게 보여요.</p>
+
+        <h3 class="chart-title">번호별 출현 횟수</h3>
+        <div class="tabs">
+          <button type="button" class="tab on" data-sort="number">번호순</button>
+          <button type="button" class="tab" data-sort="count">많이 나온 순</button>
+        </div>
+        <div id="stats" class="stats"></div>
+        <p class="hint source">출처: 동행복권 추첨 결과 기반 공개 데이터(smok95/lotto)</p>
+      </section>
+    </main>
+
+    <script src="js/lotto-data.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
