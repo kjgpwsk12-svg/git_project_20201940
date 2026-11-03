@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/buttonTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상단 버튼"
+            android:textSize="18sp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="강진구"
+            android:textColor="#006A62"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableStart="@drawable/ic_launcher_foreground"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:text="장안대 컴퓨터공학과"
+            android:textColor="#006A62"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android App with Kotlin\nAndroid App with Kotlin\nAndroid App with Kotlin"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp" />
+
+    </LinearLayout>
+
+</ScrollView>
