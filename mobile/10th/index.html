@@ -1,0 +1,43 @@
+<!DOCTYPE html> <!-- 문서 형식을 HTML5로 지정 -->
+<html lang="ko"> <!-- 문서 언어를 한국어로 지정 -->
+<head> <!-- 문서 설정 영역 시작 -->
+  <meta charset="UTF-8"> <!-- 한글이 깨지지 않도록 인코딩 지정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 모바일 화면 크기에 맞춤 -->
+  <title>냥냥 계산기</title> <!-- 브라우저 탭에 보일 제목 -->
+  <link rel="stylesheet" href="style.css"> <!-- 스타일 파일 연결 -->
+</head> <!-- 문서 설정 영역 끝 -->
+<body> <!-- 화면에 보이는 영역 시작 -->
+  <img class="photo photo-left-top" src="cat1.jpg" alt="고양이 세 마리"> <!-- 왼쪽 위 작은 고양이 사진 -->
+  <img class="photo photo-left-bottom" src="cat4.jpg" alt="기지개 켜는 고양이"> <!-- 왼쪽 아래 작은 고양이 사진 -->
+  <img class="photo photo-right" src="cat2.jpg" alt="낮잠 자는 고양이들"> <!-- 오른쪽 작은 고양이 사진 -->
+
+  <div class="calculator"> <!-- 계산기 전체 상자 -->
+    <img class="sticker" src="cat5.jpg" alt="고양이 스티커"> <!-- 계산기 위에 앉은 고양이 -->
+    <div class="title"> <!-- 제목 줄 -->
+      <img class="avatar" src="cat3.jpg" alt="분홍 고양이"> <!-- 동그란 고양이 프로필 -->
+      <span>냥냥 계산기</span> <!-- 계산기 이름 -->
+      <button id="music-button" class="music">♪</button> <!-- 배경 음악 켜기/끄기 버튼 -->
+    </div> <!-- 제목 줄 끝 -->
+    <div id="display" class="display">0</div> <!-- 숫자가 표시되는 화면 -->
+    <div class="buttons"> <!-- 버튼들을 모아둔 격자 -->
+      <button class="clear" data-action="clear">C</button> <!-- 초기화(clear) 버튼 -->
+      <button class="operator" data-operator="/">/</button> <!-- 나누기 버튼 -->
+      <button class="operator" data-operator="*">x</button> <!-- 곱하기 버튼 -->
+      <button class="operator" data-operator="-">-</button> <!-- 빼기 버튼 -->
+      <button data-number="7">7</button> <!-- 숫자 7 버튼 -->
+      <button data-number="8">8</button> <!-- 숫자 8 버튼 -->
+      <button data-number="9">9</button> <!-- 숫자 9 버튼 -->
+      <button class="operator" data-operator="+">+</button> <!-- 더하기 버튼 -->
+      <button data-number="4">4</button> <!-- 숫자 4 버튼 -->
+      <button data-number="5">5</button> <!-- 숫자 5 버튼 -->
+      <button data-number="6">6</button> <!-- 숫자 6 버튼 -->
+      <button class="equal" data-action="equal">=</button> <!-- 계산 결과(=) 버튼, 두 줄 높이 -->
+      <button data-number="1">1</button> <!-- 숫자 1 버튼 -->
+      <button data-number="2">2</button> <!-- 숫자 2 버튼 -->
+      <button data-number="3">3</button> <!-- 숫자 3 버튼 -->
+      <button class="zero" data-number="0">0</button> <!-- 숫자 0 버튼, 세 칸 너비 -->
+    </div> <!-- 버튼 격자 끝 -->
+  </div> <!-- 계산기 상자 끝 -->
+  <script src="script.js"></script> <!-- 동작 코드 연결 -->
+</body> <!-- 화면 영역 끝 -->
+</html> <!-- 문서 끝 -->
