@@ -1,0 +1,117 @@
+body { /* 페이지 전체 설정 */
+  display: flex; /* 가운데 정렬을 위해 flex 사용 */
+  justify-content: center; /* 가로 가운데 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  min-height: 100vh; /* 화면 높이 전체 사용 */
+  margin: 0; /* 기본 여백 제거 */
+  font-family: 'Jua', 'Malgun Gothic', sans-serif; /* 둥근 느낌의 글꼴 */
+  background-color: #ffe3ec; /* 연한 분홍 배경 */
+  background-image: radial-gradient(#fff8 20%, transparent 21%); /* 하얀 물방울 무늬 */
+  background-size: 28px 28px; /* 물방울 간격 */
+} /* body 끝 */
+
+.photo { /* 배경에 놓인 작은 고양이 사진 공통 모양 */
+  position: fixed; /* 화면에 고정해서 계산기와 겹치지 않게 */
+  width: 140px; /* 작은 크기 */
+  height: 140px; /* 정사각형으로 자름 */
+  object-fit: cover; /* 사진 비율 유지하며 채움 */
+  border: 6px solid #fff; /* 하얀 액자 테두리 */
+  border-radius: 24px; /* 모서리 둥글게 */
+  box-shadow: 0 6px 14px #0002; /* 부드러운 그림자 */
+} /* .photo 끝 */
+
+.photo-left-top { top: 8%; left: 8%; transform: rotate(-8deg); } /* 왼쪽 위, 왼쪽으로 살짝 기울임 */
+.photo-left-bottom { bottom: 8%; left: 12%; transform: rotate(6deg); } /* 왼쪽 아래, 오른쪽으로 살짝 기울임 */
+.photo-right { top: 30%; right: 8%; transform: rotate(7deg); } /* 오른쪽 가운데, 살짝 기울임 */
+
+@media (max-width: 800px) { /* 화면이 좁으면(모바일) */
+  .photo { display: none; } /* 배경 사진을 숨겨서 깔끔하게 */
+} /* 미디어 쿼리 끝 */
+
+.calculator { /* 계산기 상자 */
+  position: relative; /* 스티커 고양이 위치의 기준 */
+  width: 300px; /* 계산기 너비 */
+  margin-top: 70px; /* 스티커 고양이가 들어갈 위쪽 공간 */
+  padding: 16px; /* 안쪽 여백 */
+  background: #fff5f8; /* 크림빛 분홍 */
+  border: 4px solid #ffb6c8; /* 분홍 테두리 */
+  border-radius: 32px; /* 모서리 크게 둥글게 */
+  box-shadow: 0 10px 24px #ff7a9644; /* 분홍빛 그림자 */
+} /* .calculator 끝 */
+
+.sticker { /* 계산기 위에 걸터앉은 스티커 고양이 */
+  position: absolute; /* 계산기 기준으로 위치 지정 */
+  top: -82px; /* 계산기 위로 튀어나오게 */
+  right: 14px; /* 오른쪽에 붙임 */
+  width: 90px; /* 스티커 크기 */
+  pointer-events: none; /* 버튼 클릭을 막지 않도록 */
+} /* .sticker 끝 */
+
+.title { /* 제목 줄 */
+  display: flex; /* 프로필과 글자를 가로로 배치 */
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 10px; /* 프로필과 글자 사이 간격 */
+  margin-bottom: 12px; /* 화면과의 간격 */
+  color: #e0587a; /* 진한 분홍 글자 */
+  font-size: 1.2rem; /* 글자 크기 */
+} /* .title 끝 */
+
+.avatar { /* 동그란 고양이 프로필 */
+  width: 40px; /* 너비 */
+  height: 40px; /* 높이 */
+  object-fit: cover; /* 비율 유지하며 채움 */
+  border: 3px solid #fff; /* 하얀 테두리 */
+  border-radius: 50%; /* 동그랗게 */
+} /* .avatar 끝 */
+
+.display { /* 숫자 표시 화면 */
+  margin-bottom: 14px; /* 버튼과의 간격 */
+  padding: 14px 18px; /* 안쪽 여백 */
+  color: #6b3a4a; /* 짙은 갈색 글자 */
+  font-size: 2.2rem; /* 글자 크기 */
+  text-align: right; /* 오른쪽 정렬 */
+  background: #fff; /* 하얀 화면 */
+  border: 3px dashed #ffb6c8; /* 점선 분홍 테두리 */
+  border-radius: 20px; /* 모서리 둥글게 */
+  overflow: hidden; /* 넘치는 글자 숨김 */
+} /* .display 끝 */
+
+.buttons { /* 버튼 격자 */
+  display: grid; /* 격자 배치 사용 */
+  grid-template-columns: repeat(4, 1fr); /* 4열로 균등 분할 */
+  gap: 10px; /* 버튼 사이 간격 */
+} /* .buttons 끝 */
+
+button { /* 모든 버튼 공통 모양 */
+  padding: 16px 0; /* 위아래 크기 */
+  font-family: inherit; /* 페이지 글꼴 그대로 사용 */
+  font-size: 1.4rem; /* 글자 크기 */
+  color: #6b3a4a; /* 짙은 갈색 글자 */
+  background: #fff; /* 기본 버튼은 하얀색 */
+  border: none; /* 테두리 제거 */
+  border-bottom: 5px solid #ffd3de; /* 아래쪽만 두껍게 해서 볼록한 느낌 */
+  border-radius: 20px; /* 모서리 둥글게 */
+  cursor: pointer; /* 마우스 올리면 손가락 모양 */
+  transition: transform 0.1s; /* 눌릴 때 부드럽게 */
+} /* button 끝 */
+
+button:active { /* 버튼을 누르는 동안 */
+  transform: translateY(4px) scale(0.96); /* 살짝 눌려 들어가는 효과 */
+} /* button:active 끝 */
+
+.operator { background: #ffd8a8; border-bottom-color: #ffb866; } /* 사칙연산 버튼은 살구색 */
+.clear { background: #ffb3c1; border-bottom-color: #ff8fa3; } /* 초기화 버튼은 분홍색 */
+.equal { background: #b8e8c8; border-bottom-color: #8fd3a8; grid-row: span 2; } /* = 버튼은 민트색, 두 줄 높이 */
+.music { /* 배경 음악 켜기/끄기 버튼 */
+  width: 40px; /* 너비 */
+  height: 40px; /* 높이 */
+  margin-left: auto; /* 제목 줄 오른쪽 끝으로 보냄 */
+  padding: 0; /* 안쪽 여백 제거 */
+  font-size: 1.2rem; /* 글자 크기 */
+  color: #e0587a; /* 진한 분홍 음표 */
+  border-radius: 50%; /* 동그랗게 */
+} /* .music 끝 */
+
+.music.off { color: #bbb; text-decoration: line-through; } /* 음악이 꺼지면 회색에 취소선 */
+
+.zero { grid-column: span 3; } /* 0 버튼은 세 칸 너비 */
