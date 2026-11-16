@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ButtonEvent 실습"
+        android:textColor="#8BC34A"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <FrameLayout
+        android:layout_width="294dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="32dp">
+
+        <ImageView
+            android:id="@+id/imgSnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/snail"
+            android:scaleType="fitXY"
+            android:contentDescription="달팽이" />
+
+        <ImageView
+            android:id="@+id/imgSelectedShell"
+            android:layout_width="214dp"
+            android:layout_height="172dp"
+            android:layout_marginStart="78dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="fitXY"
+            android:visibility="invisible"
+            android:contentDescription="선택한 껍질" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어떤게 달팽이 집인가요?"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/btnShell1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/shell1"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:contentDescription="1번 껍질" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/btnShell2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/shell2"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:contentDescription="2번 껍질" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/btnShell3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/shell3"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:contentDescription="3번 껍질" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/btnShell4"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/shell4"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:contentDescription="4번 껍질" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
