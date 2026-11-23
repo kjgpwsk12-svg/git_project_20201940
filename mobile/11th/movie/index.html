@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- 문서 형식을 HTML5로 지정 -->
+<html lang="ko">
+<head>
+  <!-- 문자 인코딩을 UTF-8로 지정 (한글 깨짐 방지) -->
+  <meta charset="UTF-8" />
+  <!-- 웹/태블릿/모바일 모두에서 화면 너비에 맞추고, 노치 영역까지 사용하도록 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- 모바일 브라우저 주소창 색상 -->
+  <meta name="theme-color" content="#0a0b10" />
+  <meta name="description" content="오늘의 박스오피스와 개봉 예정작, 출처별 평점·작품평을 한곳에서 확인하고 예매·공식 정보 사이트로 이동하세요." />
+  <title>무비노트 - 박스오피스 · 개봉작 정보</title>
+  <!-- 글꼴(Pretendard). 불러오지 못하면 기기 기본 글꼴을 쓴다 -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <!-- 스타일 시트: 공통(style.css) + 홈 화면(home.css) -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body data-page="home">
+  <!-- 키보드 사용자를 위한 본문 바로가기 -->
+  <a class="skip-link" href="#view">본문으로 건너뛰기</a>
+
+  <!-- ===== 헤더: 홈에서는 캐러셀 위에 투명하게 겹치고, 스크롤하면 배경이 생긴다 ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <!-- 로고 (누르면 홈으로) -->
+      <a class="brand" href="#/" aria-label="무비노트 홈"><span class="brand-mark">▶</span><span>MOVIE<b>NOTE</b></span></a>
+      <!-- 웹 화면용 메뉴 (모바일에서는 하단 탭으로 대체) -->
+      <nav class="top-nav" aria-label="주 메뉴">
+        <a href="#/" data-nav="home">박스오피스</a>
+        <a href="#/search" data-nav="search">검색</a>
+        <a href="#/compare" data-nav="compare">비교하기</a>
+        <a href="#/admin" data-nav="admin">운영자</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== 화면이 그려지는 본문 영역 (라우터가 내용을 채운다) ===== -->
+  <main id="view" class="view" tabindex="-1"></main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>박스오피스 데이터 출처: <strong>영화진흥위원회 영화관입장권통합전산망(KOBIS)</strong>. 평점·작품평·줄거리는 운영자가 등록한 정보이며, 외부 사이트 링크는 출처와 확인일을 함께 표시합니다.</p>
+    </div>
+  </footer>
+
+  <!-- 비교 담기 막대 (비교할 영화를 담으면 나타난다) -->
+  <div id="compare-bar" class="compare-bar" hidden></div>
+
+  <!-- 모바일 하단 탭 바 (앱처럼 사용) -->
+  <nav class="bottom-nav" aria-label="하단 메뉴">
+    <a href="#/" data-nav="home"><span class="bn-icon">🎞️</span>박스오피스</a>
+    <a href="#/search" data-nav="search"><span class="bn-icon">🔍</span>검색</a>
+    <a href="#/compare" data-nav="compare"><span class="bn-icon">⚖️</span>비교</a>
+    <a href="#/admin" data-nav="admin"><span class="bn-icon">🛠️</span>운영자</a>
+  </nav>
+
+  <!-- 알림 메시지(토스트) 영역 -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- 스크립트: 의존 순서대로 불러온다 (설정 → 도구 → 데이터 → 화면 → 앱 시작) -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data/sampleMovies.js"></script>
+  <script src="js/movieStore.js"></script>
+  <script src="js/compareStore.js"></script>
+  <script src="js/kobisClient.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/heroCarousel.js"></script>
+  <script src="js/views/homeView.js"></script>
+  <script src="js/views/searchView.js"></script>
+  <script src="js/views/detailView.js"></script>
+  <script src="js/views/compareView.js"></script>
+  <script src="js/views/adminView.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

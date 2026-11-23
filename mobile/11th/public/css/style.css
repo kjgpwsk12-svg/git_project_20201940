@@ -1,0 +1,210 @@
+/* ===== 색상/크기 변수 (테마 변경 시 여기만 수정) ===== */
+:root {
+  --bg: #eef3f9;          /* 페이지 배경색 */
+  --panel: #ffffff;       /* 패널(카드) 배경색 */
+  --panel-sub: #f3f7fb;   /* 패널 안쪽 작은 상자 배경색 */
+  --text: #1c2b3a;        /* 기본 글자색 */
+  --sub: #5b6b7b;         /* 보조 글자색 */
+  --line: #e3eaf1;        /* 구분선 색 */
+  --accent: #2a7de1;      /* 강조색 (버튼, 강수확률) */
+  --warm: #e8743b;        /* 기온선 색 */
+  --error: #c0392b;       /* 오류 글자색 */
+  --radius: 16px;         /* 모서리 둥글기 */
+}
+
+/* 어두운 화면 설정을 쓰는 사용자를 위한 색상 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1722; --panel: #19232f; --panel-sub: #212e3c;
+    --text: #e8eef4; --sub: #9fb0c0; --line: #2b3a4a;
+  }
+}
+
+/* 모든 요소의 크기 계산 방식을 통일 */
+* { box-sizing: border-box; }
+
+/* 페이지 기본 스타일 */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, "Malgun Gothic", sans-serif;
+  line-height: 1.5;
+}
+
+/* 내용 폭을 제한하고 가운데 정렬하는 공통 컨테이너 */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* hidden 속성이 다른 display 설정에 덮이지 않도록 보장 */
+[hidden] { display: none !important; }
+
+/* ===== 헤더 ===== */
+.site-header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;   /* 스크롤해도 상단에 고정 */
+  padding: 12px 0;
+}
+.header-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.brand {
+  border: 0; background: none; color: var(--text);
+  font-size: 20px; font-weight: 700; cursor: pointer; padding: 0;
+}
+
+/* 검색 영역 */
+.search-wrap { position: relative; flex: 1; min-width: 260px; }
+.search { display: flex; gap: 8px; }
+.search input {
+  flex: 1; min-width: 0; padding: 10px 14px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel-sub); color: var(--text);
+  font-size: 16px;             /* 모바일 자동 확대 방지 */
+}
+.search button {
+  padding: 10px 16px; border: 0; border-radius: 10px;
+  background: var(--accent); color: #fff; font-size: 15px; cursor: pointer;
+  white-space: nowrap;
+}
+.search button.ghost { background: var(--panel-sub); color: var(--text); }
+
+/* 검색 결과 드롭다운 */
+.results {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px);
+  list-style: none; margin: 0; padding: 0;
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+.results li { padding: 12px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.results li:last-child { border-bottom: 0; }
+.results li:hover { background: var(--panel-sub); }
+.results li small { color: var(--sub); }
+
+/* 최근 검색 칩 */
+.recent { display: flex; align-items: center; gap: 10px; padding-top: 10px; }
+.recent-label { color: var(--sub); font-size: 13px; white-space: nowrap; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line); background: var(--panel-sub); color: var(--text);
+  border-radius: 999px; padding: 4px 12px; font-size: 13px; cursor: pointer;
+}
+
+/* ===== 안내 메시지 ===== */
+.message { margin: 16px 0; padding: 14px; border-radius: 10px; background: #fff4d6; color: #5a4300; }
+.message.error { background: #fdeaea; color: var(--error); }
+
+/* ===== 대시보드 격자 (PC: 12칸, 모바일: 1칸) ===== */
+.dashboard { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 16px; }
+.span-12 { grid-column: span 12; }
+.span-7 { grid-column: span 7; }
+.span-5 { grid-column: span 5; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* 패널(카드) 공통 스타일 */
+.panel {
+  background: var(--panel); border-radius: var(--radius);
+  padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.panel h2 { margin: 0 0 14px; font-size: 16px; }
+
+/* ===== 대표 카드 (hero) ===== */
+.panel-hero {
+  grid-column: span 12; display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px;
+  color: #fff; padding: 28px; border-radius: var(--radius);
+  background: linear-gradient(135deg, #4a90e2, #357abd);   /* 기본(맑음) */
+}
+/* 날씨 종류별 배경 (js에서 theme-* 클래스를 붙인다) */
+.theme-clear  { background: linear-gradient(135deg, #4a9de8, #2f6fc0); }
+.theme-cloudy { background: linear-gradient(135deg, #7f93a8, #56697c); }
+.theme-rain   { background: linear-gradient(135deg, #52667f, #34465b); }
+.theme-snow   { background: linear-gradient(135deg, #8fb3d6, #5f84a8); }
+.theme-storm  { background: linear-gradient(135deg, #3d4458, #22273a); }
+.theme-fog    { background: linear-gradient(135deg, #8d9aa5, #67737d); }
+.theme-night  { background: linear-gradient(135deg, #1f2f55, #0f1a35); }
+
+.observed-at { margin: 0; opacity: 0.85; font-size: 13px; }
+.place { margin: 4px 0 0; font-size: 28px; }
+.place-sub { margin: 0; opacity: 0.85; }
+.main-temp { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
+.icon { font-size: 72px; line-height: 1; }
+.temp { font-size: 84px; font-weight: 700; line-height: 1; }
+.weather-text { margin: 8px 0 0; font-size: 20px; }
+.today-range { margin: 4px 0 0; opacity: 0.9; }
+
+/* 오른쪽 조언 영역 */
+.hero-right { background: rgba(255, 255, 255, 0.14); border-radius: 12px; padding: 16px 18px; }
+.hero-right h2 { margin: 0 0 10px; font-size: 15px; }
+.advice-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.advice-list li { font-size: 15px; }
+
+/* ===== 세부 날씨 타일 ===== */
+.tile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.tile { background: var(--panel-sub); border-radius: 12px; padding: 14px; }
+.tile-label { color: var(--sub); font-size: 13px; }
+.tile-value { font-size: 22px; font-weight: 700; margin-top: 2px; }
+.tile-note { color: var(--sub); font-size: 12px; margin-top: 2px; }
+
+/* ===== 그래프 ===== */
+.chart-box { width: 100%; overflow-x: auto; }
+.chart-box svg { width: 100%; min-width: 640px; height: auto; display: block; }
+.chart-text { fill: var(--sub); font-size: 11px; }
+.chart-temp-text { fill: var(--text); font-size: 12px; font-weight: 600; }
+.legend { color: var(--sub); font-size: 12px; margin: 8px 0 0; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 4px 0 12px; }
+.temp-dot { background: var(--warm); }
+.rain-dot { background: var(--accent); opacity: 0.6; }
+
+/* ===== 시간대별 예보 ===== */
+.hourly-list { display: flex; gap: 10px; margin: 0; padding: 0 0 6px; list-style: none; overflow-x: auto; }
+.hourly-list li {
+  min-width: 78px; text-align: center; background: var(--panel-sub);
+  border-radius: 12px; padding: 10px 6px;
+}
+.h-time { color: var(--sub); font-size: 13px; }
+.h-icon { font-size: 28px; margin: 4px 0; }
+.h-temp { font-weight: 700; }
+.h-rain { color: var(--accent); font-size: 12px; }
+.h-wind { color: var(--sub); font-size: 12px; }
+
+/* ===== 7일 예보 ===== */
+.daily-list { list-style: none; margin: 0; padding: 0; }
+.daily-list li {
+  display: grid; grid-template-columns: 64px 36px 1fr 52px 1fr; align-items: center; gap: 8px;
+  padding: 10px 0; border-bottom: 1px solid var(--line);
+}
+.daily-list li:last-child { border-bottom: 0; }
+.d-day { font-weight: 600; }
+.d-icon { font-size: 24px; }
+.d-text { color: var(--sub); font-size: 13px; }
+.d-rain { color: var(--accent); font-size: 13px; text-align: right; }
+.d-range { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+/* 최저~최고 기온 막대 */
+.range-bar { flex: 1; height: 6px; background: var(--line); border-radius: 3px; position: relative; }
+.range-fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; background: linear-gradient(90deg, #4a9de8, var(--warm)); }
+
+/* ===== 대기질 ===== */
+.air-main { display: flex; align-items: baseline; gap: 10px; }
+.air-value { font-size: 36px; font-weight: 700; }
+.air-label { font-weight: 600; }
+.air-items { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.air-bar { height: 8px; border-radius: 4px; margin-top: 12px; background: linear-gradient(90deg, #3aa655, #f2c230, #f08a24, #d9443a, #8a3a9e); position: relative; }
+.air-marker { position: absolute; top: -4px; width: 4px; height: 16px; background: var(--text); border-radius: 2px; }
+
+/* ===== 일출 일몰 ===== */
+.sun-row { display: flex; justify-content: space-between; text-align: center; }
+.sun-time { font-size: 24px; font-weight: 700; }
+.sun-label { color: var(--sub); font-size: 13px; }
+.sun-length { margin-top: 12px; color: var(--sub); font-size: 13px; text-align: center; }
+
+/* 데이터 출처 문구 */
+.source { margin: 24px 0; color: var(--sub); font-size: 12px; text-align: center; }
+
+/* ===== 태블릿/모바일: 1열로 정리 ===== */
+@media (max-width: 800px) {
+  .span-7, .span-5 { grid-column: span 12; }
+  .panel-hero { grid-template-columns: 1fr; padding: 20px; }
+  .temp { font-size: 64px; }
+  .icon { font-size: 56px; }
+  .daily-list li { grid-template-columns: 52px 30px 1fr 44px; }
+  .d-range { grid-column: 1 / -1; }   /* 기온 막대는 다음 줄로 */
+}

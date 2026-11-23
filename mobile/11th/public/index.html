@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- 문서 형식을 HTML5로 지정 -->
+<html lang="ko">
+<head>
+  <!-- 문자 인코딩을 UTF-8로 지정 (한글 깨짐 방지) -->
+  <meta charset="UTF-8" />
+  <!-- 모바일/태블릿/PC 모두에서 화면 너비에 맞게 표시 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 검색 결과에 보일 사이트 설명 -->
+  <meta name="description" content="현재 위치와 검색한 장소의 날씨, 시간대별·7일 예보, 미세먼지, 자외선 정보를 한 화면에서 확인하세요." />
+  <!-- 브라우저 탭에 표시되는 제목 -->
+  <title>빠른 날씨 - 현재 위치 날씨 대시보드</title>
+  <!-- 스타일 시트 연결 -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= 상단 헤더: 로고 + 검색 ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- 사이트 이름 (누르면 현재 위치 날씨로 돌아감) -->
+      <button id="home-button" class="brand" type="button" title="현재 위치 날씨로 이동">🌤️ 빠른 날씨</button>
+
+      <!-- 검색 영역 (입력창 + 결과 목록을 함께 감싼다) -->
+      <div class="search-wrap">
+        <form id="search-form" class="search" autocomplete="off">
+          <!-- 장소 이름 입력창 -->
+          <input id="search-input" type="search" placeholder="장소 검색 (예: 부산, 제주, Tokyo)" aria-label="장소 검색" />
+          <!-- 검색 실행 버튼 -->
+          <button type="submit">검색</button>
+          <!-- 현재 위치 다시 확인 버튼 -->
+          <button id="locate-button" type="button" class="ghost" title="내 위치로 보기">📍 내 위치</button>
+        </form>
+        <!-- 검색 결과 목록 (동명 지역 중에서 선택) -->
+        <ul id="search-results" class="results" hidden></ul>
+      </div>
+    </div>
+
+    <!-- 최근 검색한 장소 바로가기 -->
+    <div class="container recent" id="recent-box" hidden>
+      <span class="recent-label">최근 검색</span>
+      <div id="recent-list" class="chips"></div>
+    </div>
+  </header>
+
+  <!-- ================= 본문 ================= -->
+  <main class="container">
+
+    <!-- 안내 메시지 영역 (로딩, 오류, 권한 거부) -->
+    <p id="message" class="message" role="status" hidden></p>
+
+    <!-- 날씨 대시보드: 데이터가 준비되면 표시 -->
+    <div id="dashboard" class="dashboard" hidden>
+
+      <!-- 현재 날씨 대표 카드 (날씨에 따라 배경색이 바뀐다) -->
+      <section id="hero" class="hero panel-hero" aria-label="현재 날씨">
+        <div class="hero-left">
+          <p id="observed-at" class="observed-at"></p>
+          <h1 id="place-name" class="place"></h1>
+          <p id="place-sub" class="place-sub"></p>
+          <div class="main-temp">
+            <span id="weather-icon" class="icon"></span>
+            <span id="temperature" class="temp"></span>
+          </div>
+          <p id="weather-text" class="weather-text"></p>
+          <p id="today-range" class="today-range"></p>
+        </div>
+        <!-- 오늘의 한 줄 요약 / 생활 조언 -->
+        <div class="hero-right">
+          <h2>오늘의 조언</h2>
+          <ul id="advice-list" class="advice-list"></ul>
+        </div>
+      </section>
+
+      <!-- 세부 정보 타일 (체감, 강수, 바람, 습도, 자외선 등) -->
+      <section class="panel span-12" aria-label="세부 날씨">
+        <h2>세부 날씨</h2>
+        <div id="highlight-grid" class="tile-grid"></div>
+      </section>
+
+      <!-- 시간대별 기온 그래프 -->
+      <section class="panel span-12" aria-label="기온 그래프">
+        <h2>24시간 기온 · 강수확률 그래프</h2>
+        <div id="chart-box" class="chart-box"></div>
+        <p class="legend"><span class="dot temp-dot"></span>기온 <span class="dot rain-dot"></span>강수확률</p>
+      </section>
+
+      <!-- 시간대별 예보 -->
+      <section class="panel span-12" aria-label="시간대별 예보">
+        <h2>시간대별 예보</h2>
+        <ul id="hourly-list" class="hourly-list"></ul>
+      </section>
+
+      <!-- 7일 예보 -->
+      <section class="panel span-7" aria-label="7일 예보">
+        <h2>7일 예보</h2>
+        <ul id="daily-list" class="daily-list"></ul>
+      </section>
+
+      <!-- 오른쪽 열: 대기질 + 해/달 시간 -->
+      <div class="span-5 stack">
+        <section class="panel" aria-label="대기질">
+          <h2>대기질</h2>
+          <div id="air-box"></div>
+        </section>
+        <section class="panel" aria-label="일출 일몰">
+          <h2>일출 · 일몰</h2>
+          <div id="sun-box"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- 데이터 출처 표시 -->
+    <footer id="source" class="source"></footer>
+  </main>
+
+  <!-- 스크립트는 의존 순서대로 불러온다 (설정 → 데이터 → 화면 → 앱 시작) -->
+  <script src="js/config.js"></script>
+  <script src="js/weatherCodes.js"></script>
+  <script src="js/weatherProvider.js"></script>
+  <script src="js/placeService.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/advice.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

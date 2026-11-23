@@ -1,0 +1,10 @@
+{
+  "name": "quick-weather-web",
+  "version": "1.0.0",
+  "description": "현재 위치와 검색한 장소의 날씨를 빠르게 확인하는 모바일 웹사이트",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
